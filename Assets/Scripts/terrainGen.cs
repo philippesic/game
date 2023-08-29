@@ -5,12 +5,20 @@ public class TerrainGenerator : MonoBehaviour
     public int width = 512;       
     public int height = 512;      
     public float scale = 10f;     
-    public float offsetX = 100f;  
-    public float offsetY = 100f;  
     public float noiseIntensity = 0.1f; 
 
-    private void Start()
-    {
+    float offsetX;
+    float offsetY;
+
+
+    void Awake() {
+        offsetX = Random.Range(0f, 99999f);  
+        offsetY = Random.Range(0f, 99999f);  
+    }
+    
+    void Start()
+    { 
+
         Terrain terrain = GetComponent<Terrain>();
 
         
