@@ -15,7 +15,7 @@ public class TerrainGenerator : MonoBehaviour
         offsetX = Random.Range(0f, 99999f);  
         offsetY = Random.Range(0f, 99999f);  
     }
-    
+
     void Start()
     { 
 
