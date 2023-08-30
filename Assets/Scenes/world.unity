@@ -240,9 +240,9 @@ GameObject:
   - component: {fileID: 59698654}
   - component: {fileID: 59698653}
   - component: {fileID: 59698652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -262,8 +262,6 @@ MonoBehaviour:
   width: 1024
   height: 1024
   scale: 5
-  offsetX: 100
-  offsetY: 100
   noiseIntensity: 0.01
 --- !u!154 &59698653
 TerrainCollider:
@@ -351,7 +349,7 @@ GameObject:
   - component: {fileID: 415473663}
   - component: {fileID: 415473662}
   - component: {fileID: 415473661}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -302,7 +302,7 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   orientation: {fileID: 272215064}
   playerCamera: {fileID: 1491237912}
 --- !u!54 &1023695176
