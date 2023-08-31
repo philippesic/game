@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -45,6 +46,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKey(sprintKey)) {
+            sprintSpeed = 200f;
+        }
+        else {
+            sprintSpeed = 1f;
+        }
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, whatIsGround);
 
@@ -95,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * sprintSpeed, ForceMode.Force);
 
         // in air
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier * sprintSpeed, ForceMode.Force);
     }
 
     private void SpeedControl()
