@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
-    public Camera playerCamera;
+    public Camera playerCamera; 
 
     private void Start()
     {

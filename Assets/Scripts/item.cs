@@ -1,20 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class item : MonoBehaviour
-{
+[CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
+public class Item : ScriptableObject {
     
-    public item() {
-
-    }
-
-    void Start() {
-        
-    }
-
-    
-    void Update() {
-        
-    }
+    public int id;
+    public string itemName;
+    public Sprite icon; //add spritepath later
+    [TextAreaAttribute]
+    public string description;
 }
