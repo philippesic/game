@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -30,16 +31,15 @@ public class InventoryManager : MonoBehaviour
     public void ListItems() {
 
         foreach (Transform item in ItemContent) {
-            Destroy(item.gameObject); 
+           Destroy(item.gameObject); 
         }
 
         foreach (var item in Items) {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
-            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-
-            itemName.text = item.itemName;
-            itemIcon.sprite = item.icon; 
+            var ItemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+            var ItemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+            ItemName.text = item.itemName;
+            ItemIcon.sprite = item.icon; 
         }
     }
 
@@ -53,6 +53,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
+            ListItems();
             Time.timeScale = 0;
             inventory.SetActive(true);
             Cursor.lockState = CursorLockMode.None;

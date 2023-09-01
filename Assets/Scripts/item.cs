@@ -5,7 +5,7 @@ public class Item : ScriptableObject {
     
     public int id;
     public string itemName;
-    public Sprite icon; //add spritepath later
+    public Sprite icon;
     [TextAreaAttribute]
     public string description;
 }
