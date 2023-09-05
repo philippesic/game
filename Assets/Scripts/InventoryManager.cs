@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : ItemContainer
 {
     public Transform ItemContent;
     public GameObject InventoryItem;
@@ -12,7 +12,6 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventory;
 
     public static InventoryManager Instance;
-    public List<ItemStack> ItemStacks = new List<ItemStack>();
 
     private void Awake()
     {
@@ -20,35 +19,8 @@ public class InventoryManager : MonoBehaviour
         inventory.SetActive(false);
     }
 
-    public void Add(Item item)
-    {
-        
-        foreach (var stack in ItemStacks)
-        {
-            if (stack.item == item)
-            {
-                stack.quantity++; 
-                ListItems(); 
-                return;
-            }
-        }
-
-        
-        ItemStack newItemStack = new ItemStack(item);
-        ItemStacks.Add(newItemStack);
-        ListItems(); 
-    }
-
-    public void Add(List<Item> items) {
-        foreach (Item item in items) {
-            Add(item);
-        }
-    }
-
-    public void Remove(ItemStack stack)
-    {
-        ItemStacks.Remove(stack);
-        ListItems(); 
+    public new void UpdateAfterContentChange() {
+        ListItems();
     }
 
     public void ListItems()
@@ -58,14 +30,14 @@ public class InventoryManager : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        foreach (var stack in ItemStacks)
+        foreach (Item item in inventoryItems)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var ItemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
             var ItemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
 
-            ItemName.text = stack.item.itemName + " " + "x" + stack.quantity.ToString();;
-            ItemIcon.sprite = stack.item.icon;
+            ItemName.text = item.itemName + " " + "x" + item.count.ToString();;
+            ItemIcon.sprite = item.icon;
         }
     }
 
