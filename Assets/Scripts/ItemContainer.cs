@@ -12,7 +12,7 @@ public class ItemContainer : MonoBehaviour
     public void Add(Item item) {
         foreach (var invItem in inventoryItems) {
             if (invItem.itemName == item.itemName) {
-                invItem.count+= item.count;
+                invItem.count += item.count;
                 UpdateAfterContentChange();
                 return;
             }
@@ -44,5 +44,16 @@ public class ItemContainer : MonoBehaviour
 
     public void UpdateAfterContentChange() {}
 
-    //public bool hasItems(List<Tuple<string, int>>) {}
+    public bool HasItems(List<string> itemNames, List<int> itemCounts) {
+        foreach (var invItem in inventoryItems) {
+            if (itemNames.Contains(invItem.name)) {
+                int index = itemNames.FindIndex(name => name == invItem.name);
+                if (invItem.count >= itemCounts[index]) {
+                    itemNames.RemoveAt(index);
+                    itemCounts.RemoveAt(index);
+                }
+            }
+        }
+        return itemNames.Count == 0;
+    }
 }

@@ -700,11 +700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c57099a0604cc987ce22b275a61d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryItems: []
   ItemContent: {fileID: 1062894068}
   InventoryItem: {fileID: 8244358209605017670, guid: a2e4d21ee2bf94cb3b61e306af95c272, type: 3}
   inventoryKey: 101
   inventory: {fileID: 1330333038}
-  ItemStacks: []
 --- !u!1001 &627914522
 PrefabInstance:
   m_ObjectHideFlags: 0
