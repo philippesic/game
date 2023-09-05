@@ -32,6 +32,10 @@ public class ItemContainer : MonoBehaviour
         foreach (var invItem in inventoryItems) {
             if (invItem.itemName == itemName) {
                 invItem.count -= count;
+                if (invItem.count < 1) {
+                    inventoryItems.Remove(invItem);
+                }
+
                 UpdateAfterContentChange();
                 return;
             }
