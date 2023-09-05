@@ -11,7 +11,12 @@ public class InventoryManager : ItemContainer
     public KeyCode inventoryKey;
     public GameObject inventory;
 
+    public bool canOpen = true;
+    public bool isOpen = false;
     public static InventoryManager Instance;
+
+    public ShopController shop;
+    public GameObject placer;
 
     private void Awake()
     {
@@ -47,22 +52,33 @@ public class InventoryManager : ItemContainer
         {
             Time.timeScale = 1;
             inventory.SetActive(false);
+            placer.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            isOpen = false;
         }
         else
         {
             ListItems();
             Time.timeScale = 0;
             inventory.SetActive(true);
+            placer.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            isOpen = true;
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(inventoryKey))
+        if(shop.isOpen) {
+            canOpen = false;
+        }
+        else {
+            canOpen = true;
+        }
+
+        if (Input.GetKeyDown(inventoryKey) && canOpen)
         {
             ToggleInventory();
         }
