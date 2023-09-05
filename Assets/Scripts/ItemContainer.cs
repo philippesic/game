@@ -33,7 +33,7 @@ public class ItemContainer : MonoBehaviour
         }
     }
 
-    public void RemoveItem(string itemName, int count) {
+    public void Remove(string itemName, int count) {
         foreach (var invItem in inventoryItems) {
             if (invItem.itemName == itemName) {
                 invItem.count -= count; 
@@ -42,5 +42,5 @@ public class ItemContainer : MonoBehaviour
         }
     }
 
-
+    //public bool hasItems(List<Tuple<string, int>>) {}
 }
