@@ -25,10 +25,10 @@ public class InventoryManager : ItemContainer
     }
 
     public new void UpdateAfterContentChange() {
-        ListItems();
+        UpdateInventory();
     }
 
-    public void ListItems()
+    public void UpdateInventory()
     {
         foreach (Transform item in ItemContent)
         {
@@ -59,7 +59,7 @@ public class InventoryManager : ItemContainer
         }
         else
         {
-            ListItems();
+            UpdateInventory();
             Time.timeScale = 0;
             inventory.SetActive(true);
             placer.SetActive(false);
