@@ -39,6 +39,12 @@ public class InventoryManager : MonoBehaviour
         ListItems(); 
     }
 
+    public void Add(List<Item> items) {
+        foreach (Item item in items) {
+            Add(item);
+        }
+    }
+
     public void Remove(ItemStack stack)
     {
         ItemStacks.Remove(stack);
