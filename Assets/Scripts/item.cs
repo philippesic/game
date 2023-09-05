@@ -8,4 +8,5 @@ public class Item : ScriptableObject {
     public Sprite icon;
     [TextAreaAttribute]
     public string description;
+    public int count;
 }
