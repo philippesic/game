@@ -12,42 +12,63 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventory;
 
     public static InventoryManager Instance;
-    public List<Item> Items = new List<Item>();
+    public List<ItemStack> ItemStacks = new List<ItemStack>();
 
-
-    private void Awake() {
+    private void Awake()
+    {
         Instance = this;
-        inventory.SetActive(false); 
+        inventory.SetActive(false);
     }
 
-    public void Add(Item item) {
-        Items.Add(item);
-    }
-
-    public void Remove(Item item) {
-        Items.Remove(item);
-    }
-
-    public void ListItems() {
-
-        foreach (Transform item in ItemContent) {
-           Destroy(item.gameObject); 
+    public void Add(Item item)
+    {
+        
+        foreach (var stack in ItemStacks)
+        {
+            if (stack.item == item)
+            {
+                stack.quantity++; 
+                ListItems(); 
+                return;
+            }
         }
 
-        foreach (var item in Items) {
+        
+        ItemStack newItemStack = new ItemStack(item);
+        ItemStacks.Add(newItemStack);
+        ListItems(); 
+    }
+
+    public void Remove(ItemStack stack)
+    {
+        ItemStacks.Remove(stack);
+        ListItems(); 
+    }
+
+    public void ListItems()
+    {
+        foreach (Transform item in ItemContent)
+        {
+            Destroy(item.gameObject);
+        }
+
+        foreach (var stack in ItemStacks)
+        {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var ItemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
             var ItemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            ItemName.text = item.itemName;
-            ItemIcon.sprite = item.icon; 
+
+            ItemName.text = stack.item.itemName + " " + "x" + stack.quantity.ToString();;
+            ItemIcon.sprite = stack.item.icon;
         }
     }
 
-    private void ToggleInventory() {
+    private void ToggleInventory()
+    {
         if (inventory.activeSelf)
         {
             Time.timeScale = 1;
-            inventory.SetActive(false); 
+            inventory.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -61,9 +82,24 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    void Update() {
-        if (Input.GetKeyDown(inventoryKey)) {
+    void Update()
+    {
+        if (Input.GetKeyDown(inventoryKey))
+        {
             ToggleInventory();
         }
+    }
+}
+
+[System.Serializable]
+public class ItemStack
+{
+    public Item item;
+    public int quantity;
+
+    public ItemStack(Item item)
+    {
+        this.item = item;
+        quantity = 1;
     }
 }
