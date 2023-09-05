@@ -68,16 +68,3 @@ public class InventoryManager : ItemContainer
         }
     }
 }
-
-[System.Serializable]
-public class ItemStack
-{
-    public Item item;
-    public int quantity;
-
-    public ItemStack(Item item)
-    {
-        this.item = item;
-        quantity = 1;
-    }
-}
