@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopController : MonoBehaviour
 {
-    public KeyCode shopKey;
+    /*public KeyCode shopKey;
     public GameObject shop;
     public bool canOpen = true;
     public bool isOpen = false;
@@ -51,5 +51,5 @@ public class ShopController : MonoBehaviour
             Cursor.visible = true;
             isOpen = true;
         }
-    }
+    }*/
 }

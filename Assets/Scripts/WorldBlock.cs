@@ -11,7 +11,7 @@ public class WorldBlock : MonoBehaviour
     }
 
     public void Delete() {
-        InventoryManager.Instance.Add(GetHeldItems());
+        //InventoryManager.Instance.Add(GetHeldItems());
     }
 
     List<Item> GetHeldItems() {
