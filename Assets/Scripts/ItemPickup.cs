@@ -5,13 +5,16 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     public Item item;
+    public int count;
 
-    public void Pickup() {
+    public void Pickup()
+    {
         Player.instance.inv.Add(item);
         Destroy(gameObject);
     }
 
-    public void OnTriggerEnter(Collider other) {
-            Pickup();
+    public void OnTriggerEnter(Collider other)
+    {
+        Pickup();
     }
 }
