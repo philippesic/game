@@ -7,7 +7,7 @@ public class AllItemData : MonoBehaviour
 {
     public static Dictionary<int, string> names = new Dictionary<int, string>();
     public static Dictionary<int, string> descriptions = new Dictionary<int, string>();
-    public static Dictionary<int, Sprite> icnos = new Dictionary<int, Sprite>();
+    public static Dictionary<int, Sprite> icons = new Dictionary<int, Sprite>();
     static AllItemData()
     {
         add(0, "Trash", "t");
@@ -24,7 +24,7 @@ public class AllItemData : MonoBehaviour
     {
         foreach (var id in names.Keys)
         {
-            icnos[id] = Resources.Load("Assets/Item/Icons" + names[id]) as Sprite;
+            icons[id] = Resources.Load("Assets/Item/Icons" + names[id]) as Sprite;
         }
     }
 
