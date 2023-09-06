@@ -11,7 +11,6 @@ public class InventoryManager : ItemContainer
     public KeyCode inventoryKey;
     public GameObject inventory;
 
-    public bool canOpen = true;
     public bool isOpen = false;
     public static InventoryManager Instance;
 
@@ -71,15 +70,9 @@ public class InventoryManager : ItemContainer
 
     void Update()
     {
-        if(shop.isOpen) {
-            canOpen = false;
-        }
-        else {
-            canOpen = true;
-        }
-
-        if (Input.GetKeyDown(inventoryKey) && canOpen)
+        if (Input.GetKeyDown(inventoryKey) && ! false)
         {
+            print(isOpen);
             ToggleInventory();
         }
     }
