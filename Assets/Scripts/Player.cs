@@ -11,11 +11,12 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        inv = this.gameObject.AddComponent<ItemContainer>();
     }
 
     void Start()
     {
-        inv = this.gameObject.AddComponent<ItemContainer>();
+        
     }
 
     void Update()

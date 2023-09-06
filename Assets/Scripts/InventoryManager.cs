@@ -8,16 +8,10 @@ public class InventoryManager : MonoBehaviour
 {
     public Transform ItemContent;
     public GameObject InventoryItem;
-    private Player player;
     
-    public InventoryManager()
-    {
-        player = Player.instance;
-    }
 
     private void Awake()
     {
-        UpdateInventory();
         //Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -38,7 +32,7 @@ public class InventoryManager : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        foreach (Item item in player.inv.inventoryItems)
+        foreach (Item item in Player.instance.inv.inventoryItems)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var ItemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
@@ -52,6 +46,5 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         UpdateInventory();
-        print(player.inv.inventoryItems);
     }
 }
