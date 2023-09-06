@@ -18,14 +18,14 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         UpdateInventory();
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void Close()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Destroy(this.gameObject);
@@ -52,6 +52,6 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         UpdateInventory();
-        
+        print(player.inv.inventoryItems);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public KeyCode inventoryKey;
-    public ItemContainer inv = new ItemContainer();
+    public ItemContainer inv;
     public static Player instance;
 
     private void Awake()
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        inv = this.gameObject.AddComponent<ItemContainer>();
     }
 
     void Update()
