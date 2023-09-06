@@ -14,11 +14,6 @@ public class Player : MonoBehaviour
         inv = this.gameObject.AddComponent<ItemContainer>();
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(inventoryKey))

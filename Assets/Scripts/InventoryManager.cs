@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -32,14 +30,14 @@ public class InventoryManager : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        foreach (Item item in Player.instance.inv.inventoryItems)
+        foreach (var item in Player.instance.inv.inventoryItems)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var ItemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
             var ItemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
 
-            ItemName.text = item.itemName + " " + "x" + item.count.ToString(); ;
-            ItemIcon.sprite = item.icon;
+            ItemName.text = AllItemData.names[item.id] + " " + "x" + item.count.ToString();
+            ItemIcon.sprite = AllItemData.icnos[item.id];
         }
     }
 
