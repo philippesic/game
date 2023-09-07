@@ -6,7 +6,6 @@ public class InventoryManager : MonoBehaviour
 {
     public Transform ItemContent;
     public GameObject InventoryItem;
-    public GameObject placer;
 
     public void UpdateInventory()
     {
@@ -36,7 +35,6 @@ public class InventoryManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         inventory.SetActive(false);
-        placer.SetActive(true);
     }
 
         public void ToggleOn(GameObject inventory) {
@@ -44,6 +42,5 @@ public class InventoryManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         inventory.SetActive(true);
-        placer.SetActive(false);
     }
 }
