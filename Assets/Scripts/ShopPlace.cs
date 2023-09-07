@@ -6,8 +6,9 @@ using UnityEditor;
 
 public class ShopPlace : MonoBehaviour
 {
-    public GameObject prefab;
-    public void Awake() {
+    public GameObject shop;
+    public void Place(GameObject prefab) {
+        shop.SetActive(false);
         GameObject placer = new GameObject("Placer");
 
         
