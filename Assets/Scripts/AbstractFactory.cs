@@ -8,7 +8,6 @@ public abstract class Factory : WorldBlock
     public int itemId;
     public int multiplier = 1;
     public GameObject prefab;
-    
     protected bool isRunning = false;
 
     private void Start()

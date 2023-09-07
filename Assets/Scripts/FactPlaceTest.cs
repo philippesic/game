@@ -3,8 +3,9 @@ using UnityEngine;
 public class FactPlaceTest : MonoBehaviour
 {
     public SnapGrid grid;
-    public GameObject silhouetteCubePrefab; 
+    public GameObject factory;
     private GameObject silhouetteCube; 
+    public GameObject placer;
 
     private void Update()
     {
@@ -16,7 +17,7 @@ public class FactPlaceTest : MonoBehaviour
             if (silhouetteCube == null)
             {
                 
-                silhouetteCube = Instantiate(silhouetteCubePrefab);
+                silhouetteCube = Instantiate(factory);
             }
 
             PlaceSilhouetteCube(hitInfo.point);
@@ -24,6 +25,7 @@ public class FactPlaceTest : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 PlaceCubeNear(hitInfo.point);
+                placer.SetActive(false);
             }
         }
         else
@@ -48,6 +50,6 @@ public class FactPlaceTest : MonoBehaviour
     {
         
         var finalPosition = grid.GetNearestGridPoint(clickPoint);
-        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+        factory.transform.position = finalPosition;
     }
 }
