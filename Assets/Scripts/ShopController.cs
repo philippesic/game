@@ -31,7 +31,7 @@ public class ShopController : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
+            Time.timeScale = 0;
             shop.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

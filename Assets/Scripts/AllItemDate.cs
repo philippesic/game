@@ -81,7 +81,7 @@ public class AllItemData : MonoBehaviour
                 new Recipe.ItemIDAndCountList(1, 10).end()
             ));
         recipes.Add(new Recipe(
-                16,
+                17,
                 10,
                 new Recipe.ItemIDAndCountList().end(),
                 new Recipe.ItemIDAndCountList(1, 15).end()
