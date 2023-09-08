@@ -8,6 +8,7 @@ public class ShopPlace : MonoBehaviour
 {
     public GameObject shop;
     public void Place(GameObject prefab) {
+        Debug.Log("why");
         shop.SetActive(false);
         GameObject placer = new GameObject("Placer");
 
