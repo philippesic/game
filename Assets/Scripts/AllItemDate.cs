@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -19,13 +20,38 @@ public class AllItemData : MonoBehaviour
             }
         }
 
+        public class ItemIDAndCountList
+        {
+            private List<ItemIDAndCount> itemIDAndCounts = new List<ItemIDAndCount>();
+
+            public ItemIDAndCountList(int id, int count)
+            {
+                add(id, count);
+            }
+
+            public ItemIDAndCountList(){}
+
+            public ItemIDAndCountList add(int id, int count)
+            {
+                itemIDAndCounts.Add(new ItemIDAndCount(id, count));
+                return this;
+            }
+
+            public List<ItemIDAndCount> end()
+            {
+                return itemIDAndCounts;
+            }
+        }
+
         public List<ItemIDAndCount> itemsCost;
         public List<ItemIDAndCount> itemsMade;
+        public float timeSec;
         public int machineId;
 
-        public Recipe(int machineId, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
+        public Recipe(int machineId, float timeSec, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
         {
             this.machineId = machineId;
+            this.timeSec = timeSec;
             this.itemsCost = itemsCost;
             this.itemsMade = itemsMade;
         }
@@ -34,17 +60,37 @@ public class AllItemData : MonoBehaviour
     public static Dictionary<int, string> names = new Dictionary<int, string>();
     public static Dictionary<int, string> descriptions = new Dictionary<int, string>();
     public static Dictionary<int, Sprite> icons = new Dictionary<int, Sprite>();
-    public static Dictionary<int, Recipe> recipes = new Dictionary<int, Recipe>();
+    public static List<Recipe> recipes = new List<Recipe>();
 
     static AllItemData()
     {
         add(0, "Trash", "t");
         add(1, "Raw Iron", "This is iron before it is smelted.");
+        add(1, "Iron", "idk man");
 
-        add(1, "Iron", "idk man", new Recipe(
+        recipes.Add(new Recipe(
+                15,
+                10,
+                new Recipe.ItemIDAndCountList().end(),
+                new Recipe.ItemIDAndCountList(1, 5).end()
+            ));
+        recipes.Add(new Recipe(
+                16,
+                10,
+                new Recipe.ItemIDAndCountList().end(),
+                new Recipe.ItemIDAndCountList(1, 10).end()
+            ));
+        recipes.Add(new Recipe(
+                16,
+                10,
+                new Recipe.ItemIDAndCountList().end(),
+                new Recipe.ItemIDAndCountList(1, 15).end()
+            ));
+        recipes.Add(new Recipe(
             10,
-            new List<Recipe.ItemIDAndCount>(){ new Recipe.ItemIDAndCount(1, 15) },
-            new List<Recipe.ItemIDAndCount>(){ new Recipe.ItemIDAndCount(12, 15) }
+            5,
+            new Recipe.ItemIDAndCountList(1, 15).end(),
+            new Recipe.ItemIDAndCountList(12, 15).end()
             ));
     }
 
@@ -60,7 +106,7 @@ public class AllItemData : MonoBehaviour
         names.Add(id, name);
         descriptions.Add(id, description);
         icons.Add(id, Resources.Load("Assets/Item/Icons" + names[id]) as Sprite);
-        recipes.Add(id, recipe);
+        recipes.Add(recipe);
     }
 }
 
