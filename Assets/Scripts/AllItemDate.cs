@@ -66,7 +66,7 @@ public class AllItemData : MonoBehaviour
     {
         add(0, "Trash", "t");
         add(1, "Raw Iron", "This is iron before it is smelted.");
-        add(1, "Iron", "idk man");
+        add(12, "Iron", "idk man");
 
         recipes.Add(new Recipe(
                 15,
@@ -81,7 +81,7 @@ public class AllItemData : MonoBehaviour
                 new Recipe.ItemIDAndCountList(1, 10).end()
             ));
         recipes.Add(new Recipe(
-                16,
+                17,
                 10,
                 new Recipe.ItemIDAndCountList().end(),
                 new Recipe.ItemIDAndCountList(1, 15).end()
@@ -98,15 +98,7 @@ public class AllItemData : MonoBehaviour
     {
         names.Add(id, name);
         descriptions.Add(id, description);
-        icons.Add(id, Resources.Load("Assets/Item/Icons" + names[id]) as Sprite);
-    }
-
-    static void add(int id, string name, string description, Recipe recipe)
-    {
-        names.Add(id, name);
-        descriptions.Add(id, description);
-        icons.Add(id, Resources.Load("Assets/Item/Icons" + names[id]) as Sprite);
-        recipes.Add(recipe);
+        icons.Add(id, Resources.Load<Sprite>("Items/Icons/" + names[id]));
     }
 }
 

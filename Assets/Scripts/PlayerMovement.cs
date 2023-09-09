@@ -48,10 +48,10 @@ public class PlayerMovement : MonoBehaviour
     {
 
         if (Input.GetKey(sprintKey)) {
-            sprintSpeed = 200f;
+            sprintSpeed = 50f;
         }
         else {
-            sprintSpeed = 1f;
+            sprintSpeed = 5f;
         }
 
         // ground check
