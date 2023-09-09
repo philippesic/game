@@ -4,7 +4,7 @@ public class TerrainGenerator : MonoBehaviour
 {
     public int width = 512;       
     public int height = 512;      
-    public float scale = 10f;     
+    public float scale = 1f;     
     public float noiseIntensity = 0.1f; 
 
     float offsetX;
