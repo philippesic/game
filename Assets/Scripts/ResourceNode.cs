@@ -15,6 +15,3 @@ public class ResourceNode : MonoBehaviour
         }
     }
 }
-
-//This is something? No clue how you plan to implement actual drills so just replace these assignments with whatever you need
-//Node should tell drill which to generate and affect speed with multiplier variable
