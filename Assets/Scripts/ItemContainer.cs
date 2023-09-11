@@ -77,6 +77,18 @@ public class ItemContainer : ScriptableObject
         Add(container.getIDs(), container.getCounts());
     }
 
+    public void Add(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    {
+        List<int> ids = new List<int>();
+        List<int> counts = new List<int>();
+        foreach (ItemData item in inventoryItems)
+        {
+            ids.Add(item.id);
+            counts.Add(item.count);
+        }
+        Add(ids, counts);
+    }
+
     public void Remove(int id, int count)
     {
         foreach (ItemData invItem in inventoryItems)
@@ -105,6 +117,18 @@ public class ItemContainer : ScriptableObject
     public void Remove(ItemContainer container)
     {
         Remove(container.getIDs(), container.getCounts());
+    }
+
+    public void Remove(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    {
+        List<int> ids = new List<int>();
+        List<int> counts = new List<int>();
+        foreach (ItemData item in inventoryItems)
+        {
+            ids.Add(item.id);
+            counts.Add(item.count);
+        }
+        Remove(ids, counts);
     }
 
     public int GetMissing(int id, int count)
@@ -137,6 +161,18 @@ public class ItemContainer : ScriptableObject
         return GetMissing(container.getIDs(), container.getCounts());
     }
 
+    public List<int> GetMissing(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    {
+        List<int> ids = new List<int>();
+        List<int> counts = new List<int>();
+        foreach (ItemData item in inventoryItems)
+        {
+            ids.Add(item.id);
+            counts.Add(item.count);
+        }
+        return GetMissing(ids, counts);
+    }
+
     public bool Has(int id, int count)
     {
         return GetMissing(id, count) == 0;
@@ -150,6 +186,18 @@ public class ItemContainer : ScriptableObject
     public bool Has(ItemContainer container)
     {
         return Has(container.getIDs(), container.getCounts());
+    }
+
+    public bool Has(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    {
+        List<int> ids = new List<int>();
+        List<int> counts = new List<int>();
+        foreach (ItemData item in inventoryItems)
+        {
+            ids.Add(item.id);
+            counts.Add(item.count);
+        }
+        return Has(ids, counts);
     }
 
     internal void Add(string id, int count)

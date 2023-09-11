@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,5 +15,10 @@ public class WorldBlockContanor : ScriptableObject
             Mathf.Round(position.y / unitsPerGrid) * unitsPerGrid,
             Mathf.Round(position.z / unitsPerGrid) * unitsPerGrid
         );
+    }
+
+    public static float RotationToGrid(float rotation)
+    {
+        return Mathf.Round(rotation / 90) * 90;
     }
 }
