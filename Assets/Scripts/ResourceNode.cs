@@ -10,10 +10,8 @@ public class ResourceNode : MonoBehaviour
     public void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Drill")) {
             Drill script = other.gameObject.GetComponent<Drill>();
-            script.timeSec /= multiplier;
-            script.itemsMade = itemId;
-            print(script.itemsMade);    
-            Debug.Log("eibvi");
+            script.speed /= multiplier;
+            script.itemId = itemId;
         }
     }
 }

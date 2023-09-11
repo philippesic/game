@@ -1397,7 +1397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 0
   multiplier: 1
-  terrain: {fileID: 0}
 --- !u!114 &715879185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,55 +1635,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 0
   multiplier: 1
-  terrain: {fileID: 257281450}
---- !u!1 &838565248
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 838565250}
-  - component: {fileID: 838565249}
-  m_Layer: 0
-  m_Name: Fac
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &838565249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838565248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3cb2a2e9e6ef4a3aa9b3e4fefc6c66c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  itemId: 0
-  multiplier: 1
-  prefab: {fileID: 1244528808271462, guid: 0b50edd1ab1ea9c4ba8edc42f1b15181, type: 3}
---- !u!4 &838565250
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838565248}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 488.302, y: 367.46442, z: -427.93246}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849170753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,7 +1789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43aa8f29bddbb4cdca2e2a23b90a5b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 500
+  moveSpeed: 5
   groundDrag: 5
   jumpForce: 20
   jumpCooldown: 0.2
@@ -2377,8 +2327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e3232a694e242458f64c70782d794d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSec: 0
-  itemsMade: 0
+  speed: 1
+  itemId: 0
+  multiplier: 1
+  prefab: {fileID: 0}
 --- !u!1 &1330333038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,7 +2740,6 @@ SceneRoots:
   - {fileID: 112395651}
   - {fileID: 767898312}
   - {fileID: 1023695177}
-  - {fileID: 838565250}
   - {fileID: 1137399992}
   - {fileID: 773509816}
   - {fileID: 1278784730}
