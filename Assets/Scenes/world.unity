@@ -401,10 +401,10 @@ RectTransform:
   - {fileID: 765778267}
   m_Father: {fileID: 849170754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -70}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121567377
 MonoBehaviour:
@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539135129340528, guid: 3030a830cb6634c0c80fb5c2f3aa9873, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 513.04
+      value: 508
       objectReference: {fileID: 0}
     - target: {fileID: 4539135129340528, guid: 3030a830cb6634c0c80fb5c2f3aa9873, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1697,7 +1697,6 @@ GameObject:
   - component: {fileID: 1023695176}
   - component: {fileID: 1023695178}
   - component: {fileID: 1023695175}
-  - component: {fileID: 1023695179}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1719,7 +1718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   groundDrag: 5
-  jumpForce: 5
+  jumpForce: 20
   jumpCooldown: 0.2
   airMultiplier: 0.7
   walkSpeed: 0
@@ -1791,22 +1790,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inv: {fileID: 0}
---- !u!114 &1023695179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023695174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dd45bed470542db9141ca21c378c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
-  openKey: 0
-  isOpen: 0
-  ItemGrid: {fileID: 0}
 --- !u!1 &1062894067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,7 +2410,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2558,9 +2541,9 @@ SceneRoots:
   - {fileID: 257281451}
   - {fileID: 627914522}
   - {fileID: 428121216}
+  - {fileID: 715879178}
   - {fileID: 112395651}
   - {fileID: 767898312}
   - {fileID: 1023695177}
   - {fileID: 838565250}
   - {fileID: 1137399992}
-  - {fileID: 715879178}
