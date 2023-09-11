@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        inv = this.gameObject.AddComponent<ItemContainer>();
+        inv = ScriptableObject.CreateInstance<ItemContainer>();
     }
 
     void Update()

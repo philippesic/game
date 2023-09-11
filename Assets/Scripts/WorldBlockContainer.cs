@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldBlockContanor : MonoBehaviour
+public class WorldBlockContanor : ScriptableObject
 {
-    public List<WorldBlock> blockContanor = new List<WorldBlock>();
+    public static List<WorldBlock> blockContanor = new List<WorldBlock>();
+    public static List<WorldBlock> factoryContanor = new List<WorldBlock>();
 
-    public WorldBlockContanor() {
-        
+    public static int unitsPerGrid = 1;
+
+    public static Vector3 VecToGrid(Vector3 position)
+    {
+        return new Vector3(
+            Mathf.Round(position.x / unitsPerGrid) * unitsPerGrid,
+            Mathf.Round(position.y / unitsPerGrid) * unitsPerGrid,
+            Mathf.Round(position.z / unitsPerGrid) * unitsPerGrid
+        );
     }
 }

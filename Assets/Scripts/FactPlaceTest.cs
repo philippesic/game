@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FactPlaceTest : MonoBehaviour
 {
-    public SnapGrid grid;
     public GameObject factory;
     private GameObject silhouetteCube; 
     public GameObject placer;
@@ -42,14 +41,14 @@ public class FactPlaceTest : MonoBehaviour
     private void PlaceSilhouetteCube(Vector3 clickPoint)
     {
         
-        var finalPosition = grid.GetNearestGridPoint(clickPoint);
+        var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
         silhouetteCube.transform.position = finalPosition;
     }
 
     private void PlaceCubeNear(Vector3 clickPoint)
     {
         
-        var finalPosition = grid.GetNearestGridPoint(clickPoint);
+        var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
         factory.transform.position = finalPosition;
     }
 }

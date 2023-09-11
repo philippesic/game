@@ -17,9 +17,7 @@ public class ShopPlace : MonoBehaviour
         if (script != null)
         {
             script.factory = Instantiate(prefab);
-            script.placer = placer;
-            script.grid = FindObjectOfType<SnapGrid>();
-            
+            script.placer = placer;            
         }
         else
         {
