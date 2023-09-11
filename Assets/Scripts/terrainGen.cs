@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    public int width = 512;       
-    public int height = 512;      
+    public int width;       
+    public int height;      
     public float scale = 1f;     
     public float noiseIntensity = 0.1f; 
 
