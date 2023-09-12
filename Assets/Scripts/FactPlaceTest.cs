@@ -3,7 +3,7 @@ using UnityEngine;
 public class FactPlaceTest : MonoBehaviour
 {
     public GameObject factory;
-    private GameObject silhouetteCube; 
+    private GameObject silhouetteCube;
     public GameObject placer;
 
     private void Update()
@@ -15,12 +15,12 @@ public class FactPlaceTest : MonoBehaviour
         {
             if (silhouetteCube == null)
             {
-                
+
                 silhouetteCube = Instantiate(factory);
             }
 
             PlaceSilhouetteCube(hitInfo.point);
-            
+
             if (Input.GetMouseButtonDown(0))
             {
                 PlaceCubeNear(hitInfo.point);
@@ -29,7 +29,7 @@ public class FactPlaceTest : MonoBehaviour
         }
         else
         {
-            
+
             if (silhouetteCube != null)
             {
                 Destroy(silhouetteCube);
@@ -40,14 +40,14 @@ public class FactPlaceTest : MonoBehaviour
 
     private void PlaceSilhouetteCube(Vector3 clickPoint)
     {
-        
+
         var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
         silhouetteCube.transform.position = finalPosition;
     }
 
     private void PlaceCubeNear(Vector3 clickPoint)
     {
-        
+
         var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
         factory.transform.position = finalPosition;
     }

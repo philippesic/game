@@ -11,7 +11,7 @@ public abstract class Factory : WorldBlock
 
     private void Start()
     {
-        StartFactory(); 
+        StartFactory();
     }
 
     protected virtual void ExecuteFactory()

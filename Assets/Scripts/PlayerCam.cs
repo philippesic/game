@@ -10,14 +10,14 @@ public class PlayerCam : MonoBehaviour
     [Header("Sensitivity")]
     public float sensX;
     public float sensY;
-    
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    
+
     void Update()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
