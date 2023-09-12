@@ -10,13 +10,8 @@ public class ResourceNode : MonoBehaviour
     public void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Drill")) {
             Drill script = other.gameObject.GetComponent<Drill>();
-            script.timeSec /= multiplier;
-            script.itemsMade = itemId;
-            print(script.itemsMade);    
-            Debug.Log("eibvi");
+            script.speed /= multiplier;
+            script.itemId = itemId;
         }
     }
 }
-
-//This is something? No clue how you plan to implement actual drills so just replace these assignments with whatever you need
-//Node should tell drill which to generate and affect speed with multiplier variable
