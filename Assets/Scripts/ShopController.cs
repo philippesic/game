@@ -12,15 +12,16 @@ public class ShopController : MonoBehaviour
         shop.SetActive(false);
     }
 
-    
+
     void Update()
     {
-        if(Input.GetKeyDown(shopKey)) {
+        if (Input.GetKeyDown(shopKey))
+        {
             ToggleShop();
         }
     }
 
-        private void ToggleShop()
+    private void ToggleShop()
     {
         if (shop.activeSelf)
         {

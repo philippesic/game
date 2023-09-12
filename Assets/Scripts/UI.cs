@@ -55,7 +55,7 @@ public abstract class UI : MonoBehaviour
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
         itemScript.setText(
-            AllGameDate.names[item.id] +
+            AllGameDate.itemNames[item.id] +
             (item.count == 1 ? "" : " x" + item.count.ToString())
         );
         itemScript.setIcon(AllGameDate.icons[item.id]);

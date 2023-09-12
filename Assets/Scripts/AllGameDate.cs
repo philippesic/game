@@ -8,9 +8,9 @@ public class AllGameDate : ScriptableObject
 
     static AllGameDate()
     {
-        add(0, "Trash", "t");
-        add(1, "Raw Iron", "This is iron before it is smelted.");
-        add(12, "Iron", "idk man");
+        addItem(0, "Trash", "t");
+        addItem(1, "Raw Iron", "This is iron before it is smelted.");
+        addItem(12, "Iron", "idk man");
 
         recipes.Add(new Recipe(
                 15,
@@ -37,7 +37,7 @@ public class AllGameDate : ScriptableObject
                 new ItemIDAndCountList(12, 15).end()
             ));
 
-        FactoryPlacementCost.Add(0, new ItemIDAndCountList(12, 1).end());
+        addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList(12, 1).end());
     }
 
     // internal stuff
@@ -93,17 +93,34 @@ public class AllGameDate : ScriptableObject
         }
     }
 
-    public static Dictionary<int, string> names = new Dictionary<int, string>();
+    public static Dictionary<int, string> itemNames = new Dictionary<int, string>();
     public static Dictionary<int, string> descriptions = new Dictionary<int, string>();
     public static Dictionary<int, Sprite> icons = new Dictionary<int, Sprite>();
     public static List<Recipe> recipes = new List<Recipe>();
-    public static Dictionary<int, List<ItemIDAndCount>> FactoryPlacementCost = new Dictionary<int, List<ItemIDAndCount>>();
 
-    static void add(int id, string name, string description)
+    public static Dictionary<int, string> factoryNames = new Dictionary<int, string>();
+    public static Dictionary<int, string> factoryDescriptions = new Dictionary<int, string>();
+    public static Dictionary<int, Sprite> factoryIcons = new Dictionary<int, Sprite>();
+    public static Dictionary<int, GameObject> factoryPrefabs = new Dictionary<int, GameObject>();
+    public static Dictionary<int, List<ItemIDAndCount>> factoryPlacementCosts = new Dictionary<int, List<ItemIDAndCount>>();
+
+    static void addItem(int id, string name, string description)
     {
-        names.Add(id, name);
+        itemNames.Add(id, name);
         descriptions.Add(id, description);
-        icons.Add(id, Resources.Load<Sprite>("Items/Icons/" + names[id]));
+        icons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
+    }
+
+    static void addFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
+    {
+        factoryNames.Add(id, name);
+        factoryDescriptions.Add(id, description);
+        factoryIcons.Add(id, Resources.Load<Sprite>("WorldBlocks/Icons/" + factoryNames[id]));
+        Debug.Log("WorldBlocks/Prefabs/" + factoryNames[id]);
+        Debug.Log(Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
+        Debug.Log("WorldBlocks/Prefabs/1x1x1 block");
+        factoryPrefabs.Add(id, Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
+        factoryPlacementCosts.Add(id, placementCost);
     }
 }
 

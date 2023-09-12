@@ -17,5 +17,5 @@ public class UpdateTerrainCollision : MonoBehaviour
     {
         terrainCollider.terrainData = terrain.terrainData;
     }
-    
+
 }

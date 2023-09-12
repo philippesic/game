@@ -205,7 +205,8 @@ public class ItemContainer : ScriptableObject
         throw new NotImplementedException();
     }
 
-    public void ContentChange() {
+    public void ContentChange()
+    {
         foreach (ItemData invItem in inventoryItems)
         {
             if (invItem.count == 0)

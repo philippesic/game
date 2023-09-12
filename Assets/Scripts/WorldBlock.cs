@@ -2,33 +2,21 @@ using UnityEngine;
 
 public class WorldBlock : MonoBehaviour
 {
-    public static int blockID;
-    public static GameObject prefab;
+    public int blockID;
+    public bool isShadow = false;
 
-    public static bool CheckPlacement(Vector3 pos, float rotation)
+    public void Destroy()
     {
-        return /* in can place in location && */ Player.instance.inv.Has(AllGameDate.FactoryPlacementCost[blockID]);
-    }
-
-    public static void CreateShadow(Vector3 pos, float rotation) {
-        
-    }
-
-    public static bool Place(Vector3 pos, float rotation)
-    {
-        pos = WorldBlockContanor.VecToGrid(pos);
-        rotation = WorldBlockContanor.RotationToGrid(rotation);
-        if (CheckPlacement(pos, rotation))
+        if (!isShadow)
         {
-            Player.instance.inv.Remove(AllGameDate.FactoryPlacementCost[blockID]);
-            // Instantiate stuff
-            return true;
+            Player.instance.inv.Add(AllGameDate.factoryPlacementCosts[blockID]);
         }
-        return false;
+        Destroy(gameObject);
     }
 
-    public void Destroy() {
-        Player.instance.inv.Add(AllGameDate.FactoryPlacementCost[blockID]);
-        Destroy(gameObject);
+    public void setPos(Vector3 pos, float rotation)
+    {
+        transform.position = pos;
+        transform.rotation = WorldBlockContanor.Rotation2dToRotation3d(rotation);
     }
 }
