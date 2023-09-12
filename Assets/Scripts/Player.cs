@@ -14,5 +14,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         UI.checkForOpenKeys();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            WorldBlockPlacer.StartPlacement(0);
+        }
     }
 }

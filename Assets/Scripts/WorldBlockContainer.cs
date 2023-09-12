@@ -5,7 +5,6 @@ public class WorldBlockContanor : ScriptableObject
 {
     public static List<WorldBlock> blockContanor = new List<WorldBlock>();
     public static List<WorldBlock> factoryContanor = new List<WorldBlock>();
-
     public static int unitsPerGrid = 1;
 
     public static Vector3 VecToGrid(Vector3 position)
@@ -17,8 +16,17 @@ public class WorldBlockContanor : ScriptableObject
         );
     }
 
-    public static float RotationToGrid(float rotation)
+    public static float Rotation2dToGrid(float rotation)
     {
         return Mathf.Round(rotation / 90) * 90;
+    }
+
+    public static Quaternion Rotation2dToRotation3d(float rotation)
+    {
+        Quaternion quat = new Quaternion
+        {
+            eulerAngles = new Vector3(0, 0, rotation)
+        };
+        return quat;
     }
 }

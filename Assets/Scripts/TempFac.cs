@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TempFac : Factory
 {
-    public override GameObject Create() {
-        GameObject newItem = Instantiate(prefab);
-        return newItem;
+    public override GameObject Create()
+    {
+        throw new System.NotImplementedException();
     }
 }
