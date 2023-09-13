@@ -14,9 +14,9 @@ public class WorldBlock : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setPos(Vector3 pos, float rotation)
+    public void setPos(Vector3 pos, float rotation, bool onGrid = false)
     {
-        transform.position = pos;
+        transform.position = onGrid ? WorldBlockContanor.VecToGrid(pos) : pos;
         transform.rotation = WorldBlockContanor.Rotation2dToRotation3d(rotation);
     }
 }

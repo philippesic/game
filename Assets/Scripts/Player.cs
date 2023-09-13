@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
         UI.checkForOpenKeys();
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            WorldBlockPlacer.StartPlacement(0);
+            gameObject.GetComponentInChildren<WorldBlockPlacer>().StartPlacement(0);
         }
     }
 }

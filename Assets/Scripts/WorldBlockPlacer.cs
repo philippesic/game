@@ -1,32 +1,39 @@
-using System.Collections.Generic;
 using UnityEngine;
-public class WorldBlockPlacer : ScriptableObject
-{
-    public static WorldBlock placingBlock;
-    public static int placingBlockID;
+using UnityEngine.UIElements;
 
-    public static void StartPlacement(int id)
+public class WorldBlockPlacer : MonoBehaviour
+{
+
+    [HideInInspector] public WorldBlock placingBlock;
+    [HideInInspector] public int placingBlockID;
+
+    public void StartPlacement(int id)
     {
+        if (placingBlock != null)
+        {
+            placingBlock.Destroy();
+        }
         placingBlock = CreateShadowObject(id).GetComponent<WorldBlock>();
+        placingBlockID = id;
     }
 
-    public static bool CheckPlacement(Vector3 pos, float rotation)
+    private bool CheckPlacement(Vector3 pos, float rotation)
     {
         return (
             /* in can place in location && */
-            Player.instance.inv.Has(AllGameDate.factoryPlacementCosts[placingBlock.blockID])
+            Player.instance.inv.Has(AllGameDate.factoryPlacementCosts[placingBlockID])
         );
     }
 
-    public static bool Place(Vector3 pos, float rotation)
+    public bool Place(Vector3 pos, float rotation)
     {
         pos = WorldBlockContanor.VecToGrid(pos);
         rotation = WorldBlockContanor.Rotation2dToGrid(rotation);
         if (CheckPlacement(pos, rotation))
         {
-            Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlock.blockID]);
-            GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlock.blockID]);
-            block.GetComponent<WorldBlock>().setPos(pos, rotation);
+            Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlockID]);
+            GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID]);
+            block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
             placingBlock.Destroy();
             placingBlock = null;
             return true;
@@ -34,19 +41,37 @@ public class WorldBlockPlacer : ScriptableObject
         return false;
     }
 
-    public static GameObject CreateShadowObject(int id)
+    public GameObject CreateShadowObject(int id)
     {
-        Debug.Log(AllGameDate.factoryPrefabs[0].gameObject);
         GameObject shadowObject = Instantiate(AllGameDate.factoryPrefabs[id]);
         shadowObject.GetComponent<WorldBlock>().isShadow = true;
+        foreach(Collider collider in shadowObject.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
         return shadowObject;
+    }
+
+    private void doPlacementDisplay()
+    {
+        RaycastHit hitInfo;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hitInfo)) {
+            if (hitInfo.distance < 10)
+            {
+                placingBlock.setPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, hitInfo.distance), 0, true);
+                return;
+            }
+        }
+        placingBlock.setPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), 0);
     }
 
     public void Update()
     {
-        if (placingBlock == null)
+        if (placingBlock != null)
         {
-            placingBlock.setPos(Player.instance.gameObject.transform.position + new Vector3(0, 0, 10), 0);
+            doPlacementDisplay();
         }
     }
 }

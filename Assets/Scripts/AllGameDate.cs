@@ -116,9 +116,6 @@ public class AllGameDate : ScriptableObject
         factoryNames.Add(id, name);
         factoryDescriptions.Add(id, description);
         factoryIcons.Add(id, Resources.Load<Sprite>("WorldBlocks/Icons/" + factoryNames[id]));
-        Debug.Log("WorldBlocks/Prefabs/" + factoryNames[id]);
-        Debug.Log(Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
-        Debug.Log("WorldBlocks/Prefabs/1x1x1 block");
         factoryPrefabs.Add(id, Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
         factoryPlacementCosts.Add(id, placementCost);
     }
