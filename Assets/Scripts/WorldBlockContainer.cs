@@ -29,4 +29,10 @@ public class WorldBlockContanor : ScriptableObject
         };
         return quat;
     }
+
+    public static float Rotation3dToRotation2d(Quaternion rotation)
+    {
+        // add later
+        return 0;
+    }
 }
