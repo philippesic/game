@@ -25,18 +25,21 @@ public class WorldBlockPlacer : MonoBehaviour
         );
     }
 
-    public bool Place(Vector3 pos, float rotation)
+    public bool Place()
     {
-        pos = WorldBlockContanor.VecToGrid(pos);
-        rotation = WorldBlockContanor.Rotation2dToGrid(rotation);
-        if (CheckPlacement(pos, rotation))
+        if (placingBlock != null)
         {
-            Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlockID]);
-            GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID]);
-            block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
-            placingBlock.Destroy();
-            placingBlock = null;
-            return true;
+            Vector3 pos = WorldBlockContanor.VecToGrid(placingBlock.getPos());
+            float rotation = WorldBlockContanor.Rotation2dToGrid(placingBlock.getRotation());
+            if (CheckPlacement(pos, rotation))
+            {
+                Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlockID]);
+                GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID]);
+                block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
+                placingBlock.Destroy();
+                placingBlock = null;
+                return true;
+            }
         }
         return false;
     }
@@ -45,7 +48,7 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         GameObject shadowObject = Instantiate(AllGameDate.factoryPrefabs[id]);
         shadowObject.GetComponent<WorldBlock>().isShadow = true;
-        foreach(Collider collider in shadowObject.GetComponentsInChildren<Collider>())
+        foreach (Collider collider in shadowObject.GetComponentsInChildren<Collider>())
         {
             collider.enabled = false;
         }
@@ -57,7 +60,8 @@ public class WorldBlockPlacer : MonoBehaviour
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hitInfo)) {
+        if (Physics.Raycast(ray, out hitInfo))
+        {
             if (hitInfo.distance < 10)
             {
                 placingBlock.setPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, hitInfo.distance), 0, true);

@@ -18,5 +18,9 @@ public class Player : MonoBehaviour
         {
             gameObject.GetComponentInChildren<WorldBlockPlacer>().StartPlacement(0);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gameObject.GetComponentInChildren<WorldBlockPlacer>().Place();
+        }
     }
 }

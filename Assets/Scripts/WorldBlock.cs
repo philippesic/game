@@ -19,4 +19,14 @@ public class WorldBlock : MonoBehaviour
         transform.position = onGrid ? WorldBlockContanor.VecToGrid(pos) : pos;
         transform.rotation = WorldBlockContanor.Rotation2dToRotation3d(rotation);
     }
+
+    public Vector3 getPos()
+    {
+        return transform.position;
+    }
+
+    public float getRotation()
+    {
+        return WorldBlockContanor.Rotation3dToRotation2d(transform.rotation);
+    }
 }
