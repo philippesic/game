@@ -4,11 +4,13 @@ public class Player : MonoBehaviour
 {
     public ItemContainer inv;
     public static Player instance;
+    private WorldBlockPlacer worldBlockPlacer;
 
     private void Awake()
     {
         instance = this;
         inv = ScriptableObject.CreateInstance<ItemContainer>();
+        worldBlockPlacer = gameObject.GetComponentInChildren<WorldBlockPlacer>();
     }
 
     void Update()
@@ -20,7 +22,8 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gameObject.GetComponentInChildren<WorldBlockPlacer>().Place();
+            worldBlockPlacer.Place();
+            
         }
     }
 }
