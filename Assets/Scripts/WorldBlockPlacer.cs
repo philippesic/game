@@ -4,7 +4,6 @@ using UnityEngine.UIElements;
 
 public class WorldBlockPlacer : MonoBehaviour
 {
-
     [HideInInspector] public WorldBlock placingBlock;
     [HideInInspector] public int placingBlockID;
     [HideInInspector] public bool isPlacingOnValid = false;
