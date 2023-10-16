@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7189721784236431686}
   - component: {fileID: 844157626206176552}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 1x1x1 block
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 2754181310300973080}
   - component: {fileID: 4118319458566398230}
   - component: {fileID: 2412084392929412382}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,3 +164,4 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 024d28627d81a44cd95de9d274c7d00f, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
