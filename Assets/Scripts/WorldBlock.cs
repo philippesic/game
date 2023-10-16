@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldBlock : MonoBehaviour
@@ -30,12 +32,19 @@ public class WorldBlock : MonoBehaviour
         return WorldBlockContanor.Rotation3dToRotation2d(transform.rotation);
     }
 
-    public void makeShadow(){
+    public void makeShadow()
+    {
         isShadow = true;
         GetComponentInChildren<Collider>().isTrigger = true;
     }
-    
-    public void OnCollisionEnter(Collision collision){
-        Debug.Log(collision.gameObject.name);
+
+    public List<Collider> getCurrentCollisions()
+    {
+       return GetComponentInChildren<CollisionGetter>().getCurrentCollisions();
+    }
+
+    public bool canBePlaced()
+    {
+        return getCurrentCollisions().Count <= 0;
     }
 }

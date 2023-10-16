@@ -1,11 +1,18 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class WorldBlockContanor : ScriptableObject
+public class WorldBlockContanor : MonoBehaviour
 {
-    public static List<WorldBlock> blockContanor = new List<WorldBlock>();
-    public static List<WorldBlock> factoryContanor = new List<WorldBlock>();
+    public List<WorldBlock> blockContanor = new List<WorldBlock>();
+    public List<WorldBlock> factoryContanor = new List<WorldBlock>();
     public static int unitsPerGrid = 1;
+    public static WorldBlockContanor instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public static Vector3 VecToGrid(Vector3 position)
     {

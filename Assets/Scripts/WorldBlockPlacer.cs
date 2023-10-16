@@ -22,7 +22,7 @@ public class WorldBlockPlacer : MonoBehaviour
     private bool CheckPlacement(Vector3 pos, float rotation)
     {
         return (
-            true &&
+            placingBlock.canBePlaced() &&
             Player.instance.inv.Has(AllGameDate.factoryPlacementCosts[placingBlockID])
         );
     }
@@ -36,7 +36,7 @@ public class WorldBlockPlacer : MonoBehaviour
             if (CheckPlacement(pos, rotation) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlockID]);
-                GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID]);
+                GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID], pos, new Quaternion(), WorldBlockContanor.instance.transform);
                 block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
                 placingBlock.Destroy();
                 placingBlock = null;
