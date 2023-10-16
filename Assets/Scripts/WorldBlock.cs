@@ -29,4 +29,13 @@ public class WorldBlock : MonoBehaviour
     {
         return WorldBlockContanor.Rotation3dToRotation2d(transform.rotation);
     }
+
+    public void makeShadow(){
+        isShadow = true;
+        GetComponentInChildren<Collider>().isTrigger = true;
+    }
+    
+    public void OnCollisionEnter(Collision collision){
+        Debug.Log(collision.gameObject.name);
+    }
 }

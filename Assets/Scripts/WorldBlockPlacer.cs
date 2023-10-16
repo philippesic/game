@@ -15,14 +15,14 @@ public class WorldBlockPlacer : MonoBehaviour
         {
             placingBlock.Destroy();
         }
-        placingBlock = CreateShadowObject(id).GetComponent<WorldBlock>();
+        placingBlock = CreateShadowObject(id);
         placingBlockID = id;
     }
 
     private bool CheckPlacement(Vector3 pos, float rotation)
     {
         return (
-            /* in can place in location && */
+            true &&
             Player.instance.inv.Has(AllGameDate.factoryPlacementCosts[placingBlockID])
         );
     }
@@ -49,14 +49,10 @@ public class WorldBlockPlacer : MonoBehaviour
         return false;
     }
 
-    public GameObject CreateShadowObject(int id)
+    public WorldBlock CreateShadowObject(int id)
     {
-        GameObject shadowObject = Instantiate(AllGameDate.factoryPrefabs[id]);
-        shadowObject.GetComponent<WorldBlock>().isShadow = true;
-        foreach (Collider collider in shadowObject.GetComponentsInChildren<Collider>())
-        {
-            collider.enabled = false;
-        }
+        WorldBlock shadowObject = Instantiate(AllGameDate.factoryPrefabs[id]).GetComponent<WorldBlock>();;
+        shadowObject.makeShadow();
         return shadowObject;
     }
 
@@ -64,7 +60,6 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
-
         if (Physics.Raycast(ray, out hitInfo))
         {
             if (hitInfo.distance < 10)

@@ -2816,6 +2816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placingBlock: {fileID: 0}
   placingBlockID: 0
+  isPlacingOnValid: 0
 --- !u!1 &2130311198
 GameObject:
   m_ObjectHideFlags: 0
