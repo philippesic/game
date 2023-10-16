@@ -6,26 +6,9 @@ using UnityEditor;
 
 public class ShopPlace : MonoBehaviour
 {
-    public GameObject shop;
-    public void Place(GameObject prefab)
-    {
-        Debug.Log("why");
-        GameObject placer = new GameObject("Placer");
+    private WorldBlockPlacer worldBlockPlacer;
+    public GameObject player;
 
-
-        FactPlaceTest script = placer.AddComponent<FactPlaceTest>();
-
-        if (script != null)
-        {
-            script.factory = Instantiate(prefab);
-            script.placer = placer;
-        }
-        else
-        {
-            Debug.LogWarning("Not Found");
-        }
-
-
-        Selection.activeObject = placer;
-    }
+    //This script is attatched to the shop. INstance worldblock placer and do the stuff to instance placing a factory.
+    //Each button assign a place function with an id parameter to place correct object
 }
