@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                worldBlockPlacer.StartPlacement(0);
+                worldBlockPlacer.StartPlacement(1);
             }
         }
         if (Input.GetKeyDown(KeyCode.F))

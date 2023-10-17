@@ -1,34 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Factory : WorldBlock
+public class Factory : WorldBlock
 {
-    public float speed = 1.0f; //In seconds
-    public int itemId;
-    public int multiplier = 1;
-    protected bool isRunning = false;
+    public float multiplier = 1.0f;
+    private List<Factory> neighborFactories = new List<Factory>();
 
     private void Start()
     {
-        StartFactory();
-    }
-
-    protected virtual void ExecuteFactory()
-    {
-        if (!isRunning)
-        {
-            //
+        if (!isShadow) {
+            GetNeighbors();
+            foreach (Factory neighbor in neighborFactories)
+            {
+                neighbor.GetNeighbors();
+            }
         }
     }
 
-    public void StartFactory()
+    public void GetNeighbors()
     {
-        ExecuteFactory();
+        neighborFactories = new List<Factory>();
+        Collider[] neighbors = Physics.OverlapSphere(transform.position, 0.55f);
+        foreach (Collider neighbor in neighbors)
+        {
+            Factory neighborFactory = neighbor.GetComponentInParent<Factory>();
+            if (neighborFactory != null && neighborFactory.transform != transform && !neighborFactory.isDestroyed)
+            {
+                neighborFactories.Add(neighborFactory);
+            }
+        }
     }
 
-    public void StopFactory()
+    protected override void GetDestroyed()
     {
-        //
+        foreach (Factory neighbor in neighborFactories)
+        {
+            neighbor.GetNeighbors();
+        }
     }
 }

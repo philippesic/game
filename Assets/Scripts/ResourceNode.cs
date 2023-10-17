@@ -12,8 +12,6 @@ public class ResourceNode : MonoBehaviour
         if (other.CompareTag("Drill"))
         {
             Drill script = other.gameObject.GetComponent<Drill>();
-            script.speed /= multiplier;
-            script.itemId = itemId;
         }
     }
 }

@@ -5,7 +5,7 @@ public class Drill : Factory
 {
     void Update()
     {
-        Generate(speed, itemId, multiplier);
+        
     }
 
     private IEnumerator Generate(float sec, int id, int mult)

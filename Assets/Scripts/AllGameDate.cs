@@ -38,6 +38,8 @@ public class AllGameDate : ScriptableObject
             ));
 
         addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList(12, 1).end());
+        addFactory(1, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList(12, 1).end());
+
     }
 
     // internal stuff

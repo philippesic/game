@@ -2292,6 +2292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockID: 0
   isShadow: 0
+  isDestroyed: 0
 --- !u!1 &767898310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,14 +3266,14 @@ MonoBehaviour:
   moveSpeed: 4
   groundDrag: 5
   jumpForce: 20
-  jumpCooldown: 0.2
-  airMultiplier: 0.5
+  jumpCooldown: 0.1
+  airMultiplier: 0.8
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
-  whatIsGround:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 272215064}

@@ -1,20 +1,28 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldBlock : MonoBehaviour
 {
     public int blockID;
     public bool isShadow = false;
+    public bool isDestroyed = false;
 
     public void Destroy()
     {
-        if (!isShadow)
+        if (!isDestroyed)
         {
-            Player.instance.inv.Add(AllGameDate.factoryPlacementCosts[blockID]);
+            isDestroyed = true;
+            GetDestroyed();
+            if (!isShadow)
+            {
+                Player.instance.inv.Add(AllGameDate.factoryPlacementCosts[blockID]);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
+    protected virtual void GetDestroyed() { }
 
     public void setPos(Vector3 pos, float rotation, bool onGrid = false)
     {
@@ -38,13 +46,22 @@ public class WorldBlock : MonoBehaviour
         GetComponentInChildren<Collider>().isTrigger = true;
     }
 
-    public List<Collider> getCurrentCollisions()
+    public List<Collider> getCurrentBlockCollisions()
     {
-       return GetComponentInChildren<CollisionGetter>().getCurrentCollisions();
+        Collider[] collisions = Physics.OverlapBox(transform.position, new Vector3(0.49f, 0.49f, 0.49f));
+        List<Collider> blockCollisions = new List<Collider>();
+        foreach (Collider collision in collisions)
+        {
+            if (collision.GetComponentInParent<WorldBlock>() != null || collision.GetComponentInParent<Player>() != null)
+            {
+                blockCollisions.Add(collision);
+            }
+        }
+        return blockCollisions;
     }
 
     public bool canBePlaced()
     {
-        return getCurrentCollisions().Count <= 0;
+        return getCurrentBlockCollisions().Count <= 0;
     }
 }

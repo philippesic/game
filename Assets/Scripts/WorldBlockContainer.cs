@@ -9,7 +9,7 @@ public class WorldBlockContanor : MonoBehaviour
     public static int unitsPerGrid = 1;
     public static WorldBlockContanor instance;
 
-    private void Awake()
+    void Awake()
     {
         instance = this;
     }
