@@ -8,6 +8,7 @@ TagManager:
   - water
   - item
   - Drill
+  - Iron
   layers:
   - Default
   - TransparentFX
