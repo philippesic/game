@@ -8,6 +8,8 @@ public class NodeGen : MonoBehaviour
     public List<GameObject> nodes = new List<GameObject>();
     public float scatterRadius;
 
+    private string tag;
+
     void Start()
     {
         Terrain terrain = Terrain.activeTerrain;
@@ -15,7 +17,16 @@ public class NodeGen : MonoBehaviour
 
         for (int i = 0; i < nodes.Count; i++)
         {
+                switch (i) {
+                case 0:
+                    tag = "Iron";
+                    break;
+                default:
+                    break;
+            }
             GameObject prefab = nodes[i];
+            prefab.gameObject.tag = tag;
+
             float rarityMultiplier = i + 100;
 
             int numberOfInstances = Mathf.RoundToInt(rarityMultiplier * 10);
