@@ -5,12 +5,14 @@ public class Player : MonoBehaviour
     public ItemContainer inv;
     public static Player instance;
     private WorldBlockPlacer worldBlockPlacer;
+    private WorldBlockBreaker worldBlockBreaker;
 
     private void Awake()
     {
         instance = this;
         inv = ScriptableObject.CreateInstance<ItemContainer>();
         worldBlockPlacer = gameObject.GetComponentInChildren<WorldBlockPlacer>();
+        worldBlockBreaker = gameObject.GetComponentInChildren<WorldBlockBreaker>();
     }
 
     void Update()
@@ -18,12 +20,28 @@ public class Player : MonoBehaviour
         UI.checkForOpenKeys();
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            gameObject.GetComponentInChildren<WorldBlockPlacer>().StartPlacement(0);
+            worldBlockBreaker.StopRemoval();
+            if (worldBlockPlacer.placingBlock)
+            {
+                worldBlockPlacer.StopPlacement();
+            }
+            else
+            {
+                worldBlockPlacer.StartPlacement(0);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            worldBlockPlacer.Place();
-            
+            worldBlockPlacer.StopPlacement();
+            if (worldBlockBreaker.isRemoving)
+            {
+                worldBlockBreaker.StopRemoval();
+            }
+            else
+            {
+                worldBlockBreaker.StartRemoval();
+            }            
         }
+        
     }
 }
