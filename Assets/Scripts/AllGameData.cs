@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class AllGameDate : ScriptableObject
+public class AllGameData : ScriptableObject
 {
 
-    static AllGameDate()
+    static AllGameData()
     {
         addItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
         addItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
@@ -67,8 +67,8 @@ public class AllGameDate : ScriptableObject
                 new ItemIDAndCountList(12, 15).end()
             ));
 
-        addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList(12, 1).end());
-        addFactory(1, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList(12, 1).end());
+        addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().end());
+        addFactory(1, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().end());
 
     }
 

@@ -41,14 +41,14 @@ public class FactPlaceTest : MonoBehaviour
     private void PlaceSilhouetteCube(Vector3 clickPoint)
     {
 
-        var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
+        var finalPosition = WorldBlockContainer.VecToGrid(clickPoint);
         silhouetteCube.transform.position = finalPosition;
     }
 
     private void PlaceCubeNear(Vector3 clickPoint)
     {
 
-        var finalPosition = WorldBlockContanor.VecToGrid(clickPoint);
+        var finalPosition = WorldBlockContainer.VecToGrid(clickPoint);
         factory.transform.position = finalPosition;
     }
 }
