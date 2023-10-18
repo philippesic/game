@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockID: 0
   isShadow: 0
+  isDestroyed: 0

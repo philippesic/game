@@ -8,9 +8,39 @@ public class AllGameDate : ScriptableObject
 
     static AllGameDate()
     {
-        addItem(0, "Trash", "t");
-        addItem(1, "Raw Iron", "This is iron before it is smelted.");
-        addItem(12, "Iron", "idk man");
+        addItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
+        addItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
+        addItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
+        addItem(4, "Uranium", "Radioactive element with unique properties.");
+        addItem(5, "Banana", "A delicious and nutritious fruit.");
+        addItem(6, "Raw Silver", "Silver in its unrefined state, awaiting refinement.");
+        addItem(7, "Raw Gold", "Unprocessed gold, waiting to be refined and utilized.");
+        addItem(8, "Lead", "Dense and malleable lead metal.");
+        addItem(9, "Lithium", "Essential lithium element for various applications.");
+        addItem(10, "Sulfur", "A vital element with diverse industrial applications.");
+        addItem(11, "Diamond", "A precious and exceptionally hard gemstone.");
+        addItem(12, "Processed Iron", "Refined iron, ready for various applications.");
+        addItem(13, "Processed Copper", "Refined copper, suitable for various uses.");
+        addItem(14, "Processed Silver", "Refined silver, ready for crafting and manufacturing.");
+        addItem(15, "Processed Gold", "Refined gold, prepared for various high-value applications.");
+        addItem(16, "Glass", "Transparent material used for various constructions.");
+        addItem(17, "Steel", "Strong and versatile steel material for industrial applications.");
+        addItem(18, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
+        addItem(19, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
+        addItem(20, "Copper Plate", "Flat copper sheet, ideal for various crafting endeavors.");
+        addItem(21, "Motor", "Core component for machinery and automation systems.");
+        addItem(22, "Silicon", "Crucial element for electronic devices and technology.");
+        addItem(23, "Laser", "High-intensity beam emitter for precision applications.");
+        addItem(24, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.");
+        addItem(25, "Solar Panel", "Device that harnesses sunlight for sustainable energy.");
+        addItem(26, "Fan", "Mechanical device for generating airflow and cooling.");
+        addItem(27, "Magnet", "Magnetic element with various industrial and scientific uses.");
+        addItem(28, "Computer", "Advanced computing system for processing complex tasks.");
+        addItem(29, "High Precision Motor", "Specialized motor for precision-critical applications.");
+        addItem(30, "Fuel", "Essential energy source for various machinery and vehicles.");
+
+
+        
 
         recipes.Add(new Recipe(
                 15,
