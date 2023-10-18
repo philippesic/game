@@ -494,7 +494,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 149823655}
-  - component: {fileID: 149823656}
   m_Layer: 3
   m_Name: BlockContainer
   m_TagString: Untagged
@@ -517,20 +516,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2087949488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &149823656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149823654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18440e34716d7498ba41d85d60c8dd20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockContanor: []
-  factoryContanor: []
 --- !u!1 &182115745
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 public class WorldBlockContainer: MonoBehaviour
 {
     public List<WorldBlock> blockContainer = new List<WorldBlock>();
-    public List<WorldBlock> factoryContainer = new List<WorldBlock>();
     public static int unitsPerGrid = 1;
     public static WorldBlockContainer instance;
     public Dictionary<char, Vector3> vecToDirection = new Dictionary<char, Vector3>();

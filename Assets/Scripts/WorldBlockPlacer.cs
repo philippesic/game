@@ -1,7 +1,4 @@
-using System;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WorldBlockPlacer : MonoBehaviour
 {
@@ -43,6 +40,7 @@ public class WorldBlockPlacer : MonoBehaviour
         {
             Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.getPos());
             float rotation = WorldBlockContainer.Rotation2dToGrid(placingBlock.getRotation());
+            Debug.Log("Place");
             if (CheckPlacement(pos, rotation) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
