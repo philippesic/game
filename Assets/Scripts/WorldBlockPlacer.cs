@@ -33,7 +33,7 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         return (
             placingBlock.canBePlaced() &&
-            Player.instance.inv.Has(AllGameDate.factoryPlacementCosts[placingBlockID])
+            Player.instance.inv.Has(AllGameData.factoryPlacementCosts[placingBlockID])
         );
     }
 
@@ -41,12 +41,12 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         if (placingBlock != null)
         {
-            Vector3 pos = WorldBlockContanor.VecToGrid(placingBlock.getPos());
-            float rotation = WorldBlockContanor.Rotation2dToGrid(placingBlock.getRotation());
+            Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.getPos());
+            float rotation = WorldBlockContainer.Rotation2dToGrid(placingBlock.getRotation());
             if (CheckPlacement(pos, rotation) && isPlacingOnValid)
             {
-                Player.instance.inv.Remove(AllGameDate.factoryPlacementCosts[placingBlockID]);
-                GameObject block = Instantiate(AllGameDate.factoryPrefabs[placingBlockID], pos, new Quaternion(), WorldBlockContanor.instance.transform);
+                Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
+                GameObject block = Instantiate(AllGameData.factoryPrefabs[placingBlockID], pos, new Quaternion(), WorldBlockContainer.instance.transform);
                 block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
                 placingBlock.Destroy();
                 placingBlock = null;
@@ -61,7 +61,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public WorldBlock CreateShadowObject(int id)
     {
-        WorldBlock shadowObject = Instantiate(AllGameDate.factoryPrefabs[id]).GetComponent<WorldBlock>();;
+        WorldBlock shadowObject = Instantiate(AllGameData.factoryPrefabs[id]).GetComponent<WorldBlock>();;
         shadowObject.makeShadow();
         return shadowObject;
     }

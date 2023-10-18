@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class AllGameDate : ScriptableObject
+public class AllGameData : ScriptableObject
 {
 
-    static AllGameDate()
+    static AllGameData()
     {
         addItem(0, "Trash", "t");
         addItem(1, "Raw Iron", "This is iron before it is smelted.");

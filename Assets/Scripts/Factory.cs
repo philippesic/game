@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class Factory : WorldBlock
 {
@@ -28,6 +28,7 @@ public class Factory : WorldBlock
             Factory neighborFactory = neighbor.GetComponentInParent<Factory>();
             if (neighborFactory != null && neighborFactory.transform != transform && !neighborFactory.isDestroyed)
             {
+                Vector3 relativePos = neighborFactory.transform.rotation * (neighborFactory.transform.position - transform.position);
                 neighborFactories.Add(neighborFactory);
             }
         }
@@ -39,5 +40,15 @@ public class Factory : WorldBlock
         {
             neighbor.GetNeighbors();
         }
+    }
+
+    protected void FillOutputBuffers()
+    {
+
+    }
+    
+    protected void lee()
+    {
+
     }
 }

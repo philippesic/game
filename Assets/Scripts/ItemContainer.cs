@@ -24,7 +24,7 @@ public class ItemContainer : ScriptableObject
         inventoryItems = new List<ItemData>();
     }
 
-    public List<int> getIDs()
+    public List<int> GetIDs()
     {
         List<int> ids = new List<int>();
         foreach (ItemData item in inventoryItems)
@@ -34,7 +34,7 @@ public class ItemContainer : ScriptableObject
         return ids;
     }
 
-    public List<int> getCounts()
+    public List<int> GetCounts()
     {
         List<int> counts = new List<int>();
         foreach (ItemData item in inventoryItems)
@@ -66,22 +66,29 @@ public class ItemContainer : ScriptableObject
         {
             if (ids.Contains(invItem.id))
             {
-                invItem.count += counts[ids.FindIndex(id => id == invItem.id)];
+                int index = ids.FindIndex(id => id == invItem.id);
+                invItem.count += counts[index];
+                ids.RemoveAt(index);
+                counts.RemoveAt(index);
             }
+        }
+        for (int i = 0; i < ids.Count; i++)
+        {
+            inventoryItems.Add(new ItemData(ids[i], counts[i]));
         }
         ContentChange();
     }
 
     public void Add(ItemContainer container)
     {
-        Add(container.getIDs(), container.getCounts());
+        Add(container.GetIDs(), container.GetCounts());
     }
 
-    public void Add(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    public void Add(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
         List<int> ids = new List<int>();
         List<int> counts = new List<int>();
-        foreach (ItemData item in inventoryItems)
+        foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);
@@ -116,10 +123,10 @@ public class ItemContainer : ScriptableObject
 
     public void Remove(ItemContainer container)
     {
-        Remove(container.getIDs(), container.getCounts());
+        Remove(container.GetIDs(), container.GetCounts());
     }
 
-    public void Remove(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    public void Remove(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
         List<int> ids = new List<int>();
         List<int> counts = new List<int>();
@@ -158,14 +165,14 @@ public class ItemContainer : ScriptableObject
 
     public List<int> GetMissing(ItemContainer container)
     {
-        return GetMissing(container.getIDs(), container.getCounts());
+        return GetMissing(container.GetIDs(), container.GetCounts());
     }
 
-    public List<int> GetMissing(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    public List<int> GetMissing(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
         List<int> ids = new List<int>();
         List<int> counts = new List<int>();
-        foreach (ItemData item in inventoryItems)
+        foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);
@@ -185,14 +192,14 @@ public class ItemContainer : ScriptableObject
 
     public bool Has(ItemContainer container)
     {
-        return Has(container.getIDs(), container.getCounts());
+        return Has(container.GetIDs(), container.GetCounts());
     }
 
-    public bool Has(List<AllGameDate.ItemIDAndCount> itemIDAndCounts)
+    public bool Has(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
         List<int> ids = new List<int>();
         List<int> counts = new List<int>();
-        foreach (ItemData item in inventoryItems)
+        foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);

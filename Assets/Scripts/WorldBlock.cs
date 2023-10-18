@@ -17,7 +17,7 @@ public class WorldBlock : MonoBehaviour
             GetDestroyed();
             if (!isShadow)
             {
-                Player.instance.inv.Add(AllGameDate.factoryPlacementCosts[blockID]);
+                Player.instance.inv.Add(AllGameData.factoryPlacementCosts[blockID]);
             }
             Destroy(gameObject);
         }
@@ -26,8 +26,8 @@ public class WorldBlock : MonoBehaviour
 
     public void setPos(Vector3 pos, float rotation, bool onGrid = false)
     {
-        transform.position = onGrid ? WorldBlockContanor.VecToGrid(pos) : pos;
-        transform.rotation = WorldBlockContanor.Rotation2dToRotation3d(rotation);
+        transform.position = onGrid ? WorldBlockContainer.VecToGrid(pos) : pos;
+        transform.rotation = WorldBlockContainer.Rotation2dToRotation3d(rotation);
     }
 
     public Vector3 getPos()
@@ -37,7 +37,7 @@ public class WorldBlock : MonoBehaviour
 
     public float getRotation()
     {
-        return WorldBlockContanor.Rotation3dToRotation2d(transform.rotation);
+        return WorldBlockContainer.Rotation3dToRotation2d(transform.rotation);
     }
 
     public void makeShadow()
