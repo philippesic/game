@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldBlockContainer: MonoBehaviour
 {
     public List<WorldBlock> blockContainer = new List<WorldBlock>();
+    public List<Factory> factoryContainer = new List<Factory>();
     public static int unitsPerGrid = 1;
     public static WorldBlockContainer instance;
     public Dictionary<char, Vector3> vecToDirection = new Dictionary<char, Vector3>();
@@ -13,6 +13,19 @@ public class WorldBlockContainer: MonoBehaviour
     void Awake()
     {
         instance = this;
+    }
+
+    public void CreateBlock(int id, Vector3 pos, float rotation)
+    {
+        GameObject block = Instantiate(AllGameData.factoryPrefabs[id], pos, new Quaternion(), transform);
+        WorldBlock blockScript = block.GetComponent<WorldBlock>();
+        blockScript.setPos(pos, rotation, true);
+        blockContainer.Add(blockScript);
+        if (block.GetComponent<Factory>())
+        {
+            factoryContainer.Add(block.GetComponent<Factory>());
+        }
+
     }
 
     public static Vector3 VecToGrid(Vector3 position)

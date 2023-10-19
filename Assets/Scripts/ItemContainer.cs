@@ -207,9 +207,10 @@ public class ItemContainer : ScriptableObject
         return Has(ids, counts);
     }
 
-    internal void Add(string id, int count)
+    public void Empty()
     {
-        throw new NotImplementedException();
+        inventoryItems = new List<ItemData>();
+        ContentChange();
     }
 
     public void ContentChange()

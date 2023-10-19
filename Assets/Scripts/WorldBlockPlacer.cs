@@ -44,8 +44,7 @@ public class WorldBlockPlacer : MonoBehaviour
             if (CheckPlacement(pos, rotation) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
-                GameObject block = Instantiate(AllGameData.factoryPrefabs[placingBlockID], pos, new Quaternion(), WorldBlockContainer.instance.transform);
-                block.GetComponent<WorldBlock>().setPos(pos, rotation, true);
+                WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, rotation);
                 placingBlock.Destroy();
                 placingBlock = null;
                 if (keepPlace) {

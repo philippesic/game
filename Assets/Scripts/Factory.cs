@@ -6,22 +6,31 @@ using System;
 public class Factory : WorldBlock
 {
     public float multiplier = 1.0f;
-    private List<Factory> neighborFactories = new List<Factory>();
+    protected Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
 
     private void Start()
     {
         if (!isShadow) {
             GetNeighbors();
-            foreach (Factory neighbor in neighborFactories)
+            foreach (Factory neighbor in neighborFactories.Values)
             {
                 neighbor.GetNeighbors();
             }
+            printDict(neighborFactories);
+        }
+    }
+
+    public void printDict(Dictionary<string, Factory> dict)
+    {
+        foreach (KeyValuePair<string, Factory> pair in dict)
+        {
+            Debug.Log(pair.Key + pair.Value.ToString());
         }
     }
 
     public void GetNeighbors()
     {
-        neighborFactories = new List<Factory>();
+        neighborFactories = new Dictionary<string, Factory>();
         Collider[] neighbors = Physics.OverlapSphere(transform.position, 0.55f);
         foreach (Collider neighbor in neighbors)
         {
@@ -29,26 +38,18 @@ public class Factory : WorldBlock
             if (neighborFactory != null && neighborFactory.transform != transform && !neighborFactory.isDestroyed)
             {
                 Vector3 relativePos = neighborFactory.transform.rotation * (neighborFactory.transform.position - transform.position);
-                neighborFactories.Add(neighborFactory);
+                neighborFactories.Add(relativePos.ToString("F0"), neighborFactory);
             }
         }
     }
 
     protected override void GetDestroyed()
     {
-        foreach (Factory neighbor in neighborFactories)
+        foreach (Factory neighbor in neighborFactories.Values)
         {
             neighbor.GetNeighbors();
         }
     }
 
-    protected void FillOutputBuffers()
-    {
-
-    }
-    
-    protected void lee()
-    {
-
-    }
+    public virtual void Tick() {}
 }
