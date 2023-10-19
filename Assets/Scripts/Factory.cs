@@ -51,5 +51,7 @@ public class Factory : WorldBlock
         }
     }
 
+    public virtual void PreTick() {}
+
     public virtual void Tick() {}
 }

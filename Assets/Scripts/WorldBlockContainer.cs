@@ -28,6 +28,18 @@ public class WorldBlockContainer: MonoBehaviour
 
     }
 
+    public void DoTickUpdate()
+    {
+        foreach (Factory factory in factoryContainer)
+        {
+            factory.PreTick();
+        }
+        foreach (Factory factory in factoryContainer)
+        {
+            factory.Tick();
+        }
+    }
+
     public static Vector3 VecToGrid(Vector3 position)
     {
         return new Vector3(
