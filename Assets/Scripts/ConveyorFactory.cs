@@ -8,7 +8,6 @@ public class ConveyorFactory : Factory
 {
     public class ConveyorFactoryItem
     {
-        public class
     }
 
     public void GetItem()
