@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65820338247890050}
   - component: {fileID: 812878708315126138}
   m_Layer: 0
-  m_Name: Trash
+  m_Name: Raw Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

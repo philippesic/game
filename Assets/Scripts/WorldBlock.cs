@@ -6,8 +6,8 @@ using UnityEngine;
 public class WorldBlock : MonoBehaviour
 {
     public int blockID;
-    public bool isShadow = false;
-    public bool isDestroyed = false;
+    [HideInInspector] public bool isShadow = false;
+    [HideInInspector] public bool isDestroyed = false;
 
     public void Destroy()
     {
@@ -24,10 +24,10 @@ public class WorldBlock : MonoBehaviour
     }
     protected virtual void GetDestroyed() { }
 
-    public void setPos(Vector3 pos, float rotation, bool onGrid = false)
+    public void setPos(Vector3 pos, int rotation, bool onGrid = false)
     {
         transform.position = onGrid ? WorldBlockContainer.VecToGrid(pos) : pos;
-        transform.rotation = WorldBlockContainer.Rotation2dToRotation3d(rotation);
+        transform.rotation = WorldBlockContainer.RotationIntToRotation3d(rotation);
     }
 
     public Vector3 getPos()
@@ -43,10 +43,10 @@ public class WorldBlock : MonoBehaviour
     public void makeShadow()
     {
         isShadow = true;
-        GetComponentInChildren<Collider>().isTrigger = true;
+        foreach (Collider collider in GetComponentsInChildren<Collider>()) { collider.isTrigger = true; }
     }
 
-    public List<Collider> getCurrentBlockCollisions()
+    public List<Collider> GetCurrentBlockCollisions()
     {
         Collider[] collisions = Physics.OverlapBox(transform.position, new Vector3(0.49f, 0.49f, 0.49f));
         List<Collider> blockCollisions = new List<Collider>();
@@ -60,8 +60,8 @@ public class WorldBlock : MonoBehaviour
         return blockCollisions;
     }
 
-    public bool canBePlaced()
+    public bool CanBePlaced()
     {
-        return getCurrentBlockCollisions().Count <= 0;
+        return GetCurrentBlockCollisions().Count <= 0;
     }
 }

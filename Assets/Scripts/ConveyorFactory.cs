@@ -16,8 +16,7 @@ public class ConveyorFactory : Factory
             this.id = id;
         }
     }
-
-    public bool shouldMoveItems = true;
+    [HideInInspector] public bool shouldMoveItems = true;
     public ConveyorFactoryItem heldItem;
 
     public void GetItem(ConveyorFactoryItem item)
@@ -42,12 +41,19 @@ public class ConveyorFactory : Factory
 
     public override void Tick()
     {
-        ConveyorFactory conveyorFactory = neighborFactories["(0, 0, 1)"].gameObject.GetComponent<ConveyorFactory>();
-        if (shouldMoveItems && heldItem != null && CanPush(conveyorFactory))
+        if (neighborFactories.ContainsKey("(0, 0, 1)"))
         {
-            shouldMoveItems = false;
-            conveyorFactory.GetItem(heldItem);
-            heldItem = null;
+            ConveyorFactory conveyorFactory = neighborFactories["(0, 0, 1)"].gameObject.GetComponent<ConveyorFactory>();
+            if (heldItem == null)
+            {
+                shouldMoveItems = false;
+            }
+            else if (shouldMoveItems && CanPush(conveyorFactory))
+            {
+                shouldMoveItems = false;
+                conveyorFactory.GetItem(heldItem);
+                heldItem = null;
+            }
         }
     }
 }

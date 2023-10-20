@@ -10,7 +10,8 @@ public class Factory : WorldBlock
 
     private void Start()
     {
-        if (!isShadow) {
+        if (!isShadow)
+        {
             GetNeighbors();
             foreach (Factory neighbor in neighborFactories.Values)
             {
@@ -51,7 +52,7 @@ public class Factory : WorldBlock
         }
     }
 
-    public virtual void PreTick() {}
+    public virtual void PreTick() { }
 
-    public virtual void Tick() {}
+    public virtual void Tick() { }
 }

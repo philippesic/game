@@ -58,7 +58,7 @@ public abstract class UI : MonoBehaviour
             AllGameData.itemNames[item.id] +
             (item.count == 1 ? "" : " x" + item.count.ToString())
         );
-        itemScript.setIcon(AllGameData.icons[item.id]);
+        itemScript.setIcon(AllGameData.itemIcons[item.id]);
     }
 
     public void setGridItems(List<ItemContainer.ItemData> items, Transform grid)

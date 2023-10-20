@@ -18,16 +18,19 @@ public class Player : MonoBehaviour
     void Update()
     {
         UI.checkForOpenKeys();
+        if(Input.inputString != ""){
+            int number;
+            bool is_a_number = int.TryParse(Input.inputString, out number);
+            if (is_a_number && number >= 0 && number < 10){
+                worldBlockPlacer.StartPlacement(number);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             worldBlockBreaker.StopRemoval();
             if (worldBlockPlacer.placingBlock)
             {
                 worldBlockPlacer.StopPlacement();
-            }
-            else
-            {
-                worldBlockPlacer.StartPlacement(1);
             }
         }
         if (Input.GetKeyDown(KeyCode.F))
@@ -40,7 +43,7 @@ public class Player : MonoBehaviour
             else
             {
                 worldBlockBreaker.StartRemoval();
-            }            
+            }
         }
         
     }

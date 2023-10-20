@@ -9,15 +9,16 @@ public class WorldBlockRayCaster : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    } 
+    }
 
     public WorldBlock GetLookedAtWorldBlock()
     {
         RaycastHit hitInfo;
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         if (Physics.Raycast(ray, out hitInfo))
         {
-            if (hitInfo.distance < 10 && hitInfo.collider != null) {
+            if (hitInfo.distance < 10 && hitInfo.collider != null)
+            {
                 if (hitInfo.collider.gameObject.GetComponentInParent<WorldBlock>() != null)
                 {
                     return hitInfo.collider.gameObject.GetComponentInParent<WorldBlock>();

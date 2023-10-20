@@ -8,6 +8,7 @@ public class AllGameData : ScriptableObject
 
     static AllGameData()
     {
+        // items
         addItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
         addItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
         addItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
@@ -39,9 +40,12 @@ public class AllGameData : ScriptableObject
         addItem(29, "High Precision Motor", "Specialized motor for precision-critical applications.");
         addItem(30, "Fuel", "Essential energy source for various machinery and vehicles.");
 
+        // factories
+        addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().end());
+        addFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for building", new ItemIDAndCountList().end());
+        addFactory(2, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().end());
 
-        
-
+        // recipes
         recipes.Add(new Recipe(
                 15,
                 10,
@@ -66,14 +70,9 @@ public class AllGameData : ScriptableObject
                 new ItemIDAndCountList(1, 15).end(),
                 new ItemIDAndCountList(12, 15).end()
             ));
-
-        addFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().end());
-        addFactory(1, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().end());
-
     }
 
     // internal stuff
-
     public struct ItemIDAndCount
     {
         public int id;
@@ -126,8 +125,10 @@ public class AllGameData : ScriptableObject
     }
 
     public static Dictionary<int, string> itemNames = new Dictionary<int, string>();
-    public static Dictionary<int, string> descriptions = new Dictionary<int, string>();
-    public static Dictionary<int, Sprite> icons = new Dictionary<int, Sprite>();
+    public static Dictionary<int, string> itemDescriptions = new Dictionary<int, string>();
+    public static Dictionary<int, Sprite> itemIcons = new Dictionary<int, Sprite>();
+    public static Dictionary<int, Sprite> itemPrefabs = new Dictionary<int, Sprite>();
+
     public static List<Recipe> recipes = new List<Recipe>();
 
     public static Dictionary<int, string> factoryNames = new Dictionary<int, string>();
@@ -139,8 +140,9 @@ public class AllGameData : ScriptableObject
     static void addItem(int id, string name, string description)
     {
         itemNames.Add(id, name);
-        descriptions.Add(id, description);
-        icons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
+        itemDescriptions.Add(id, description);
+        itemIcons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
+        itemPrefabs.Add(id, Resources.Load<Sprite>("Items/Prefabs/" + itemNames[id]));
     }
 
     static void addFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
