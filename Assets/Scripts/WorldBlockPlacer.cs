@@ -1,4 +1,5 @@
 using System;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class WorldBlockPlacer : MonoBehaviour
@@ -73,32 +74,9 @@ public class WorldBlockPlacer : MonoBehaviour
             if (hitInfo.distance < 10)
             {
                 Vector3 point = hitInfo.point;
-                if (hitInfo.point.x - Math.Floor(hitInfo.point.x) == 0.5f)
+                if (hitInfo.collider.GetComponentInParent<WorldBlock>() != null)
                 {
-                    point = hitInfo.point + new Vector3(0.999f, 0, 0);
-                    Vector3 pointOther = hitInfo.point + new Vector3(-0.999f, 0, 0);
-                    if ((point - gameObject.transform.position).magnitude > (pointOther - gameObject.transform.position).magnitude)
-                    {
-                        point = pointOther;
-                    }
-                }
-                else if (hitInfo.point.y - Math.Floor(hitInfo.point.y) == 0.5f)
-                {
-                    point = hitInfo.point + new Vector3(0, 0.999f, 0);
-                    Vector3 pointOther = hitInfo.point + new Vector3(0, -0.999f, 0);
-                    if ((point - gameObject.transform.position).magnitude > (pointOther - gameObject.transform.position).magnitude)
-                    {
-                        point = pointOther;
-                    }
-                }
-                else if (hitInfo.point.z - Math.Floor(hitInfo.point.z) == 0.5f)
-                {
-                    point = hitInfo.point + new Vector3(0, 0, 0.999f);
-                    Vector3 pointOther = hitInfo.point + new Vector3(0, 0, -0.999f);
-                    if ((point - gameObject.transform.position).magnitude > (pointOther - gameObject.transform.position).magnitude)
-                    {
-                        point = pointOther;
-                    }
+                    point += hitInfo.normal * 0.999f;
                 }
                 isPlacingOnValid = true;
                 placingBlock.setPos(point, blockRotation, true);
@@ -121,12 +99,12 @@ public class WorldBlockPlacer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 blockRotation -= 1;
-                if (blockRotation < 1) {blockRotation += 6;}
+                if (blockRotation < 1) { blockRotation = 6; }
             }
             else if (Input.GetKeyDown(KeyCode.H))
             {
                 blockRotation += 1;
-                while (blockRotation > 6) {blockRotation -= 6;}
+                while (blockRotation > 6) { blockRotation = 1; }
             }
         }
     }
