@@ -64,4 +64,9 @@ public class WorldBlock : MonoBehaviour
     {
         return GetCurrentBlockCollisions().Count <= 0;
     }
+
+    public T GetBlockFromType<T>() where T: WorldBlock
+    {
+        return GetComponentInParent<T>();
+    }
 }

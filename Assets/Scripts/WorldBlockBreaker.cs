@@ -21,7 +21,7 @@ public class WorldBlockBreaker : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.R))
             {
-                WorldBlock lookedAtBlock = WorldBlockRayCaster.instance.GetLookedAtWorldBlock();
+                WorldBlock lookedAtBlock = PlayerRayCaster.instance.GetLookedAtWorldBlock();
                 if (lookedAtBlock != null)
                 {
                     lookedAtBlock.Destroy();

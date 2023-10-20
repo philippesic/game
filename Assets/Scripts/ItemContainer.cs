@@ -215,12 +215,17 @@ public class ItemContainer : ScriptableObject
 
     public void ContentChange()
     {
+        List<ItemData> itemsToRemove = new List<ItemData>();
         foreach (ItemData invItem in inventoryItems)
         {
             if (invItem.count == 0)
             {
-                inventoryItems.Remove(invItem);
+                itemsToRemove.Add(invItem);
             }
+        }
+        foreach (ItemData invItem in itemsToRemove)
+        {
+            inventoryItems.Remove(invItem);
         }
         UpdateAfterContentChange();
     }

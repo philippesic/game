@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldBlockRayCaster : MonoBehaviour
+public class PlayerRayCaster : MonoBehaviour
 {
-    public static WorldBlockRayCaster instance;
+    public static PlayerRayCaster instance;
 
     private void Awake()
     {

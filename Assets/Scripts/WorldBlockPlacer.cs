@@ -8,7 +8,6 @@ public class WorldBlockPlacer : MonoBehaviour
     [HideInInspector] public int placingBlockID;
     [HideInInspector] public bool isPlacingOnValid = false;
     private int blockRotation = 1;
-    private float scrollBlockRotation = 1;
 
     public void StartPlacement(int id)
     {
@@ -99,12 +98,12 @@ public class WorldBlockPlacer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 blockRotation -= 1;
-                if (blockRotation < 1) { blockRotation = 6; }
+                if (blockRotation < 1) { blockRotation = 4; }
             }
             else if (Input.GetKeyDown(KeyCode.H))
             {
                 blockRotation += 1;
-                while (blockRotation > 6) { blockRotation = 1; }
+                while (blockRotation > 4) { blockRotation = 1; }
             }
         }
     }

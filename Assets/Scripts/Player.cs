@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,10 +19,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         UI.checkForOpenKeys();
-        if(Input.inputString != ""){
+        if (Input.inputString != "")
+        {
             int number;
             bool is_a_number = int.TryParse(Input.inputString, out number);
-            if (is_a_number && number >= 0 && number < 10){
+            if (is_a_number && number >= 0 && number < 10)
+            {
                 worldBlockPlacer.StartPlacement(number);
             }
         }
@@ -45,6 +48,17 @@ public class Player : MonoBehaviour
                 worldBlockBreaker.StartRemoval();
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
+            if (block != null)
+            {
+                ConveyorFactory blockType = block.GetBlockFromType<ConveyorFactory>();
+                if (blockType != null)
+                {
+                    blockType.GiveItem(new ConveyorFactory.ConveyorFactoryItem(1, Instantiate(AllGameData.itemPrefabs[1])));
+                }
+            }
+        }
     }
 }
