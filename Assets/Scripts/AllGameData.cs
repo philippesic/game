@@ -9,6 +9,7 @@ public class AllGameData : ScriptableObject
     static AllGameData()
     {
         // items
+        addItem(0, "Trash", "Its trash");
         addItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
         addItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
         addItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
