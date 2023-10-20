@@ -118,17 +118,15 @@ public class WorldBlockPlacer : MonoBehaviour
                 Place();
             }
             DoPlacementDisplay();
-            Debug.Log(Input.mouseScrollDelta.y);
-            if (Math.Abs(Input.mouseScrollDelta.y) > 0.01)
+            if (Input.GetKeyDown(KeyCode.G))
             {
-                scrollBlockRotation -= Input.mouseScrollDelta.y;
-                while (scrollBlockRotation > 6.5) {scrollBlockRotation -= 6;}
-                while (scrollBlockRotation < 0.5) {scrollBlockRotation += 6;}
-                blockRotation = (int) Math.Round(scrollBlockRotation);
+                blockRotation -= 1;
+                if (blockRotation < 1) {blockRotation += 6;}
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.H))
             {
-                scrollBlockRotation = blockRotation;
+                blockRotation += 1;
+                while (blockRotation > 6) {blockRotation -= 6;}
             }
         }
     }
