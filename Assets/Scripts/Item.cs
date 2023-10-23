@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickup : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public int id;
     public int count;
@@ -26,5 +26,12 @@ public class ItemPickup : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         Pickup();
+    }
+
+    public static GameObject CreateItem(int id, int count = 1)
+    {
+        GameObject obj = Instantiate(AllGameData.itemPrefabs[id], ItemObjectContainer.instance.transform);
+        obj.GetComponent<Item>().count = count;
+        return obj;
     }
 }

@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class ConveyorFactory : Factory
@@ -12,9 +9,16 @@ public class ConveyorFactory : Factory
     {
         public int id;
         public GameObject displayObject;
+
         public ConveyorFactoryItem(int id)
         {
             this.id = id;
+        }
+
+        public ConveyorFactoryItem(GameObject displayObject)
+        {
+            id = displayObject.GetComponent<Item>().id;
+            this.displayObject = displayObject;
         }
 
         public ConveyorFactoryItem(int id, GameObject displayObject)
@@ -23,6 +27,7 @@ public class ConveyorFactory : Factory
             this.displayObject = displayObject;
         }
     }
+
     [HideInInspector] public bool shouldMoveItems = true;
     public ConveyorFactoryItem heldItem;
 
@@ -32,7 +37,7 @@ public class ConveyorFactory : Factory
         heldItem = item;
         if (heldItem.displayObject != null)
         {
-            heldItem.displayObject.GetComponent<ItemPickup>().UpdateConveyor(this);
+            heldItem.displayObject.GetComponent<Item>().UpdateConveyor(this);
             heldItem.displayObject.transform.position = transform.position;
         }
     }
