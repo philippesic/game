@@ -1,9 +1,11 @@
 using System.Collections;
+using System.Security.Principal;
 using UnityEngine;
 
 public class Drill : Factory
 {
-    private int genid;
+    public GameObject node;
+    public int genid;
     void Awake()
     {
 
@@ -15,9 +17,11 @@ public class Drill : Factory
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<NodeID>() != null)
+        node = other.gameObject;
+        NodeID nodeID = node.GetComponent<NodeID>();
+        if (nodeID != null)
         {
-            genid = other.gameObject.GetComponent<NodeID>().id;
+            genid = nodeID.id;
             StartCoroutine(Generate(1, genid, 1));
         }
     }
