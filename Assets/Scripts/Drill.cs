@@ -6,14 +6,6 @@ public class Drill : Factory
 {
     public GameObject node;
     public int genid;
-    void Awake()
-    {
-
-    }
-    void Update()
-    {
-
-    }
 
     void OnTriggerEnter(Collider other)
     {
