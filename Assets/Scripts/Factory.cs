@@ -32,7 +32,7 @@ public class Factory : WorldBlock
             Factory neighborFactory = neighbor.GetComponentInParent<Factory>();
             if (neighborFactory != null && neighborFactory.transform != transform && !neighborFactory.isDestroyed)
             {
-                Vector3 relativePos = transform.rotation * (neighborFactory.transform.position - transform.position);
+                Vector3 relativePos = Quaternion.Inverse(transform.rotation) * (neighborFactory.transform.position - transform.position);
                 if (!neighborFactories.ContainsKey(relativePos.ToString("F0")))
                 {
                     neighborFactories.Add(relativePos.ToString("F0"), neighborFactory);

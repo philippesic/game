@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
             bool is_a_number = int.TryParse(Input.inputString, out number);
             if (is_a_number && number >= 0 && number < 10)
             {
+                worldBlockBreaker.StopRemoval();
                 worldBlockPlacer.StartPlacement(number);
             }
         }
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
                 ConveyorFactory blockType = block.GetBlockFromType<ConveyorFactory>();
                 if (blockType != null)
                 {
-                    blockType.GiveItem(new ConveyorFactory.ConveyorFactoryItem(1, Instantiate(AllGameData.itemPrefabs[1])));
+                    blockType.GiveItem(new ConveyorFactory.ConveyorFactoryItem(Item.CreateItem(1)));
                 }
             }
         }
