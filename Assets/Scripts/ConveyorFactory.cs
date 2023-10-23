@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
@@ -10,19 +11,35 @@ public class ConveyorFactory : Factory
     public class ConveyorFactoryItem
     {
         public int id;
-        public GameObject itemDisplay;
+        public GameObject displayObject;
         public ConveyorFactoryItem(int id)
         {
             this.id = id;
+        }
+
+        public ConveyorFactoryItem(int id, GameObject displayObject)
+        {
+            this.id = id;
+            this.displayObject = displayObject;
         }
     }
     [HideInInspector] public bool shouldMoveItems = true;
     public ConveyorFactoryItem heldItem;
 
-    public void GetItem(ConveyorFactoryItem item)
+    public void GiveItem(ConveyorFactoryItem item)
     {
         shouldMoveItems = false;
         heldItem = item;
+        if (heldItem.displayObject != null)
+        {
+            heldItem.displayObject.GetComponent<ItemPickup>().UpdateConveyor(this);
+            heldItem.displayObject.transform.position = transform.position;
+        }
+    }
+
+    public void RemoveItemOnbelt()
+    {
+        heldItem = null;
     }
 
     public bool CanPush(ConveyorFactory conveyorFactory)
@@ -41,9 +58,9 @@ public class ConveyorFactory : Factory
 
     public override void Tick()
     {
-        if (neighborFactories.ContainsKey("(0, 0, 1)"))
+        if (neighborFactories.ContainsKey("(1, 0, 0)"))
         {
-            ConveyorFactory conveyorFactory = neighborFactories["(0, 0, 1)"].gameObject.GetComponent<ConveyorFactory>();
+            ConveyorFactory conveyorFactory = neighborFactories["(1, 0, 0)"].GetBlockFromType<ConveyorFactory>();
             if (heldItem == null)
             {
                 shouldMoveItems = false;
@@ -51,9 +68,17 @@ public class ConveyorFactory : Factory
             else if (shouldMoveItems && CanPush(conveyorFactory))
             {
                 shouldMoveItems = false;
-                conveyorFactory.GetItem(heldItem);
-                heldItem = null;
+                conveyorFactory.GiveItem(heldItem);
+                RemoveItemOnbelt();
             }
+        }
+    }
+
+    public void printDict(Dictionary<string, Factory> dict)
+    {
+        foreach (KeyValuePair<string, Factory> pair in dict)
+        {
+            Debug.Log(pair.Key + pair.Value.ToString());
         }
     }
 }

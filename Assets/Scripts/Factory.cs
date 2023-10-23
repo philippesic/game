@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class Factory : WorldBlock
 {
     public float multiplier = 1.0f;
-    protected Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
+    public Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
 
     private void Start()
     {
@@ -17,29 +18,25 @@ public class Factory : WorldBlock
             {
                 neighbor.GetNeighbors();
             }
-            printDict(neighborFactories);
-        }
-    }
-
-    public void printDict(Dictionary<string, Factory> dict)
-    {
-        foreach (KeyValuePair<string, Factory> pair in dict)
-        {
-            Debug.Log(pair.Key + pair.Value.ToString());
         }
     }
 
     public void GetNeighbors()
     {
         neighborFactories = new Dictionary<string, Factory>();
-        Collider[] neighbors = Physics.OverlapSphere(transform.position, 0.55f);
+        Collider[] neighbors = Physics.OverlapBox(transform.position, new Vector3(0.9f, 0.9f, 2.9f));
+        neighbors = neighbors.Concat(Physics.OverlapBox(transform.position, new Vector3(0.9f, 2.9f, 0.9f))).ToArray();
+        neighbors = neighbors.Concat(Physics.OverlapBox(transform.position, new Vector3(2.9f, 0.9f, 0.9f))).ToArray();
         foreach (Collider neighbor in neighbors)
         {
             Factory neighborFactory = neighbor.GetComponentInParent<Factory>();
             if (neighborFactory != null && neighborFactory.transform != transform && !neighborFactory.isDestroyed)
             {
-                Vector3 relativePos = neighborFactory.transform.rotation * (neighborFactory.transform.position - transform.position);
-                neighborFactories.Add(relativePos.ToString("F0"), neighborFactory);
+                Vector3 relativePos = transform.rotation * (neighborFactory.transform.position - transform.position);
+                if (!neighborFactories.ContainsKey(relativePos.ToString("F0")))
+                {
+                    neighborFactories.Add(relativePos.ToString("F0"), neighborFactory);
+                }
             }
         }
     }

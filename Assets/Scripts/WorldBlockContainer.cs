@@ -61,8 +61,6 @@ public class WorldBlockContainer : MonoBehaviour
 
     public static Quaternion RotationIntToRotation3d(int rotation)
     {
-        Debug.Log(intToRotation[rotation]);
-        Debug.Log(Quaternion.LookRotation(intToRotation[rotation], Vector3.up) * Vector3.up);
         return Quaternion.LookRotation(intToRotation[rotation], Vector3.up);
     }
 

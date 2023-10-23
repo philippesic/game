@@ -128,7 +128,7 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, string> itemNames = new Dictionary<int, string>();
     public static Dictionary<int, string> itemDescriptions = new Dictionary<int, string>();
     public static Dictionary<int, Sprite> itemIcons = new Dictionary<int, Sprite>();
-    public static Dictionary<int, Sprite> itemPrefabs = new Dictionary<int, Sprite>();
+    public static Dictionary<int, GameObject> itemPrefabs = new Dictionary<int, GameObject>();
 
     public static List<Recipe> recipes = new List<Recipe>();
 
@@ -143,7 +143,7 @@ public class AllGameData : ScriptableObject
         itemNames.Add(id, name);
         itemDescriptions.Add(id, description);
         itemIcons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
-        itemPrefabs.Add(id, Resources.Load<Sprite>("Items/Prefabs/" + itemNames[id]));
+        itemPrefabs.Add(id, Resources.Load<GameObject>("Items/Prefabs/" + itemNames[id]));
     }
 
     static void addFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)

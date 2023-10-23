@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockID: 0
   isShadow: 0
+  isDestroyed: 0
 --- !u!1 &4718113576145821904
 GameObject:
   m_ObjectHideFlags: 0
