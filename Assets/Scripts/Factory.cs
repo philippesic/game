@@ -9,7 +9,7 @@ public class Factory : WorldBlock
     public float multiplier = 1.0f;
     public Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
 
-    private void Start()
+    public void Start()
     {
         if (!isShadow)
         {
@@ -18,8 +18,12 @@ public class Factory : WorldBlock
             {
                 neighbor.GetNeighbors();
             }
+            SetupFactory();
         }
+        
     }
+
+    public virtual void SetupFactory() { }
 
     public void GetNeighbors()
     {
@@ -38,6 +42,7 @@ public class Factory : WorldBlock
                     neighborFactories.Add(relativePos.ToString("F0"), neighborFactory);
                 }
             }
+
         }
     }
 
