@@ -6,6 +6,6 @@ public class PlayerInventory : UI
 
     void Update()
     {
-        setGridItems(Player.instance.inv.inventoryItems, ItemGrid);
+        SetGridItems(Player.instance.inv.inventoryItems, ItemGrid);
     }
 }

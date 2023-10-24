@@ -6,51 +6,50 @@ using Unity.VisualScripting;
 
 public abstract class UI : MonoBehaviour
 {
-    public static Dictionary<KeyCode, UI> openKeys = new Dictionary<KeyCode, UI>();
-    public GameObject itemObject;
+    public static List<UI> uis = new();
 
-    public static void checkForOpenKeys()
+    public static void CheckOpenKeys()
     {
-        foreach (KeyValuePair<KeyCode, UI> key in UI.openKeys)
+        foreach (UI ui in uis)
         {
-            if (Input.GetKeyDown(key.Key))
+            if (Input.GetKeyDown(ui.openKey))
             {
-                key.Value.toggle();
+                ui.Toggle();
             }
         }
     }
 
     public KeyCode openKey;
     public bool isOpen = false;
+    public GameObject itemObject;
 
     public void Awake()
     {
-        //itemObject = Resources.Load("Assets/Models/2D/Item", typeof(GameObject)) as GameObject;
-        openKeys.Add(openKey, this);
-        updateVisualState();
+        uis.Add(this);
     }
 
-    public void toggle()
+    public void Toggle()
     {
         isOpen = !isOpen;
-        updateVisualState();
+        UpdateVisualState();
     }
 
-    public void setState(bool state = false)
+    public void SetState(bool state = false)
     {
         isOpen = state;
-        updateVisualState();
+        UpdateVisualState();
     }
 
-    public void updateVisualState()
+    public void UpdateVisualState()
     {
         Time.timeScale = isOpen ? 0 : 1;
         gameObject.SetActive(isOpen);
         Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isOpen;
+        GetComponent<Image>().enabled = isOpen;
     }
 
-    public void addItemToGrid(ItemContainer.ItemData item, Transform grid)
+    public void AddItemToGrid(ItemContainer.ItemData item, Transform grid)
     {
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
@@ -61,7 +60,7 @@ public abstract class UI : MonoBehaviour
         itemScript.setIcon(AllGameData.itemIcons[item.id]);
     }
 
-    public void setGridItems(List<ItemContainer.ItemData> items, Transform grid)
+    public void SetGridItems(List<ItemContainer.ItemData> items, Transform grid)
     {
         foreach (Transform item in grid)
         {
@@ -70,7 +69,7 @@ public abstract class UI : MonoBehaviour
 
         foreach (var item in items)
         {
-            addItemToGrid(item, grid);
+            AddItemToGrid(item, grid);
         }
     }
 }

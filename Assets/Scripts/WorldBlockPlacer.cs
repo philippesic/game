@@ -59,9 +59,13 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public WorldBlock CreateShadowObject(int id)
     {
-        WorldBlock shadowObject = Instantiate(AllGameData.factoryPrefabs[id]).GetComponent<WorldBlock>(); ;
-        shadowObject.makeShadow();
-        return shadowObject;
+        if (AllGameData.factoryPrefabs.ContainsKey(id))
+        {
+            WorldBlock shadowObject = Instantiate(AllGameData.factoryPrefabs[id]).GetComponent<WorldBlock>(); ;
+            shadowObject.makeShadow();
+            return shadowObject;
+        }
+        return null;
     }
 
     private void DoPlacementDisplay()
@@ -107,4 +111,4 @@ public class WorldBlockPlacer : MonoBehaviour
             }
         }
     }
-}   
+}
