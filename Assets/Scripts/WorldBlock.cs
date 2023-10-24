@@ -28,6 +28,7 @@ public class WorldBlock : MonoBehaviour
     {
         transform.position = onGrid ? WorldBlockContainer.VecToGrid(pos) : pos;
         transform.rotation = WorldBlockContainer.RotationIntToRotation3d(rotation);
+        Debug.Log(rotation);
     }
 
     public Vector3 getPos()
@@ -35,9 +36,9 @@ public class WorldBlock : MonoBehaviour
         return transform.position;
     }
 
-    public float getRotation()
+    public Quaternion getRotation()
     {
-        return WorldBlockContainer.Rotation3dToRotation2d(transform.rotation);
+        return transform.rotation;
     }
 
     public void makeShadow()
@@ -65,7 +66,7 @@ public class WorldBlock : MonoBehaviour
         return GetCurrentBlockCollisions().Count <= 0;
     }
 
-    public T GetBlockFromType<T>() where T: WorldBlock
+    public T GetBlockFromType<T>() where T : WorldBlock
     {
         return GetComponentInParent<T>();
     }

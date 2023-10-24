@@ -20,7 +20,7 @@ public class Factory : WorldBlock
             }
             SetupFactory();
         }
-        
+
     }
 
     public virtual void SetupFactory() { }

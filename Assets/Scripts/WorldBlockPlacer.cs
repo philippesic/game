@@ -88,6 +88,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void Update()
     {
+        updateRotation();
         if (placingBlock != null)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -95,16 +96,20 @@ public class WorldBlockPlacer : MonoBehaviour
                 Place();
             }
             DoPlacementDisplay();
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                blockRotation -= 1;
-                if (blockRotation < 1) { blockRotation = 4; }
-            }
-            else if (Input.GetKeyDown(KeyCode.H))
-            {
-                blockRotation += 1;
-                while (blockRotation > 4) { blockRotation = 1; }
-            }
         }
     }
-}   
+
+    private void updateRotation()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            blockRotation -= 1;
+            if (blockRotation < 1) { blockRotation = 6; }
+        }
+        else if (Input.GetKeyDown(KeyCode.H))
+        {
+            blockRotation += 1;
+            if (blockRotation > 6) { blockRotation = 1; }
+        }
+    }
+}

@@ -63,9 +63,9 @@ public class ConveyorFactory : Factory
 
     public override void Tick()
     {
-        if (neighborFactories.ContainsKey("(1, 0, 0)"))
+        if (neighborFactories.ContainsKey("(0, 0, 1)"))
         {
-            ConveyorFactory conveyorFactory = neighborFactories["(1, 0, 0)"].GetBlockFromType<ConveyorFactory>();
+            ConveyorFactory conveyorFactory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ConveyorFactory>();
             if (heldItem == null)
             {
                 shouldMoveItems = false;

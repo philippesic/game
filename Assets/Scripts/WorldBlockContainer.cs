@@ -63,10 +63,4 @@ public class WorldBlockContainer : MonoBehaviour
     {
         return Quaternion.LookRotation(intToRotation[rotation], Vector3.up);
     }
-
-    public static float Rotation3dToRotation2d(Quaternion rotation)
-    {
-        // add later
-        return 0;
-    }
 }
