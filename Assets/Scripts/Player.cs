@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private WorldBlockPlacer worldBlockPlacer;
     private WorldBlockBreaker worldBlockBreaker;
 
-    private void Awake()
+    void Awake()
     {
         instance = this;
         inv = ScriptableObject.CreateInstance<ItemContainer>();
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        UI.checkForOpenKeys();
+        UI.CheckOpenKeys();
         if (Input.inputString != "")
         {
             int number;
