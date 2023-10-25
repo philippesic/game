@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.tvOS;
 
 public class WorldBlockContainer : MonoBehaviour
 {
@@ -30,7 +31,22 @@ public class WorldBlockContainer : MonoBehaviour
         {
             factoryContainer.Add(block.GetComponent<Factory>());
         }
+    }
 
+    public void RemoveBlock(WorldBlock block)
+    {
+        if (blockContainer.Contains(block))
+        {
+            blockContainer.Remove(block);
+        }
+        Factory factory = block.GetBlockFromType<Factory>();
+        if (factory != null)
+        {
+            if (factoryContainer.Contains(factory))
+            {
+                factoryContainer.Remove(factory);
+            }
+        }
     }
 
     public void DoTickUpdate()
@@ -61,6 +77,10 @@ public class WorldBlockContainer : MonoBehaviour
 
     public static Quaternion RotationIntToRotation3d(int rotation)
     {
-        return Quaternion.LookRotation(intToRotation[rotation], Vector3.up);
+        if (intToRotation.ContainsKey(rotation))
+        {
+            return Quaternion.LookRotation(intToRotation[rotation], Vector3.up);
+        }
+        return new Quaternion();
     }
 }
