@@ -144,6 +144,8 @@ public class AllGameData : ScriptableObject
         itemNames.Add(id, name);
         itemDescriptions.Add(id, description);
         itemIcons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
+        Debug.Log(itemNames[id] + " " + id);
+        Debug.Log(itemIcons[id]);
         itemPrefabs.Add(id, Resources.Load<GameObject>("Items/Prefabs/" + itemNames[id]));
     }
 
