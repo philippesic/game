@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-public class ShopPlace : MonoBehaviour
+public class ShopPlace : UI
 {
     private WorldBlockPlacer worldBlockPlacer;
     public GameObject player;
