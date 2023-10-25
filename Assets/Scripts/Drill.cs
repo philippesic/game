@@ -1,35 +1,50 @@
 using System.Collections;
 using System.Security.Principal;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class Drill : Factory
 {
-    public GameObject node;
-    public int genid;
+    [HideInInspector] public int itemID;
+    [HideInInspector] public float drillSpeedIPT;
+    [HideInInspector] public ItemContainer outputItems;
+    private float itemsGenerated = 0;
 
     public override void SetupFactory()
     {
+        outputItems = ScriptableObject.CreateInstance<ItemContainer>();
+
         Collider[] others = Physics.OverlapBox(transform.position, new Vector3(0.9f, 0.9f, 0.9f));
         foreach (Collider other in others)
         {
-            Debug.Log(other.gameObject.tag);
-            node = other.gameObject;
-            NodeID nodeID = node.GetComponent<NodeID>();
-            if (nodeID != null)
+            if (other.gameObject.TryGetComponent<NodeID>(out var nodeID))
             {
-                genid = nodeID.id;
-                StartCoroutine(Generate(1, genid, 1));
+                itemID = nodeID.id;
+                drillSpeedIPT = nodeID.drillSpeedIPT;
                 break;
             }
         }
     }
 
-    private IEnumerator Generate(float sec, int id, int mult)
+    public override void Tick()
     {
-        while (true)
+        int itemsGeneratedBeforeTick = (int)itemsGenerated;
+        itemsGenerated += drillSpeedIPT;
+        int itemsGeneratedThisTick = ((int)itemsGenerated) - itemsGeneratedBeforeTick;
+        if (itemsGeneratedThisTick > 0)
         {
-            yield return new WaitForSeconds(sec);
-            Player.instance.inv.Add(id, mult);
+            if (outputItems.Count() < 60){
+                outputItems.Add(itemID, itemsGeneratedThisTick);
+            }
+            else
+            {
+                itemsGenerated = 1 - drillSpeedIPT;
+            }
+        }
+            
+        if (itemsGenerated % 1 == 0)
+        {
+            itemsGenerated = 0;
         }
     }
 }

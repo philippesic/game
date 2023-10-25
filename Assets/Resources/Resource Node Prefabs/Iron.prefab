@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  multiplierType: 0
 --- !u!65 &-1171819128776476329
 BoxCollider:
   m_ObjectHideFlags: 0
