@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -51,6 +52,10 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
+            for (int i = 0; i < 31; i++)
+            {
+                Player.instance.inv.Add(i, 1);
+            }
             WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
             if (block != null)
             {

@@ -26,7 +26,10 @@ public abstract class UI : MonoBehaviour
     public void Awake()
     {
         uis.Add(this);
+        UIAwake();
     }
+
+    public virtual void UIAwake() { }
 
     public void Toggle()
     {
