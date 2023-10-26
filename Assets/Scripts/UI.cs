@@ -27,6 +27,7 @@ public abstract class UI : MonoBehaviour
     {
         uis.Add(this);
         UIAwake();
+        UpdateVisualState();
     }
 
     public virtual void UIAwake() { }

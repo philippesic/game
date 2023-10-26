@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UpdateTickManager : MonoBehaviour
 {
-    public float TickPerSecond = 4f;
+    public float TickPerSecond;
     public Stopwatch timer = new Stopwatch();
     public float lastUpdateTime = 0;
 
@@ -23,7 +23,6 @@ public class UpdateTickManager : MonoBehaviour
         {
             lastUpdateTime += 1000 / TickPerSecond;
             WorldBlockContainer.instance.DoTickUpdate();
-            print("tick");
         }
     }
 }

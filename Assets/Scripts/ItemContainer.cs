@@ -24,6 +24,16 @@ public class ItemContainer : ScriptableObject
         inventoryItems = new List<ItemData>();
     }
 
+    public int Count()
+    {
+        int count = 0;
+        foreach (ItemData item in inventoryItems)
+        {
+            count += item.count;
+        }
+        return count;
+    }
+
     public List<int> GetIDs()
     {
         List<int> ids = new List<int>();

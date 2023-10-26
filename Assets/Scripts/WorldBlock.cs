@@ -15,6 +15,7 @@ public class WorldBlock : MonoBehaviour
         {
             isDestroyed = true;
             GetDestroyed();
+            WorldBlockContainer.instance.RemoveBlock(this);
             if (!isShadow)
             {
                 Player.instance.inv.Add(AllGameData.factoryPlacementCosts[blockID]);
@@ -28,7 +29,6 @@ public class WorldBlock : MonoBehaviour
     {
         transform.position = onGrid ? WorldBlockContainer.VecToGrid(pos) : pos;
         transform.rotation = WorldBlockContainer.RotationIntToRotation3d(rotation);
-        Debug.Log(rotation);
     }
 
     public Vector3 getPos()

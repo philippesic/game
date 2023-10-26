@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class WorldBlockBreaker : MonoBehaviour
 {
     public bool isRemoving = false;
+    public Stopwatch timer = new();
+
+    void Awake()
+    {
+        timer.Restart();
+    }
+
     public void StartRemoval()
     {
         isRemoving = true;
@@ -17,15 +25,13 @@ public class WorldBlockBreaker : MonoBehaviour
 
     void Update()
     {
-        if (isRemoving)
+        if (isRemoving && Input.GetKey(KeyCode.R) && timer.ElapsedMilliseconds > 100)
         {
-            if (Input.GetKey(KeyCode.R))
+            WorldBlock lookedAtBlock = PlayerRayCaster.instance.GetLookedAtWorldBlock();
+            if (lookedAtBlock != null)
             {
-                WorldBlock lookedAtBlock = PlayerRayCaster.instance.GetLookedAtWorldBlock();
-                if (lookedAtBlock != null)
-                {
-                    lookedAtBlock.Destroy();
-                }
+                lookedAtBlock.Destroy();
+                timer.Restart();
             }
         }
     }
