@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Security.Principal;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class Drill : Factory
@@ -13,17 +10,18 @@ public class Drill : Factory
     public override void SetupFactory()
     {
         outputItems = ScriptableObject.CreateInstance<ItemContainer>();
-
-        Collider[] others = Physics.OverlapBox(transform.position, new Vector3(0.9f, 0.9f, 0.9f));
+        Collider[] others = Physics.OverlapBox(transform.position, new Vector3(2f, 2f, 2f)); //, new Quaternion(), new LayerMask(), QueryTriggerInteraction.Collide
         foreach (Collider other in others)
         {
-            if (other.gameObject.TryGetComponent<NodeID>(out var nodeID))
+            if (other.gameObject.TryGetComponent(out NodeID nodeID))
             {
                 itemID = nodeID.id;
                 drillSpeedIPT = nodeID.drillSpeedIPT;
-                break;
+                return;
             }
         }
+        itemID = 0;
+        drillSpeedIPT = 0;
     }
 
     public override void Tick()
@@ -33,7 +31,7 @@ public class Drill : Factory
         int itemsGeneratedThisTick = ((int)itemsGenerated) - itemsGeneratedBeforeTick;
         if (itemsGeneratedThisTick > 0)
         {
-            if (outputItems.Count() < 60){
+            if (outputItems.Count() < 500){
                 outputItems.Add(itemID, itemsGeneratedThisTick);
             }
             else
@@ -41,7 +39,6 @@ public class Drill : Factory
                 itemsGenerated = 1 - drillSpeedIPT;
             }
         }
-            
         if (itemsGenerated % 1 == 0)
         {
             itemsGenerated = 0;

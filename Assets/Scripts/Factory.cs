@@ -6,7 +6,6 @@ using System.Linq;
 
 public class Factory : WorldBlock
 {
-    public float multiplier = 1.0f;
     public Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
 
     public void Start()
@@ -20,7 +19,6 @@ public class Factory : WorldBlock
             }
             SetupFactory();
         }
-
     }
 
     public virtual void SetupFactory() { }
