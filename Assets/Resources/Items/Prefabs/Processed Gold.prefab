@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15fd4e4fa0d30418bbea09e1ed3a7b9e, type: 2}
+  - {fileID: 2100000, guid: 20cc4b86a2c7942348f37a5de7983386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3707044219562876237}
   - component: {fileID: 3220551033706496347}
   m_Layer: 0
-  m_Name: Raw Iron
+  m_Name: Processed Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e787751b724456881830d78ec92077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 15
   count: 1
   conveyor: {fileID: 0}
