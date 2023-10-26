@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
                 ConveyorFactory blockType = block.GetBlockFromType<ConveyorFactory>();
                 if (blockType != null)
                 {
-                    blockType.GiveItem(new ConveyorFactory.ConveyorFactoryItem(Item.CreateItem(2)));
+                    blockType.GiveItem(new ItemObjectContainingFactory.ItemGameObjectContainer(Item.CreateItem(2)));
                 }
             }
         }

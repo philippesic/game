@@ -6,21 +6,21 @@ public class Item : MonoBehaviour
 {
     public int id;
     public int count;
-    public ConveyorFactory conveyor;
+    public ItemObjectContainingFactory containingFactory;
 
     public void Pickup()
     {
         Player.instance.inv.Add(id, count);
-        if (conveyor != null)
+        if (containingFactory != null)
         {
-            conveyor.RemoveItemOnbelt();
+            containingFactory.RemoveItem(this);
         }
         Destroy(gameObject);
     }
-
-    public void UpdateConveyor(ConveyorFactory conveyor = null)
+    
+    public void UpdateItemObjectContainingFactory(ItemObjectContainingFactory containingFactory = null)
     {
-        this.conveyor = conveyor;
+        this.containingFactory = containingFactory;
     }
 
     public void OnTriggerEnter(Collider other)
