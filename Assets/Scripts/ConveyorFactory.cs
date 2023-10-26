@@ -19,7 +19,6 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override bool CanPush(ItemObjectContainingFactory containingFactory)
     {
-        Debug.Log("CanPush");
         if (containingFactory != null)
         {
             return containingFactory.HasRoomToPush();
@@ -29,16 +28,13 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override bool HasRoomToPush()
     {
-        Debug.Log("HasRoomToPush");
         return heldItem == null;
     }
 
     public override void Tick()
     {
-        Debug.Log("Tick");
         if (neighborFactories.ContainsKey("(0, 0, 1)"))
         {
-            Debug.Log(heldItem);
             ItemObjectContainingFactory containingFactory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ItemObjectContainingFactory>();
             if (heldItem == null)
             {
@@ -46,7 +42,6 @@ public class ConveyorFactory : ItemObjectContainingFactory
             }
             else if (shouldMoveItems && CanPush(containingFactory))
             {
-                Debug.Log("Tick3");
                 shouldMoveItems = false;
                 containingFactory.GiveItem(heldItem);
                 RemoveItem(heldItem);
