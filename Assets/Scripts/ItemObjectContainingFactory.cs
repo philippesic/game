@@ -53,11 +53,6 @@ public class ItemObjectContainingFactory : Factory
 
     public virtual void RemoveItem(Item item) { }
 
-    public virtual bool CanPush(ItemObjectContainingFactory containingFactory)
-    {
-        return false;
-    }
-
     public virtual bool HasRoomToPush()
     {
         return false;

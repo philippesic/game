@@ -17,15 +17,6 @@ public class ConveyorFactory : ItemObjectContainingFactory
         }
     }
 
-    public override bool CanPush(ItemObjectContainingFactory containingFactory)
-    {
-        if (containingFactory != null)
-        {
-            return containingFactory.HasRoomToPush();
-        }
-        return false;
-    }
-
     public override bool HasRoomToPush()
     {
         return heldItem == null;
@@ -40,7 +31,7 @@ public class ConveyorFactory : ItemObjectContainingFactory
             {
                 shouldMoveItems = false;
             }
-            else if (shouldMoveItems && CanPush(containingFactory))
+            else if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
             {
                 shouldMoveItems = false;
                 containingFactory.GiveItem(heldItem);

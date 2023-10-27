@@ -369,7 +369,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   count: 1
-  conveyor: {fileID: 0}
+  containingFactory: {fileID: 0}
+--- !u!4 &64425092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4539135129340528, guid: 0b50edd1ab1ea9c4ba8edc42f1b15181, type: 3}
+  m_PrefabInstance: {fileID: 627914522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &112395647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdce3af71b8244150b90a5468636d68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openKey: 122
+  isOpen: 0
+  itemObject: {fileID: 0}
   player: {fileID: 1023695174}
 --- !u!1 &415473660
 GameObject:
@@ -1457,7 +1465,7 @@ GameObject:
   - component: {fileID: 415473663}
   - component: {fileID: 415473662}
   - component: {fileID: 415473661}
-  m_Layer: 4
+  m_Layer: 3
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1564,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2061577065}
     m_Modifications:
     - target: {fileID: -4085510447935426013, guid: 0b50edd1ab1ea9c4ba8edc42f1b15181, type: 3}
       propertyPath: item
@@ -1647,7 +1655,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   count: 1
-  conveyor: {fileID: 0}
+  containingFactory: {fileID: 0}
+--- !u!4 &428121220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4539135129340528, guid: 0b50edd1ab1ea9c4ba8edc42f1b15181, type: 3}
+  m_PrefabInstance: {fileID: 428121216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &458439523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1879,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2061577065}
     m_Modifications:
     - target: {fileID: -4085510447935426013, guid: 0b50edd1ab1ea9c4ba8edc42f1b15181, type: 3}
       propertyPath: item
@@ -4399,7 +4412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64317080750254f0787221125d30aea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TickPerSecond: 0.5
+  TickPerSecond: 4
   lastUpdateTime: 0
 --- !u!4 &1861509812
 Transform:
@@ -4581,7 +4594,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 64425092}
+  - {fileID: 428121220}
   m_Father: {fileID: 2087949488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2061577066
@@ -4593,7 +4608,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061577064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61891dcb9efad44d48969cf2c83d09af, type: 3}
+  m_Script: {fileID: 11500000, guid: 5816a2d6b577449e7b98d891e4f8907b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2063208150
@@ -4854,8 +4869,6 @@ SceneRoots:
   - {fileID: 17775333}
   - {fileID: 1220893662}
   - {fileID: 2087949488}
-  - {fileID: 627914522}
-  - {fileID: 428121216}
   - {fileID: 715879178}
   - {fileID: 112395651}
   - {fileID: 408758182}
