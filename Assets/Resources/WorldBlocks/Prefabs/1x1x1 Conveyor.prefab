@@ -165,7 +165,6 @@ MonoBehaviour:
   blockID: 1
   isShadow: 0
   isDestroyed: 0
-  multiplier: 1
   shouldMoveItems: 1
 --- !u!1 &3160165632578089043
 GameObject:

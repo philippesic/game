@@ -46,6 +46,7 @@ public class AllGameData : ScriptableObject
         addFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for building", new ItemIDAndCountList().end());
         addFactory(2, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().end());
         addFactory(3, "Drill", "it dirl", new ItemIDAndCountList().end());
+        addFactory(4, "Claw Factory", "it grab you", new ItemIDAndCountList().end());
 
         // recipes
         recipes.Add(new Recipe(

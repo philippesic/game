@@ -1,30 +1,49 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemObjectContainingFactory : Factory
 {
+    public static Dictionary<Item, ItemGameObjectContainer> allItemGameObjectContainersDict = new();
+
     public class ItemGameObjectContainer
     {
         public int id;
         public GameObject displayObject;
 
-        public ItemGameObjectContainer(int id)
+        public ItemGameObjectContainer(Item item)
+        {
+            id = item.id;
+            displayObject = item.gameObject;
+            allItemGameObjectContainersDict.Add(item, this);
+        }
+
+        public ItemGameObjectContainer(int id, Item item)
         {
             this.id = id;
+            displayObject = item.gameObject;
+            allItemGameObjectContainersDict.Add(item, this);
         }
 
         public ItemGameObjectContainer(GameObject displayObject)
         {
             id = displayObject.GetComponent<Item>().id;
             this.displayObject = displayObject;
+            allItemGameObjectContainersDict.Add(displayObject.GetComponent<Item>(), this);
         }
 
         public ItemGameObjectContainer(int id, GameObject displayObject)
         {
             this.id = id;
             this.displayObject = displayObject;
+            allItemGameObjectContainersDict.Add(displayObject.GetComponent<Item>(), this);
+        }
+
+        ~ItemGameObjectContainer()
+        {
+            allItemGameObjectContainersDict.Remove(displayObject.GetComponent<Item>());
         }
     }
 
@@ -43,15 +62,36 @@ public class ItemObjectContainingFactory : Factory
 
     protected virtual void MannageGivenItem(ItemGameObjectContainer item) { }
 
-    public void RemoveItem(ItemGameObjectContainer item)
+    public ItemGameObjectContainer GetItemGameObjectContainer(Item item)
     {
-        if (item.displayObject != null)
+        if (allItemGameObjectContainersDict.ContainsKey(item)) return allItemGameObjectContainersDict[item];
+        return null;
+    }
+
+    public void RemoveItem(Item item)
+    {
+        ItemGameObjectContainer itemGameObjectContainer = GetItemGameObjectContainer(item);
+        if (itemGameObjectContainer == null)
         {
-            RemoveItem(item.displayObject.GetComponent<Item>());
+            RemoveItem(itemGameObjectContainer);
         }
     }
 
-    public virtual void RemoveItem(Item item) { }
+    public ItemGameObjectContainer RemoveItem(ItemGameObjectContainer item)
+    {
+        Item itemClass = item.displayObject.GetComponent<Item>();
+        if (itemClass.containingFactory == this)
+        {
+            itemClass.UpdateItemObjectContainingFactory();
+        }
+        if (item.displayObject != null)
+        {
+            RemoveItemInternal(itemClass);
+        }
+        return item;
+    }
+
+    protected virtual void RemoveItemInternal(Item item) { }
 
     public virtual bool HasRoomToPush()
     {

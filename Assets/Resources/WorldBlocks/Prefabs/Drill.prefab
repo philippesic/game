@@ -688,10 +688,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e3232a694e242458f64c70782d794d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockID: 0
+  blockID: 3
   isShadow: 0
   isDestroyed: 0
-  multiplier: 1
   itemID: 0
   drillSpeedIPT: 0
   outputItems: {fileID: 0}

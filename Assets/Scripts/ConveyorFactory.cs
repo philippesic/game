@@ -9,7 +9,7 @@ public class ConveyorFactory : ItemObjectContainingFactory
         heldItem = item;
     }
 
-    public override void RemoveItem(Item item)
+    protected override void RemoveItemInternal(Item item)
     {
         if (heldItem.displayObject == item.gameObject)
         {

@@ -8,7 +8,7 @@ public class ClawFactory : ItemObjectContainingFactory
 {
     public ItemGameObjectContainer heldItem;
 
-    public override void RemoveItem(Item item)
+    protected override void RemoveItemInternal(Item item)
     {
         if (heldItem.displayObject == item)
         {
@@ -25,11 +25,12 @@ public class ClawFactory : ItemObjectContainingFactory
     {
         if (heldItem == null)
         {
-            TryPush();
+            Debug.Log("TryGrab");
+            TryGrab();
         }
         else
         {
-            TryGrab();
+            TryPush();
         }
     }
 
@@ -44,11 +45,11 @@ public class ClawFactory : ItemObjectContainingFactory
         {
             if (neighborFactories.ContainsKey("(0, 0, 1)"))
             {
-                ItemObjectContainingFactory factory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ItemObjectContainingFactory>();
+                ConveyorFactory factory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ConveyorFactory>();
                 if (factory != null && factory.HasRoomToPush())
                 {
+                    factory.GiveItem(RemoveItem(heldItem));
                     shouldMoveItems = false;
-                    factory.GiveItem(heldItem);
                 }
                 else
                 {
@@ -62,11 +63,13 @@ public class ClawFactory : ItemObjectContainingFactory
             else
             {
                 Collider[] colliders = Physics.OverlapBox(transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward, new Vector3(0.9f, 0.9f, 0.9f));
+                shouldMoveItems = false;
                 foreach (Collider collider in colliders)
                 {
                     if (collider.TryGetComponent(out Item item))
                     {
-                        shouldMoveItems = false;
+                        shouldMoveItems = true;
+                        break;
                     }
                 }
                 if (shouldMoveItems)
@@ -83,13 +86,14 @@ public class ClawFactory : ItemObjectContainingFactory
     {
         if (shouldMoveItems)
         {
+            PrintDict(neighborFactories);
             if (neighborFactories.ContainsKey("(0, 0, -1)"))
             {
-                ItemObjectContainingFactory factory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ItemObjectContainingFactory>();
-                if (factory != null && factory.HasRoomToPush())
+                ConveyorFactory factory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ConveyorFactory>();
+                if (factory != null && factory.heldItem != null)
                 {
+                    GiveItem(factory.RemoveItem(factory.heldItem));
                     shouldMoveItems = false;
-                    factory.GiveItem(heldItem);
                 }
                 else
                 {
@@ -107,12 +111,14 @@ public class ClawFactory : ItemObjectContainingFactory
                 {
                     if (collider.TryGetComponent(out Item item))
                     {
-                        if (shouldMoveItems)
+                        if (item.containingFactory == null)
                         {
                             collider.gameObject.transform.position = transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward;
                             GiveItem(new ItemGameObjectContainer(collider.gameObject));
                             shouldMoveItems = false;
+                            break;
                         }
+                        // idfk
                     }
                 }
 
