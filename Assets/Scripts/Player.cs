@@ -66,5 +66,9 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ProcessFactory.instance.inv.Add(0, 5);
+        }
     }
 }
