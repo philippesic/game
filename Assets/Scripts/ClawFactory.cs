@@ -10,7 +10,7 @@ public class ClawFactory : ItemObjectContainingFactory
 
     protected override void RemoveItemInternal(Item item)
     {
-        if (heldItem.displayObject == item)
+        if (heldItem.displayObject == item.gameObject)
         {
             heldItem = null;
         }
@@ -25,7 +25,6 @@ public class ClawFactory : ItemObjectContainingFactory
     {
         if (heldItem == null)
         {
-            Debug.Log("TryGrab");
             TryGrab();
         }
         else
@@ -62,20 +61,18 @@ public class ClawFactory : ItemObjectContainingFactory
             }
             else
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward, new Vector3(0.9f, 0.9f, 0.9f));
-                shouldMoveItems = false;
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.rotation * Vector3.forward, new Vector3(0.9f, 0.9f, 0.9f));
                 foreach (Collider collider in colliders)
                 {
                     if (collider.TryGetComponent(out Item item))
                     {
-                        shouldMoveItems = true;
+                        shouldMoveItems = false;
                         break;
                     }
                 }
                 if (shouldMoveItems)
                 {
-                    heldItem.displayObject.transform.position = transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward;
-                    RemoveItem(heldItem);
+                    RemoveItem(heldItem).displayObject.transform.position = transform.position + transform.rotation * Vector3.forward;
                     shouldMoveItems = false;
                 }
             }
@@ -86,7 +83,6 @@ public class ClawFactory : ItemObjectContainingFactory
     {
         if (shouldMoveItems)
         {
-            PrintDict(neighborFactories);
             if (neighborFactories.ContainsKey("(0, 0, -1)"))
             {
                 ConveyorFactory factory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ConveyorFactory>();
@@ -106,19 +102,17 @@ public class ClawFactory : ItemObjectContainingFactory
             }
             else
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward, new Vector3(0.9f, 0.9f, 0.9f));
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.rotation * Vector3.back, new Vector3(0.9f, 0.9f, 0.9f));
                 foreach (Collider collider in colliders)
                 {
                     if (collider.TryGetComponent(out Item item))
                     {
                         if (item.containingFactory == null)
                         {
-                            collider.gameObject.transform.position = transform.position + Quaternion.Inverse(transform.rotation) * Vector3.forward;
-                            GiveItem(new ItemGameObjectContainer(collider.gameObject));
+                            GiveItem(GetItemGameObjectContainer(collider.gameObject));
                             shouldMoveItems = false;
                             break;
                         }
-                        // idfk
                     }
                 }
 

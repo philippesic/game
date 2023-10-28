@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemObjectContainingFactory : Factory
@@ -62,16 +61,28 @@ public class ItemObjectContainingFactory : Factory
 
     protected virtual void MannageGivenItem(ItemGameObjectContainer item) { }
 
-    public ItemGameObjectContainer GetItemGameObjectContainer(Item item)
+    public ItemGameObjectContainer GetItemGameObjectContainer(Item item, bool createNew = true)
     {
-        if (allItemGameObjectContainersDict.ContainsKey(item)) return allItemGameObjectContainersDict[item];
+        if (item != null && allItemGameObjectContainersDict.ContainsKey(item))
+        {
+            return allItemGameObjectContainersDict[item];
+        }
+        if (createNew)
+        {
+            return new ItemGameObjectContainer(item);
+        }
         return null;
+    }
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(GameObject itemObject, bool createNew = true)
+    {
+        return GetItemGameObjectContainer(itemObject.GetComponent<Item>(), createNew);
     }
 
     public void RemoveItem(Item item)
     {
-        ItemGameObjectContainer itemGameObjectContainer = GetItemGameObjectContainer(item);
-        if (itemGameObjectContainer == null)
+        ItemGameObjectContainer itemGameObjectContainer = GetItemGameObjectContainer(item, false);
+        if (itemGameObjectContainer != null)
         {
             RemoveItem(itemGameObjectContainer);
         }
@@ -84,7 +95,7 @@ public class ItemObjectContainingFactory : Factory
         {
             itemClass.UpdateItemObjectContainingFactory();
         }
-        if (item.displayObject != null)
+        if (item.displayObject != null && itemClass != null)
         {
             RemoveItemInternal(itemClass);
         }

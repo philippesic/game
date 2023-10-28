@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -8,9 +7,9 @@ public class Item : MonoBehaviour
     public int count;
     public ItemObjectContainingFactory containingFactory;
 
-    public void Pickup()
+    public void Pickup(Player player)
     {
-        Player.instance.inv.Add(id, count);
+        player.inv.Add(id, count);
         if (containingFactory != null)
         {
             containingFactory.RemoveItem(this);
@@ -21,11 +20,6 @@ public class Item : MonoBehaviour
     public void UpdateItemObjectContainingFactory(ItemObjectContainingFactory containingFactory = null)
     {
         this.containingFactory = containingFactory;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        Pickup();
     }
 
     public static GameObject CreateItem(int id, int count = 1)

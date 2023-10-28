@@ -36,7 +36,7 @@ public class ItemContainer : ScriptableObject
 
     public List<int> GetIDs()
     {
-        List<int> ids = new List<int>();
+        List<int> ids = new();
         foreach (ItemData item in inventoryItems)
         {
             ids.Add(item.id);
@@ -46,7 +46,7 @@ public class ItemContainer : ScriptableObject
 
     public List<int> GetCounts()
     {
-        List<int> counts = new List<int>();
+        List<int> counts = new();
         foreach (ItemData item in inventoryItems)
         {
             counts.Add(item.count);
@@ -140,7 +140,7 @@ public class ItemContainer : ScriptableObject
     {
         List<int> ids = new List<int>();
         List<int> counts = new List<int>();
-        foreach (ItemData item in inventoryItems)
+        foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);

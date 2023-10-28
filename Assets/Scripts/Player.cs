@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -52,10 +53,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            for (int i = 0; i < 31; i++)
-            {
-                Player.instance.inv.Add(i, 1);
-            }
             WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
             if (block != null)
             {
@@ -65,6 +62,14 @@ public class Player : MonoBehaviour
                     blockType.GiveItem(new ItemObjectContainingFactory.ItemGameObjectContainer(Item.CreateItem(2)));
                 }
             }
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Item item))
+        {
+            item.Pickup(this);
         }
     }
 }

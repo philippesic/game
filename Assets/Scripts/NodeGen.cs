@@ -5,7 +5,7 @@ using System.Collections;
 
 public class NodeGen : MonoBehaviour
 {
-    public List<GameObject> nodes = new List<GameObject>();
+    public List<GameObject> nodes = new();
     public float scatterRadius;
 
     
