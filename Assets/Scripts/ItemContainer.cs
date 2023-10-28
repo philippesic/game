@@ -194,6 +194,10 @@ public class ItemContainer : ScriptableObject
     {
         return GetMissing(id, count) == 0;
     }
+    public bool Has(AllGameData.ItemIDAndCount itemIDAndCount)
+    {
+        return GetMissing(itemIDAndCount.id, itemIDAndCount.count) == 0;
+    }
 
     public bool Has(List<int> ids, List<int> counts)
     {

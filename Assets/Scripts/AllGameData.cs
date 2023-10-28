@@ -49,6 +49,13 @@ public class AllGameData : ScriptableObject
         addFactory(4, "Claw Factory", "it grab you", new ItemIDAndCountList().end());
 
         // recipes
+        //craft recipe test
+        recipes.Add(new Recipe(
+                9,
+                1,
+                new ItemIDAndCountList(0, 5).end(),
+                new ItemIDAndCountList(1, 1).end()
+        ));
         recipes.Add(new Recipe(
                 15,
                 10,
