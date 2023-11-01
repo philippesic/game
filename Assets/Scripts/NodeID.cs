@@ -27,5 +27,5 @@ public class NodeID : MonoBehaviour
         {SpeedTypes.Fast, 2}
     };
 
-    
+
 }

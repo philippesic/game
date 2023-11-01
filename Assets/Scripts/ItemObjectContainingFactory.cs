@@ -118,12 +118,4 @@ public class ItemObjectContainingFactory : Factory
     {
         shouldMoveItems = true;
     }
-
-    public void PrintDict(Dictionary<string, Factory> dict)
-    {
-        foreach (KeyValuePair<string, Factory> pair in dict)
-        {
-            Debug.Log(pair.Key + pair.Value.ToString());
-        }
-    }
 }

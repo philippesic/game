@@ -60,4 +60,12 @@ public class Factory : WorldBlock
     public virtual void PreTick() { }
 
     public virtual void Tick() { }
+
+    public void PrintDict(Dictionary<string, Factory> dict)
+    {
+        foreach (KeyValuePair<string, Factory> pair in dict)
+        {
+            Debug.Log(pair.Key + pair.Value.ToString());
+        }
+    }
 }

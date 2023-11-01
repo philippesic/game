@@ -82,7 +82,7 @@ public class AllGameData : ScriptableObject
             ));
     }
 
-    
+
     // items
     public static Dictionary<int, string> itemNames = new();
     public static Dictionary<int, string> itemDescriptions = new();
