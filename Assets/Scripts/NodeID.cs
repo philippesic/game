@@ -6,14 +6,12 @@ using UnityEngine;
 public class NodeID : MonoBehaviour
 {
     public int id;
-    [HideInInspector] public float drillSpeedIPT;
     public SpeedTypes multiplierType;
 
-    public void Awake()
+    public float getNodeMultiplier()
     {
-        drillSpeedIPT = speedTypeToDrillSpeedIPT[multiplierType];
+        return speedTypeToDrillSpeedIPT[multiplierType];
     }
-
 
     public enum SpeedTypes
     {

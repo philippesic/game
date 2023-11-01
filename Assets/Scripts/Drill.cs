@@ -3,7 +3,8 @@ using UnityEngine;
 public class Drill : Factory
 {
     [HideInInspector] public int itemID;
-    [HideInInspector] public float drillSpeedIPT;
+    public float baseItemsPerTick;
+    [HideInInspector] public float nodeMultiplier;
     [HideInInspector] public ItemContainer outputItems;
     private float itemsGenerated = 0;
 
@@ -16,27 +17,27 @@ public class Drill : Factory
             if (other.gameObject.TryGetComponent(out NodeID nodeID))
             {
                 itemID = nodeID.id;
-                drillSpeedIPT = nodeID.drillSpeedIPT;
+                nodeMultiplier = nodeID.getNodeMultiplier();
                 return;
             }
         }
         itemID = 0;
-        drillSpeedIPT = 0;
+        nodeMultiplier = 0;
     }
 
     public override void Tick()
     {
         int itemsGeneratedBeforeTick = (int)itemsGenerated;
-        itemsGenerated += drillSpeedIPT;
+        itemsGenerated += baseItemsPerTick * nodeMultiplier;
         int itemsGeneratedThisTick = ((int)itemsGenerated) - itemsGeneratedBeforeTick;
         if (itemsGeneratedThisTick > 0)
         {
-            if (outputItems.Count() < 500){
+            if (outputItems.Count() < 100){
                 outputItems.Add(itemID, itemsGeneratedThisTick);
             }
             else
             {
-                itemsGenerated = 1 - drillSpeedIPT;
+                itemsGenerated = 1 - (baseItemsPerTick * nodeMultiplier);
             }
         }
         if (itemsGenerated % 1 == 0)

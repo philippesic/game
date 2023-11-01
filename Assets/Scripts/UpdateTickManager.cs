@@ -7,7 +7,7 @@ using UnityEngine;
 public class UpdateTickManager : MonoBehaviour
 {
     public float TickPerSecond;
-    public Stopwatch timer = new Stopwatch();
+    public Stopwatch timer;
     public float lastUpdateTime = 0;
 
     void Start()

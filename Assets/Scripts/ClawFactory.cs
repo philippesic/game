@@ -61,10 +61,10 @@ public class ClawFactory : ItemObjectContainingFactory
             }
             else
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position + transform.rotation * Vector3.forward, new Vector3(0.9f, 0.9f, 0.9f));
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(0.45f, 0.45f, 0.45f));
                 foreach (Collider collider in colliders)
                 {
-                    if (collider.TryGetComponent(out Item item))
+                    if (collider.TryGetComponent(out Item _))
                     {
                         shouldMoveItems = false;
                         break;
@@ -72,7 +72,7 @@ public class ClawFactory : ItemObjectContainingFactory
                 }
                 if (shouldMoveItems)
                 {
-                    RemoveItem(heldItem).displayObject.transform.position = transform.position + transform.rotation * Vector3.forward;
+                    RemoveItem(heldItem).displayObject.transform.position = transform.position + transform.forward;
                     shouldMoveItems = false;
                 }
             }
@@ -85,24 +85,33 @@ public class ClawFactory : ItemObjectContainingFactory
         {
             if (neighborFactories.ContainsKey("(0, 0, -1)"))
             {
-                ConveyorFactory factory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ConveyorFactory>();
-                if (factory != null && factory.heldItem != null)
+                ConveyorFactory conveyorFactory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ConveyorFactory>();
+                if (conveyorFactory != null && conveyorFactory.heldItem != null)
                 {
-                    GiveItem(factory.RemoveItem(factory.heldItem));
+                    GiveItem(conveyorFactory.RemoveItem(conveyorFactory.heldItem));
                     shouldMoveItems = false;
                 }
                 else
                 {
-                    WorldBlock block = neighborFactories["(0, 0, -1)"].GetBlockFromType<Factory>();
-                    if (block != null)
+                    Drill drill = neighborFactories["(0, 0, -1)"].GetBlockFromType<Drill>();
+                    if (drill != null && drill.outputItems.Count() > 0)
                     {
+                        GiveItem(GetItemGameObjectContainer(drill.outputItems.Get(1)));
                         shouldMoveItems = false;
+                    }
+                    else
+                    {
+                        Factory factory = neighborFactories["(0, 0, -1)"].GetBlockFromType<Factory>();
+                        if (factory != null)
+                        {
+                            shouldMoveItems = false;
+                        }
                     }
                 }
             }
             else
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position + transform.rotation * Vector3.back, new Vector3(0.9f, 0.9f, 0.9f));
+                Collider[] colliders = Physics.OverlapBox(transform.position - transform.forward, new Vector3(0.45f, 0.45f, 0.45f));
                 foreach (Collider collider in colliders)
                 {
                     if (collider.TryGetComponent(out Item item))

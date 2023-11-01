@@ -61,6 +61,16 @@ public class ItemObjectContainingFactory : Factory
 
     protected virtual void MannageGivenItem(ItemGameObjectContainer item) { }
 
+    public ItemGameObjectContainer GetItemGameObjectContainer(int id, int count)
+    {
+        return GetItemGameObjectContainer(Item.CreateItem(id, count));
+    }
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(ItemContainer.ItemData item)
+    {
+        return GetItemGameObjectContainer(Item.CreateItem(item.id, item.count));
+    }
+
     public ItemGameObjectContainer GetItemGameObjectContainer(Item item, bool createNew = true)
     {
         if (item != null && allItemGameObjectContainersDict.ContainsKey(item))
@@ -103,11 +113,6 @@ public class ItemObjectContainingFactory : Factory
     }
 
     protected virtual void RemoveItemInternal(Item item) { }
-
-    public virtual bool HasRoomToPush()
-    {
-        return false;
-    }
 
     public override void PreTick()
     {

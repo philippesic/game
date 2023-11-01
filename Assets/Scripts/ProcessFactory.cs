@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 public class ProcessFactory : Factory
 {
-
+    public static ProcessFactory instance; // temp
     public ItemContainer inv;
 
     void Awake()
     {
+        instance = this; // temp
         inv = ScriptableObject.CreateInstance<ItemContainer>();
     }
 

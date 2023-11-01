@@ -29,7 +29,7 @@ public class AllGameData : ScriptableObject
         AddItem(17, "Steel", "Strong and versatile steel material for industrial applications.");
         AddItem(18, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
         AddItem(19, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
-        AddItem(20, "Copper Plate", "Flat copper sheet, ideal for various crafting endeavors.");
+        AddItem(20, "Copper Plate", "Flat copper sheet, ideal for various crafting Endeavors.");
         AddItem(21, "Motor", "Core component for machinery and automation systems.");
         AddItem(22, "Silicon", "Crucial element for electronic devices and technology.");
         AddItem(23, "Laser", "High-intensity beam emitter for precision applications.");
@@ -42,111 +42,64 @@ public class AllGameData : ScriptableObject
         AddItem(30, "Fuel", "Essential energy source for various machinery and vehicles.");
 
         // factories
-        AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().end());
-        AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for building", new ItemIDAndCountList().end());
-        AddFactory(2, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().end());
-        AddFactory(3, "Drill", "it dirl", new ItemIDAndCountList().end());
-        AddFactory(4, "Claw Factory", "it grab you", new ItemIDAndCountList().end());
+        AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().End());
+        AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for building", new ItemIDAndCountList().End());
+        AddFactory(2, "1x1x1 Factory", "Basic 1x1x1 Factory for building", new ItemIDAndCountList().End());
+        AddFactory(3, "Drill", "it dirl", new ItemIDAndCountList().End());
+        AddFactory(4, "Claw Factory", "it grab you", new ItemIDAndCountList().End());
 
-        // recipes
         //craft recipe test
         AddRecipe(new Recipe(
                 9,
-                1,
-                new ItemIDAndCountList(0, 5).end(),
-                new ItemIDAndCountList(1, 1).end()
+                10,
+                new ItemIDAndCountList(0, 5).End(),
+                new ItemIDAndCountList(1, 1).End()
         ));
+        // recipes
         AddRecipe(new Recipe(
                 15,
-                10,
-                new ItemIDAndCountList().end(),
-                new ItemIDAndCountList(1, 5).end()
+                40,
+                new ItemIDAndCountList().End(),
+                new ItemIDAndCountList(1, 5).End()
             ));
         AddRecipe(new Recipe(
                 16,
-                10,
-                new ItemIDAndCountList().end(),
-                new ItemIDAndCountList(1, 10).end()
+                40,
+                new ItemIDAndCountList().End(),
+                new ItemIDAndCountList(1, 10).End()
             ));
         AddRecipe(new Recipe(
                 17,
-                10,
-                new ItemIDAndCountList().end(),
-                new ItemIDAndCountList(1, 15).end()
+                40,
+                new ItemIDAndCountList().End(),
+                new ItemIDAndCountList(1, 15).End()
             ));
         AddRecipe(new Recipe(
                 10,
-                5,
-                new ItemIDAndCountList(1, 15).end(),
-                new ItemIDAndCountList(12, 15).end()
+                20,
+                new ItemIDAndCountList(1, 15).End(),
+                new ItemIDAndCountList(12, 15).End()
             ));
     }
 
-    // internal stuff
-    public struct ItemIDAndCount
-    {
-        public int id;
-        public int count;
+    
+    // items
+    public static Dictionary<int, string> itemNames = new();
+    public static Dictionary<int, string> itemDescriptions = new();
+    public static Dictionary<int, Sprite> itemIcons = new();
+    public static Dictionary<int, GameObject> itemPrefabs = new();
 
-        public ItemIDAndCount(int id, int count)
-        {
-            this.id = id;
-            this.count = count;
-        }
-    }
-
-    public class ItemIDAndCountList
-    {
-        private List<ItemIDAndCount> itemIDAndCounts = new List<ItemIDAndCount>();
-
-        public ItemIDAndCountList(int id, int count)
-        {
-            add(id, count);
-        }
-
-        public ItemIDAndCountList() { }
-
-        public ItemIDAndCountList add(int id, int count)
-        {
-            itemIDAndCounts.Add(new ItemIDAndCount(id, count));
-            return this;
-        }
-
-        public List<ItemIDAndCount> end()
-        {
-            return itemIDAndCounts;
-        }
-    }
-
-    public class Recipe
-    {
-        public List<ItemIDAndCount> itemsCost;
-        public List<ItemIDAndCount> itemsMade;
-        public float timeSec;
-        public int machineId;
-
-        public Recipe(int machineId, float timeSec, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
-        {
-            this.machineId = machineId;
-            this.timeSec = timeSec;
-            this.itemsCost = itemsCost;
-            this.itemsMade = itemsMade;
-        }
-    }
-
-    public static Dictionary<int, string> itemNames = new Dictionary<int, string>();
-    public static Dictionary<int, string> itemDescriptions = new Dictionary<int, string>();
-    public static Dictionary<int, Sprite> itemIcons = new Dictionary<int, Sprite>();
-    public static Dictionary<int, GameObject> itemPrefabs = new Dictionary<int, GameObject>();
-
+    // recipes
     public static Dictionary<int, List<Recipe>> recipes = new();
 
-    public static Dictionary<int, string> factoryNames = new Dictionary<int, string>();
-    public static Dictionary<int, string> factoryDescriptions = new Dictionary<int, string>();
-    public static Dictionary<int, Sprite> factoryIcons = new Dictionary<int, Sprite>();
-    public static Dictionary<int, GameObject> factoryPrefabs = new Dictionary<int, GameObject>();
-    public static Dictionary<int, List<ItemIDAndCount>> factoryPlacementCosts = new Dictionary<int, List<ItemIDAndCount>>();
+    // factories
+    public static Dictionary<int, string> factoryNames = new();
+    public static Dictionary<int, string> factoryDescriptions = new();
+    public static Dictionary<int, Sprite> factoryIcons = new();
+    public static Dictionary<int, GameObject> factoryPrefabs = new();
+    public static Dictionary<int, List<ItemIDAndCount>> factoryPlacementCosts = new();
 
+    // internal stuff
     static void AddItem(int id, string name, string description)
     {
         itemNames.Add(id, name);
@@ -171,6 +124,58 @@ public class AllGameData : ScriptableObject
         factoryIcons.Add(id, Resources.Load<Sprite>("WorldBlocks/Icons/" + factoryNames[id]));
         factoryPrefabs.Add(id, Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
         factoryPlacementCosts.Add(id, placementCost);
+    }
+
+    // data types
+    public struct ItemIDAndCount
+    {
+        public int id;
+        public int count;
+
+        public ItemIDAndCount(int id, int count)
+        {
+            this.id = id;
+            this.count = count;
+        }
+    }
+
+    public class ItemIDAndCountList
+    {
+        private List<ItemIDAndCount> itemIDAndCounts = new List<ItemIDAndCount>();
+
+        public ItemIDAndCountList(int id, int count)
+        {
+            Add(id, count);
+        }
+
+        public ItemIDAndCountList() { }
+
+        public ItemIDAndCountList Add(int id, int count)
+        {
+            itemIDAndCounts.Add(new ItemIDAndCount(id, count));
+            return this;
+        }
+
+        public List<ItemIDAndCount> End()
+        {
+            return itemIDAndCounts;
+        }
+    }
+
+    public class Recipe
+    {
+        public List<ItemIDAndCount> itemsCost;
+        public List<ItemIDAndCount> itemsMade;
+        public float timeTicks;
+        public int machineId;
+
+        public Recipe(int machineId, float timeTicks, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
+        {
+            this.machineId = machineId;
+            this.timeTicks = timeTicks;
+            this.itemsCost = itemsCost;
+            this.itemsMade = itemsMade;
+        }
     }
 }
 

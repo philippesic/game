@@ -34,6 +34,27 @@ public class ItemContainer : ScriptableObject
         return count;
     }
 
+    public ItemData Get(int count)
+    {
+        if (inventoryItems.Count > 0)
+        {
+            if (inventoryItems[0].count > count)
+            {
+                inventoryItems[0].count -= count;
+                ContentChange();
+                return new ItemData(inventoryItems[0].id, count);
+            }
+            else
+            {
+                ItemData item = inventoryItems[0];
+                inventoryItems.RemoveAt(0);
+                ContentChange();
+                return item;
+            }
+        }
+        return null;
+    }
+
     public List<int> GetIDs()
     {
         List<int> ids = new();
