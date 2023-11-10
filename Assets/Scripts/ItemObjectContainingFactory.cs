@@ -48,7 +48,7 @@ public class ItemObjectContainingFactory : Factory
 
     [HideInInspector] public bool shouldMoveItems = true;
 
-    public void GiveItem(ItemGameObjectContainer item)
+    public void Give(ItemGameObjectContainer item)
     {
         shouldMoveItems = false;
         if (item.displayObject != null)
@@ -110,6 +110,11 @@ public class ItemObjectContainingFactory : Factory
             RemoveItemInternal(itemClass);
         }
         return item;
+    }
+
+    public virtual bool HasRoomToPush()
+    {
+        return false;
     }
 
     protected virtual void RemoveItemInternal(Item item) { }

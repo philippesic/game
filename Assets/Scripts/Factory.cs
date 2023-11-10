@@ -52,11 +52,6 @@ public class Factory : WorldBlock
         }
     }
 
-    public virtual bool HasRoomToPush()
-    {
-        return false;
-    }
-
     public virtual void PreTick() { }
 
     public virtual void Tick() { }

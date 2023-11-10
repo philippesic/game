@@ -47,7 +47,7 @@ public class ClawFactory : ItemObjectContainingFactory
                 ConveyorFactory factory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ConveyorFactory>();
                 if (factory != null && factory.HasRoomToPush())
                 {
-                    factory.GiveItem(RemoveItem(heldItem));
+                    factory.Give(RemoveItem(heldItem));
                     shouldMoveItems = false;
                 }
                 else
@@ -88,7 +88,7 @@ public class ClawFactory : ItemObjectContainingFactory
                 ConveyorFactory conveyorFactory = neighborFactories["(0, 0, -1)"].GetBlockFromType<ConveyorFactory>();
                 if (conveyorFactory != null && conveyorFactory.heldItem != null)
                 {
-                    GiveItem(conveyorFactory.RemoveItem(conveyorFactory.heldItem));
+                    Give(conveyorFactory.RemoveItem(conveyorFactory.heldItem));
                     shouldMoveItems = false;
                 }
                 else
@@ -96,7 +96,7 @@ public class ClawFactory : ItemObjectContainingFactory
                     Drill drill = neighborFactories["(0, 0, -1)"].GetBlockFromType<Drill>();
                     if (drill != null && drill.outputItems.Count() > 0)
                     {
-                        GiveItem(GetItemGameObjectContainer(drill.outputItems.Get(1)));
+                        Give(GetItemGameObjectContainer(drill.outputItems.Get(1)));
                         shouldMoveItems = false;
                     }
                     else
@@ -118,7 +118,7 @@ public class ClawFactory : ItemObjectContainingFactory
                     {
                         if (item.containingFactory == null)
                         {
-                            GiveItem(GetItemGameObjectContainer(collider.gameObject));
+                            Give(GetItemGameObjectContainer(collider.gameObject));
                             shouldMoveItems = false;
                             break;
                         }

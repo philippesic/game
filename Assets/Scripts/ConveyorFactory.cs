@@ -34,7 +34,7 @@ public class ConveyorFactory : ItemObjectContainingFactory
             else if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
             {
                 shouldMoveItems = false;
-                containingFactory.GiveItem(heldItem);
+                containingFactory.Give(heldItem);
                 RemoveItem(heldItem);
             }
         }
