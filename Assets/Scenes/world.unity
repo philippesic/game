@@ -4414,7 +4414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64317080750254f0787221125d30aea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TickPerSecond: 0.25
+  TickPerSecond: 4
   lastUpdateTime: 0
 --- !u!4 &1861509812
 Transform:
