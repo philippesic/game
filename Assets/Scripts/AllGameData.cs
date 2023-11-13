@@ -30,7 +30,7 @@ public class AllGameData : ScriptableObject
         AddItem(17, "Steel", "Strong and versatile steel material for industrial applications.");
         AddItem(18, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
         AddItem(19, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
-        AddItem(20, "Copper Plate", "Flat copper sheet, ideal for various crafting Endeavors.");
+        AddItem(20, "Copper Wire", "Copeer wire, ideal for various crafting Endeavors.");
         // Advanced
         AddItem(21, "Motor", "Core component for machinery and automation systems.");
         AddItem(22, "Silicon", "Crucial element for electronic devices and technology.");
@@ -54,7 +54,7 @@ public class AllGameData : ScriptableObject
         AddFactory(10, "Solar Array T1", "Sun power!", new ItemIDAndCountList().End());
         AddFactory(11, "Solar Array T2", "Sun power!^2", new ItemIDAndCountList().End());
         AddFactory(12, "Wind Turbine T1", "Wind power!", new ItemIDAndCountList().End());
-        AddFactory(12, "Wind Turbine T2", "Wind power!^2", new ItemIDAndCountList().End());
+        AddFactory(13, "Wind Turbine T2", "Wind power!^2", new ItemIDAndCountList().End());
         // Machines
         AddFactory(20, "Smelter T1", "Basic Smelter for starting your factory", new ItemIDAndCountList().End());
         AddFactory(21, "Smelter T2", "block", new ItemIDAndCountList().End());
@@ -127,14 +127,14 @@ public class AllGameData : ScriptableObject
         AddRecipe(new Recipe(
                 "Caster",
                 20,
-                new ItemIDAndCountList("Steal", 10).End(),
-                new ItemIDAndCountList("Steal Plate", 20).End()
+                new ItemIDAndCountList("Steel", 10).End(),
+                new ItemIDAndCountList("Steel Plate", 20).End()
             ));
         AddRecipe(new Recipe(
                 "Caster",
                 20,
                 new ItemIDAndCountList("Copper", 20).End(),
-                new ItemIDAndCountList("Copper wire", 30).End()
+                new ItemIDAndCountList("Copper Wire", 30).End()
             ));
         // Foundry
         AddRecipe(new Recipe(
@@ -143,7 +143,7 @@ public class AllGameData : ScriptableObject
                 new ItemIDAndCountList("Iron", 20).Add("Coal", 10).End(),
                 new ItemIDAndCountList("Steel", 30).End()
             ));
-        
+
     }
 
 
@@ -158,6 +158,7 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, List<Recipe>> recipes = new();
 
     // factories
+    public static List<int> FactoryIDsList = new();
     public static Dictionary<int, string> factoryNames = new();
     public static Dictionary<string, int> factoryIDs = new();
     public static Dictionary<int, string> factoryDescriptions = new();
@@ -186,6 +187,7 @@ public class AllGameData : ScriptableObject
 
     static void AddFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
     {
+        FactoryIDsList.Add(id);
         factoryNames.Add(id, name);
         factoryIDs.Add(name, id);
         factoryDescriptions.Add(id, description);

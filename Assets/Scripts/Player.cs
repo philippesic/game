@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     public ItemContainer inv;
     public static Player instance;
-    private WorldBlockPlacer worldBlockPlacer;
-    private WorldBlockBreaker worldBlockBreaker;
+    [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
+    [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
 
     void Awake()
     {

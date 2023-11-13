@@ -76,4 +76,25 @@ public abstract class UI : MonoBehaviour
             AddItemToGrid(item, grid);
         }
     }
+
+    public void AddFactoryToGrid(int factoryId, Transform grid)
+    {
+        GameObject obj = Instantiate(itemObject, grid);
+        MenuItem itemScript = obj.GetComponent<MenuItem>();
+        itemScript.setText(AllGameData.factoryNames[factoryId]);
+        itemScript.setIcon(AllGameData.factoryIcons[factoryId]);
+    }
+
+    public void SetGridFactories(List<int> factoryIds, Transform grid)
+    {
+        foreach (Transform item in grid)
+        {
+            Destroy(item.gameObject);
+        }
+
+        foreach (var item in factoryIds)
+        {
+            AddFactoryToGrid(item, grid);
+        }
+    }
 }
