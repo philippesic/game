@@ -14,11 +14,9 @@ public class Item : MonoBehaviour
 
     public void UpdateMovement()
     {
-        Debug.Log(isMoving);
         if (isMoving)
         {
             
-            Debug.Log(transform.position);
             if (Time.deltaTime / movementTime >= 1)
             {
                 isMoving = false;
