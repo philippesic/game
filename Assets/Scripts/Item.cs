@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    
     public int id;
     public int count;
-    public ItemObjectContainingFactory containingFactory;
-    public bool isMoving = false;
+    [HideInInspector] public ItemObjectContainingFactory containingFactory;
+    [HideInInspector] public bool isMoving = false;
     private Vector3 moreToPos;
     private float movementTime;
 
