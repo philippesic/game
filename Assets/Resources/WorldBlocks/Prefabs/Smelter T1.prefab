@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7189721784236431686}
+  - component: {fileID: 9057011898186386674}
   - component: {fileID: 5134381688769579250}
   m_Layer: 3
-  m_Name: 1x1x1 Factory
+  m_Name: Smelter T1
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +34,22 @@ Transform:
   - {fileID: 6460113391022188166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9057011898186386674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980998418371149948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303c8990657174b158494046d7459563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockID: 5
+  isShadow: 0
+  isDestroyed: 0
+  inventorySize: 100
 --- !u!65 &5134381688769579250
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class ProcessFactory : Factory
     void Awake()
     {
         instance = this; // temp
-        inv = ScriptableObject.CreateInstance<ItemContainer>();
+        inv = ItemContainer.New();
     }
 
     public override void Tick()

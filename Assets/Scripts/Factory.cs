@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Factory : WorldBlock
 {
-    public Dictionary<string, Factory> neighborFactories = new Dictionary<string, Factory>();
+    public Dictionary<string, Factory> neighborFactories = new();
 
     public void Start()
     {
@@ -51,6 +51,8 @@ public class Factory : WorldBlock
             neighbor.GetNeighbors();
         }
     }
+
+    public virtual void GeneralUpdate() { }
 
     public virtual void PreTick() { }
 

@@ -1,22 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryContainingFactory : Factory
 {
     public class ItemData : ItemContainer.ItemData
     {
-        public ItemData(int id, int count) : base(id, count) {}
+        public ItemData(int id, int count) : base(id, count) { }
     }
 
-    public virtual bool HasRoomToPush()
+    public virtual bool HasRoomToPush(int count = 1)
     {
-        return false;
+        return count == 0;
     }
 
-    public virtual void Give(ItemData item) {}
+    public void Give(Item item)
+    {
+        Give(item.id, item.count);
+    }
 
-    public virtual ItemData Get(int count) {
+    public void Give(int id, int count)
+    {
+        Give(new ItemData(id, count));
+    }
+
+    public virtual void Give(ItemData item) { }
+
+    public virtual ItemData Get(int count)
+    {
         return null;
     }
 }

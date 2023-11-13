@@ -692,7 +692,8 @@ MonoBehaviour:
   isShadow: 0
   isDestroyed: 0
   itemID: 0
-  baseItemsPerTick: 0.5
+  baseItemsPerTick: 0.25
+  inventorySize: 100
   nodeMultiplier: 0
   outputItems: {fileID: 0}
 --- !u!65 &8042766086072072328

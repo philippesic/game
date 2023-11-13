@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Drill : Factory
+public class Drill : InventoryContainingFactory
 {
     [HideInInspector] public int itemID;
     public float baseItemsPerTick;
+    public int inventorySize;
     [HideInInspector] public float nodeMultiplier;
     [HideInInspector] public ItemContainer outputItems;
     private float itemsGenerated = 0;
 
     public override void SetupFactory()
     {
-        outputItems = ScriptableObject.CreateInstance<ItemContainer>();
+        outputItems = ItemContainer.New();
         Collider[] others = Physics.OverlapBox(transform.position, new Vector3(2f, 2f, 2f)); //, new Quaternion(), new LayerMask(), QueryTriggerInteraction.Collide
         foreach (Collider other in others)
         {
@@ -25,6 +26,13 @@ public class Drill : Factory
         nodeMultiplier = 0;
     }
 
+    public override ItemData Get(int count)
+    {
+        ItemContainer.ItemData itemData = outputItems.Get(count);
+        if (itemData == null) { return null; }
+        return new ItemData(itemData.id, itemData.count);
+    }
+
     public override void Tick()
     {
         int itemsGeneratedBeforeTick = (int)itemsGenerated;
@@ -32,7 +40,7 @@ public class Drill : Factory
         int itemsGeneratedThisTick = ((int)itemsGenerated) - itemsGeneratedBeforeTick;
         if (itemsGeneratedThisTick > 0)
         {
-            if (outputItems.Count() < 100){
+            if (outputItems.Count() < inventorySize){
                 outputItems.Add(itemID, itemsGeneratedThisTick);
             }
             else

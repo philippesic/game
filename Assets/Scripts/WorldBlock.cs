@@ -14,14 +14,20 @@ public class WorldBlock : MonoBehaviour
         if (!isDestroyed)
         {
             isDestroyed = true;
-            GetDestroyed();
-            WorldBlockContainer.instance.RemoveBlock(this);
             if (!isShadow)
             {
                 Player.instance.inv.Add(AllGameData.factoryPlacementCosts[blockID]);
+                Player.instance.inv.Add(GetExtraBlockCost());
             }
+            GetDestroyed();
+            WorldBlockContainer.instance.RemoveBlock(this);
             Destroy(gameObject);
         }
+    }
+
+    public virtual ItemContainer GetExtraBlockCost()
+    {
+        return null;
     }
     protected virtual void GetDestroyed() { }
 

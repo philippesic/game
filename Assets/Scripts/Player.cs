@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         instance = this;
-        inv = ScriptableObject.CreateInstance<ItemContainer>();
+        inv = ItemContainer.New();
         worldBlockPlacer = gameObject.GetComponentInChildren<WorldBlockPlacer>();
         worldBlockBreaker = gameObject.GetComponentInChildren<WorldBlockBreaker>();
     }

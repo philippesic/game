@@ -61,6 +61,14 @@ public class WorldBlockContainer : MonoBehaviour
         }
     }
 
+    public void DoGeneralUpdate()
+    {
+        foreach (Factory factory in factoryContainer)
+        {
+            factory.GeneralUpdate();
+        }
+    }
+
     public static Vector3 VecToGrid(Vector3 position)
     {
         return new Vector3(

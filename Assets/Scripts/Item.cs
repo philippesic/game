@@ -1,4 +1,6 @@
 
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -6,17 +8,65 @@ public class Item : MonoBehaviour
     public int id;
     public int count;
     public ItemObjectContainingFactory containingFactory;
+    public bool isMoving = false;
+    private Vector3 moreToPos;
+    private float movementTime;
+
+    public void UpdateMovement()
+    {
+        Debug.Log(isMoving);
+        if (isMoving)
+        {
+            
+            Debug.Log(transform.position);
+            if (Time.deltaTime / movementTime >= 1)
+            {
+                isMoving = false;
+                transform.position = moreToPos;
+            }
+            else
+            {
+                transform.position = transform.position + (moreToPos - transform.position) * (Time.deltaTime / movementTime);
+                movementTime -= Time.deltaTime;
+            }
+        }
+    }
 
     public void Pickup(Player player)
     {
-        player.inv.Add(id, count);
+        player.inv.Add(Pop());
+    }
+
+    public Item Pop()
+    {
         if (containingFactory != null)
         {
             containingFactory.RemoveItem(this);
         }
-        Destroy(gameObject);
+        if (ItemObjectContainingFactory.allItemGameObjectContainersDict.ContainsKey(this))
+        {
+            Destroy(ItemObjectContainingFactory.allItemGameObjectContainersDict[this].displayObject);
+            ItemObjectContainingFactory.allItemGameObjectContainersDict.Remove(this);
+        }
+        return this;
     }
-    
+
+    public void MoveTo(Vector3 position, int timeTicks = 1)
+    {
+        Debug.Log(position);
+        Debug.Log(transform.position);
+        if ((position - transform.position).magnitude < 0.3)
+        {
+            Debug.Log("MoveTo return");
+            transform.position = position;
+            return;
+        }
+        isMoving = true;
+        moreToPos = position;
+        movementTime = timeTicks / UpdateTickManager.instance.TickPerSecond - Time.deltaTime * 2;
+
+    }
+
     public void UpdateItemObjectContainingFactory(ItemObjectContainingFactory containingFactory = null)
     {
         this.containingFactory = containingFactory;

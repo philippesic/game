@@ -11,10 +11,21 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     protected override void RemoveItemInternal(Item item)
     {
-        if (heldItem.displayObject == item.gameObject)
+        if (heldItem != null && heldItem.displayObject == item.gameObject)
         {
             heldItem = null;
         }
+    }
+
+    public override void UpdateItemMovement()
+    {
+        heldItem?.item.UpdateMovement();
+    }
+
+    public override ItemContainer GetExtraBlockCost() // destroys held items
+    {
+        if (heldItem == null) { return null; }
+        return ItemContainer.New().Add(heldItem.item.Pop());
     }
 
     public override bool HasRoomToPush()
@@ -24,14 +35,13 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override void Tick()
     {
-        if (neighborFactories.ContainsKey("(0, 0, 1)"))
+        if (heldItem == null) {
+            shouldMoveItems = false;
+        }
+        else if (neighborFactories.ContainsKey("(0, 0, 1)"))
         {
             ItemObjectContainingFactory containingFactory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ItemObjectContainingFactory>();
-            if (heldItem == null)
-            {
-                shouldMoveItems = false;
-            }
-            else if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
+            if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
             {
                 shouldMoveItems = false;
                 containingFactory.Give(heldItem);

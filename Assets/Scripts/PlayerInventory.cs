@@ -5,7 +5,7 @@ public class PlayerInventory : UI
     public Transform ItemGrid;
     ItemContainer lastInv;
 
-    public override void UIAwake() { lastInv = ScriptableObject.CreateInstance<ItemContainer>(); }
+    public override void UIAwake() { lastInv = ItemContainer.New(); }
 
     void Update()
     {
@@ -13,7 +13,7 @@ public class PlayerInventory : UI
         {
             SetGridItems(Player.instance.inv.inventoryItems, ItemGrid);
         }
-        lastInv = ScriptableObject.CreateInstance<ItemContainer>(); ;
+        lastInv = ItemContainer.New();
         lastInv.Add(Player.instance.inv);
     }
 }

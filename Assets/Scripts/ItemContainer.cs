@@ -5,6 +5,11 @@ using System;
 
 public class ItemContainer : ScriptableObject
 {
+    public static ItemContainer New()
+    {
+        return CreateInstance<ItemContainer>();
+    }
+
     public class ItemData
     {
         public int id;
@@ -75,7 +80,13 @@ public class ItemContainer : ScriptableObject
         return counts;
     }
 
-    public void Add(int id, int count)
+    public ItemContainer Add(Item item)
+    {
+        Add(item.id, item.count);
+        return this;
+    }
+
+    public ItemContainer Add(int id, int count)
     {
         foreach (ItemData invItem in inventoryItems)
         {
@@ -83,15 +94,16 @@ public class ItemContainer : ScriptableObject
             {
                 invItem.count += count;
                 ContentChange();
-                return;
+                return this;
             }
         }
 
         inventoryItems.Add(new ItemData(id, count));
         ContentChange();
+        return this;
     }
 
-    public void Add(List<int> ids, List<int> counts)
+    public ItemContainer Add(List<int> ids, List<int> counts)
     {
         foreach (ItemData invItem in inventoryItems)
         {
@@ -108,23 +120,27 @@ public class ItemContainer : ScriptableObject
             inventoryItems.Add(new ItemData(ids[i], counts[i]));
         }
         ContentChange();
+        return this;
     }
 
-    public void Add(ItemContainer container)
+    public ItemContainer Add(ItemContainer container)
     {
+        if (container == null) { return this; }
         Add(container.GetIDs(), container.GetCounts());
+        return this;
     }
 
-    public void Add(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
+    public ItemContainer Add(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
-        List<int> ids = new List<int>();
-        List<int> counts = new List<int>();
+        List<int> ids = new();
+        List<int> counts = new();
         foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);
         }
         Add(ids, counts);
+        return this;
     }
 
     public void Remove(int id, int count)
@@ -215,7 +231,7 @@ public class ItemContainer : ScriptableObject
     {
         return GetMissing(id, count) == 0;
     }
-    
+
     public bool Has(AllGameData.ItemIDAndCount itemIDAndCount)
     {
         return GetMissing(itemIDAndCount.id, itemIDAndCount.count) == 0;
@@ -268,4 +284,8 @@ public class ItemContainer : ScriptableObject
 
     public void UpdateAfterContentChange() { }
 
+    public override string ToString()
+    {
+        return inventoryItems.ToString();
+    }
 }
