@@ -21,7 +21,7 @@ public class ShopController : MonoBehaviour
         }
     }
 
-    private void ToggleShop()
+    public void ToggleShop()
     {
         if (shop.activeSelf)
         {

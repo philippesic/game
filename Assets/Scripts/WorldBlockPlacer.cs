@@ -9,8 +9,14 @@ public class WorldBlockPlacer : MonoBehaviour
     [HideInInspector] public bool isPlacingOnValid = false;
     private int blockRotation = 1;
 
+    public GameObject shop;
+
     public void StartPlacement(int id)
     {
+        Time.timeScale = 1;
+        shop.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         if (placingBlock != null)
         {
             placingBlock.Destroy();
@@ -47,13 +53,11 @@ public class WorldBlockPlacer : MonoBehaviour
                 WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, blockRotation);
                 placingBlock.Destroy();
                 placingBlock = null;
-                if (keepPlace)
-                {
-                    StartPlacement(placingBlockID);
-                }
+                StopPlacement();
                 return true;
             }
         }
+        StopPlacement();
         return false;
     }
 
@@ -99,7 +103,10 @@ public class WorldBlockPlacer : MonoBehaviour
             {
                 Place();
             }
-            DoPlacementDisplay();
+            if (placingBlock != null) //gud code
+            {
+                DoPlacementDisplay();
+            }
         }
     }
 
