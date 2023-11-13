@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 43572926}
   - component: {fileID: 43572925}
   m_Layer: 5
-  m_Name: Factory (1)
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 43572926}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &43572926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,9 +607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Factory
-
-'
+  m_text: Drill
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1022,9 +1032,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Factory
-
-'
+  m_text: Conveyor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1114,7 +1122,7 @@ GameObject:
   - component: {fileID: 358086500}
   - component: {fileID: 358086499}
   m_Layer: 5
-  m_Name: Factory (5)
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1184,7 +1192,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 358086500}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &358086500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1342,7 +1362,6 @@ GameObject:
   - component: {fileID: 408758181}
   - component: {fileID: 408758180}
   - component: {fileID: 408758179}
-  - component: {fileID: 408758183}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -1438,22 +1457,6 @@ RectTransform:
   m_AnchoredPosition: {x: 410, y: 280}
   m_SizeDelta: {x: 960, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &408758183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408758178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdce3af71b8244150b90a5468636d68a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openKey: 122
-  isOpen: 0
-  itemObject: {fileID: 0}
-  player: {fileID: 1023695174}
 --- !u!1 &415473660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1679,7 @@ GameObject:
   - component: {fileID: 458439526}
   - component: {fileID: 458439525}
   m_Layer: 5
-  m_Name: Factory (4)
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1746,7 +1749,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 458439526}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &458439526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,7 +1992,7 @@ GameObject:
   - component: {fileID: 689096440}
   - component: {fileID: 689096439}
   m_Layer: 5
-  m_Name: Factory (6)
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2047,7 +2062,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 689096440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &689096440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2505,7 +2532,7 @@ GameObject:
   - component: {fileID: 812792592}
   - component: {fileID: 812792591}
   m_Layer: 5
-  m_Name: Factory (3)
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2575,7 +2602,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 812792592}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &812792592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,9 +2710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Factory
-
-'
+  m_text: Claw
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2763,7 +2800,7 @@ GameObject:
   - component: {fileID: 833783886}
   - component: {fileID: 833783885}
   m_Layer: 5
-  m_Name: Factory (2)
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2833,7 +2870,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 833783886}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &833783886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2929,9 +2978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Factory
-
-'
+  m_text: Smelter T1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3021,7 +3068,7 @@ GameObject:
   - component: {fileID: 927618227}
   - component: {fileID: 927618226}
   m_Layer: 5
-  m_Name: Factory
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3092,14 +3139,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 408758183}
-        m_TargetAssemblyTypeName: ShopPlace, Assembly-CSharp
-        m_MethodName: Place
+      - m_Target: {fileID: 1491237915}
+        m_TargetAssemblyTypeName: WorldBlockPlacer, Assembly-CSharp
+        m_MethodName: StartPlacement
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3521,7 +3568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Factory
+  m_text: 'Block
 
 '
   m_isRightToLeft: 0
@@ -4135,6 +4182,7 @@ MonoBehaviour:
   placingBlock: {fileID: 0}
   placingBlockID: 0
   isPlacingOnValid: 0
+  shop: {fileID: 408758178}
 --- !u!114 &1491237916
 MonoBehaviour:
   m_ObjectHideFlags: 0
