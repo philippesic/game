@@ -8,8 +8,8 @@ public class AllGameData : ScriptableObject
 
     static AllGameData()
     {
-        // items
-        AddItem(0, "Trash", "Its trash");
+        // ---- Items ----
+        // Main
         AddItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
         AddItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
         AddItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
@@ -21,64 +21,129 @@ public class AllGameData : ScriptableObject
         AddItem(9, "Lithium", "Essential lithium element for various applications.");
         AddItem(10, "Sulfur", "A vital element with diverse industrial applications.");
         AddItem(11, "Diamond", "A precious and exceptionally hard gemstone.");
+        // Basic
         AddItem(12, "Iron", "Iron, ready for various applications.");
         AddItem(13, "Copper", "Copper, suitable for various uses.");
         AddItem(14, "Silver", "Silver, ready for crafting and manufacturing.");
         AddItem(15, "Gold", "Gold, prepared for various high-value applications.");
-        AddItem(16, "Glass", "Transparent material used for various constructions.");
+        AddItem(16, "Diamond Glass", "Transparent material used for various constructions.");
         AddItem(17, "Steel", "Strong and versatile steel material for industrial applications.");
         AddItem(18, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
         AddItem(19, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
         AddItem(20, "Copper Plate", "Flat copper sheet, ideal for various crafting Endeavors.");
+        // Advanced
         AddItem(21, "Motor", "Core component for machinery and automation systems.");
         AddItem(22, "Silicon", "Crucial element for electronic devices and technology.");
         AddItem(23, "Laser", "High-intensity beam emitter for precision applications.");
         AddItem(24, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.");
         AddItem(25, "Solar Panel", "Device that harnesses sunlight for sustainable energy.");
         AddItem(26, "Fan", "Mechanical device for generating airflow and cooling.");
+        // Uber Advanced
         AddItem(27, "Magnet", "Magnetic element with various industrial and scientific uses.");
         AddItem(28, "Computer", "Advanced computing system for processing complex tasks.");
         AddItem(29, "High Precision Motor", "Specialized motor for precision-critical applications.");
         AddItem(30, "Fuel", "Essential energy source for various machinery and vehicles.");
 
-        // factories
+        // ---- factories ----
+        // Non Factory Blocks
         AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemIDAndCountList().End());
-        AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for building", new ItemIDAndCountList().End());
-        AddFactory(3, "Drill", "it dirl", new ItemIDAndCountList().End());
+        // Conveyors
+        AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for moving your stupi items", new ItemIDAndCountList().End());
         AddFactory(4, "Claw Factory", "it grab you", new ItemIDAndCountList().End());
-        AddFactory(5, "Smelter T1", "Basic Smelter for starting your factory", new ItemIDAndCountList().End());
+        // Power
+        AddFactory(10, "Solar Array T1", "Sun power!", new ItemIDAndCountList().End());
+        AddFactory(11, "Solar Array T2", "Sun power!^2", new ItemIDAndCountList().End());
+        AddFactory(12, "Wind Turbine T1", "Wind power!", new ItemIDAndCountList().End());
+        AddFactory(12, "Wind Turbine T2", "Wind power!^2", new ItemIDAndCountList().End());
+        // Machines
+        AddFactory(20, "Smelter T1", "Basic Smelter for starting your factory", new ItemIDAndCountList().End());
+        AddFactory(21, "Smelter T2", "block", new ItemIDAndCountList().End());
+        AddFactory(22, "Caster", "block", new ItemIDAndCountList().End());
+        AddFactory(23, "Foundry", "block", new ItemIDAndCountList().End());
+        AddFactory(24, "Assembler", "block", new ItemIDAndCountList().End());
+        // Drills
+        AddFactory(35, "M1 drill", "it dirl", new ItemIDAndCountList().End());
+        AddFactory(36, "M2 drill", "it dirl", new ItemIDAndCountList().End());
+        AddFactory(37, "M3 drill", "it dirl", new ItemIDAndCountList().End());
 
-        // recipes
+        // ---- Recipes ----
+        // Smelter T1
         AddRecipe(new Recipe(
                 "Smelter T1",
+                10,
+                new ItemIDAndCountList("Raw Iron", 5).Add("Coal", 1).End(),
+                new ItemIDAndCountList("Iron", 5).End()
+            ));
+        AddRecipe(new Recipe(
+                "Smelter T1",
+                10,
+                new ItemIDAndCountList("Raw Copper", 5).Add("Coal", 1).End(),
+                new ItemIDAndCountList("Copper", 5).End()
+            ));
+        AddRecipe(new Recipe(
+                "Smelter T1",
+                10,
+                new ItemIDAndCountList("Raw Silver", 5).Add("Coal", 1).End(),
+                new ItemIDAndCountList("Silver", 5).End()
+            ));
+        AddRecipe(new Recipe(
+                "Smelter T1",
+                10,
+                new ItemIDAndCountList("Raw Gold", 5).Add("Coal", 1).End(),
+                new ItemIDAndCountList("Gold", 5).End()
+            ));
+        // Smelter T2
+        AddRecipe(new Recipe(
+                "Smelter T2",
                 10,
                 new ItemIDAndCountList("Raw Iron", 5).End(),
                 new ItemIDAndCountList("Iron", 5).End()
             ));
         AddRecipe(new Recipe(
-                15,
-                40,
-                new ItemIDAndCountList().End(),
-                new ItemIDAndCountList(1, 5).End()
-            ));
-        AddRecipe(new Recipe(
-                16,
-                40,
-                new ItemIDAndCountList().End(),
-                new ItemIDAndCountList(1, 10).End()
-            ));
-        AddRecipe(new Recipe(
-                17,
-                40,
-                new ItemIDAndCountList().End(),
-                new ItemIDAndCountList(1, 15).End()
-            ));
-        AddRecipe(new Recipe(
+                "Smelter T2",
                 10,
-                20,
-                new ItemIDAndCountList(1, 15).End(),
-                new ItemIDAndCountList(12, 15).End()
+                new ItemIDAndCountList("Raw Copper", 5).End(),
+                new ItemIDAndCountList("Copper", 5).End()
             ));
+        AddRecipe(new Recipe(
+                "Smelter T2",
+                10,
+                new ItemIDAndCountList("Raw Silver", 5).End(),
+                new ItemIDAndCountList("Silver", 5).End()
+            ));
+        AddRecipe(new Recipe(
+                "Smelter T2",
+                10,
+                new ItemIDAndCountList("Raw Gold", 5).End(),
+                new ItemIDAndCountList("Gold", 5).End()
+            ));
+        // Caster
+        AddRecipe(new Recipe(
+                "Caster",
+                20,
+                new ItemIDAndCountList("Iron", 10).End(),
+                new ItemIDAndCountList("Iron Plate", 20).End()
+            ));
+        AddRecipe(new Recipe(
+                "Caster",
+                20,
+                new ItemIDAndCountList("Steal", 10).End(),
+                new ItemIDAndCountList("Steal Plate", 20).End()
+            ));
+        AddRecipe(new Recipe(
+                "Caster",
+                20,
+                new ItemIDAndCountList("Copper", 20).End(),
+                new ItemIDAndCountList("Copper wire", 30).End()
+            ));
+        // Foundry
+        AddRecipe(new Recipe(
+                "Foundry",
+                20,
+                new ItemIDAndCountList("Iron", 20).Add("Coal", 10).End(),
+                new ItemIDAndCountList("Steel", 30).End()
+            ));
+        
     }
 
 
