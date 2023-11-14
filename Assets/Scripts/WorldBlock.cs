@@ -37,17 +37,17 @@ public class WorldBlock : MonoBehaviour
         transform.rotation = WorldBlockContainer.RotationIntToRotation3d(rotation);
     }
 
-    public Vector3 getPos()
+    public Vector3 GetPos()
     {
         return transform.position;
     }
 
-    public Quaternion getRotation()
+    public Quaternion GetRotation()
     {
         return transform.rotation;
     }
 
-    public void makeShadow()
+    public void MakeShadow()
     {
         isShadow = true;
         foreach (Collider collider in GetComponentsInChildren<Collider>()) { collider.isTrigger = true; }

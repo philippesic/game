@@ -44,7 +44,7 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         if (placingBlock != null)
         {
-            Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.getPos());
+            Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.GetPos());
             if (CheckPlacement(pos, blockRotation) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
@@ -64,7 +64,7 @@ public class WorldBlockPlacer : MonoBehaviour
         if (AllGameData.factoryPrefabs.ContainsKey(id))
         {
             WorldBlock shadowObject = Instantiate(AllGameData.factoryPrefabs[id]).GetComponent<WorldBlock>(); ;
-            shadowObject.makeShadow();
+            shadowObject.MakeShadow();
             return shadowObject;
         }
         return null;
