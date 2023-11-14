@@ -36,13 +36,17 @@ public class PlayerRayCaster : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         if (Physics.Raycast(ray, out hitInfo))
         {
-            if (hitInfo.distance < 20 && hitInfo.collider != null)
+            if (hitInfo.distance < 3 && hitInfo.collider != null)
             {
                 // Node
                 if (hitInfo.collider.gameObject.GetComponent<NodeID>() != null)
                 {
-                    Debug.Log(AllGameData.itemNames[hitInfo.collider.gameObject.GetComponent<NodeID>().id]);
+                    IngameUI.instance.SetCrosshairText(AllGameData.itemNames[hitInfo.collider.gameObject.GetComponent<NodeID>().id]);
                 }
+            }
+            else
+            {
+                IngameUI.instance.SetCrosshairText("");
             }
         }
     }
