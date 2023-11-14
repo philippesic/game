@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 7298558091520107177}
   - component: {fileID: 8042766086072072328}
   m_Layer: 3
-  m_Name: M1 drill
+  m_Name: Drill T1
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e3232a694e242458f64c70782d794d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockID: 3
+  blockID: 35
   isShadow: 0
   isDestroyed: 0
   itemID: 0

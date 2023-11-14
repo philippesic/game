@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9057011898186386674}
   - component: {fileID: 5134381688769579250}
   m_Layer: 3
-  m_Name: Smelter T1
+  m_Name: Caster
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303c8990657174b158494046d7459563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockID: 5
+  blockID: 22
   isShadow: 0
   isDestroyed: 0
   inventorySize: 100
