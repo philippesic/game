@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public ItemContainer inv;
-    public static Player instance;
+    [HideInInspector] public ItemContainer inv;
+    [HideInInspector] public static Player instance;
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
+    public TextMeshProUGUI crosshairText;
 
     void Awake()
     {

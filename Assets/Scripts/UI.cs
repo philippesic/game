@@ -32,6 +32,19 @@ public abstract class UI : MonoBehaviour
         }
     }
 
+    public static void CloseAll()
+    {
+        foreach (UI ui in uis)
+        {
+            ui.SetState();
+        }
+    }
+
+    public static void SetCrosshairText(string text)
+    {
+        Player.instance.crosshairText.text = text;
+    }
+
     public KeyCode openKey;
     public bool isOpen = false;
     public GameObject itemObject;

@@ -9,7 +9,6 @@ public class Shop : UI
 {
     public Transform ShopGrid;
 
-
     void Start()
     {
         SetGridFactories(AllGameData.FactoryIDsList, ShopGrid);
@@ -17,7 +16,11 @@ public class Shop : UI
         foreach (Button btn in GetComponentsInChildren<Button>())
         {
             int id = AllGameData.factoryIDs[btn.GetComponentInChildren<TextMeshProUGUI>().text];
-            btn.onClick.AddListener(delegate { PlaceFactory(id); });
+            btn.onClick.AddListener(delegate
+            {
+                UI.CloseAll();
+                PlaceFactory(id);
+            });
         }
     }
 
