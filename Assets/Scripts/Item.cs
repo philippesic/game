@@ -52,11 +52,8 @@ public class Item : MonoBehaviour
 
     public void MoveTo(Vector3 position, int timeTicks = 1)
     {
-        Debug.Log(position);
-        Debug.Log(transform.position);
         if ((position - transform.position).magnitude < 0.3)
         {
-            Debug.Log("MoveTo return");
             transform.position = position;
             return;
         }
