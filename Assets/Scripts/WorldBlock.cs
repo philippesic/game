@@ -31,7 +31,7 @@ public class WorldBlock : MonoBehaviour
     }
     protected virtual void GetDestroyed() { }
 
-    public void setPos(Vector3 pos, int rotation, bool onGrid = false)
+    public void SetPos(Vector3 pos, int rotation, bool onGrid = false)
     {
         transform.position = onGrid ? WorldBlockContainer.VecToGrid(pos) : pos;
         transform.rotation = WorldBlockContainer.RotationIntToRotation3d(rotation);

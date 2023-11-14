@@ -84,12 +84,12 @@ public class WorldBlockPlacer : MonoBehaviour
                     point += hitInfo.normal * 0.999f;
                 }
                 isPlacingOnValid = true;
-                placingBlock.setPos(point, blockRotation, true);
+                placingBlock.SetPos(point, blockRotation, true);
                 return;
             }
         }
         isPlacingOnValid = false;
-        placingBlock.setPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), blockRotation);
+        placingBlock.SetPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), blockRotation);
     }
 
     public void Update()
