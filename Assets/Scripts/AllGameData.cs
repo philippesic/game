@@ -70,16 +70,16 @@ public class AllGameData : ScriptableObject
         AddFactory(37, "Drill T3", "it dirl", new ItemList().End());
 
         // ---- Recipes ----
-        // Smelter T1
-        AddRecipe(new Recipe("Smelter T1", 10, new ItemList("Raw Iron", 5).Add("Coal", 1).End(), new ItemList("Iron", 5).End()));
-        AddRecipe(new Recipe("Smelter T1", 10, new ItemList("Raw Copper", 5).Add("Coal", 1).End(), new ItemList("Copper", 5).End()));
-        AddRecipe(new Recipe("Smelter T1", 10, new ItemList("Raw Silver", 5).Add("Coal", 1).End(), new ItemList("Silver", 5).End()));
-        AddRecipe(new Recipe("Smelter T1", 10, new ItemList("Raw Gold", 5).Add("Coal", 1).End(), new ItemList("Gold", 5).End()));
-        // Smelter T2
-        AddRecipe(new Recipe("Smelter T2", 10, new ItemList("Raw Iron", 5).End(), new ItemList("Iron", 5).End()));
-        AddRecipe(new Recipe("Smelter T2", 10, new ItemList("Raw Copper", 5).End(), new ItemList("Copper", 5).End()));
-        AddRecipe(new Recipe("Smelter T2", 10, new ItemList("Raw Silver", 5).End(), new ItemList("Silver", 5).End()));
-        AddRecipe(new Recipe("Smelter T2", 10, new ItemList("Raw Gold", 5).End(), new ItemList("Gold", 5).End()));
+        // Smelter
+        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Iron", 5).Add("Coal", 1).End(), new ItemList("Iron", 5).End()));
+        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Copper", 5).Add("Coal", 1).End(), new ItemList("Copper", 5).End()));
+        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Silver", 5).Add("Coal", 1).End(), new ItemList("Silver", 5).End()));
+        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Gold", 5).Add("Coal", 1).End(), new ItemList("Gold", 5).End()));
+        // Electric Smelter
+        AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Iron", 5).End(), new ItemList("Iron", 5).End()));
+        AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Copper", 5).End(), new ItemList("Copper", 5).End()));
+        AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Silver", 5).End(), new ItemList("Silver", 5).End()));
+        AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Gold", 5).End(), new ItemList("Gold", 5).End()));
         // Caster
         AddRecipe(new Recipe("Caster", 20, new ItemList("Iron", 10).End(), new ItemList("Iron Rod", 40).End()));
         AddRecipe(new Recipe("Caster", 20, new ItemList("Iron", 10).End(), new ItemList("Iron Plate", 20).End()));
