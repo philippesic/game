@@ -13,7 +13,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StartPlacement(int id)
     {
-        IngameUI.instance.SetCrosshairText(AllGameData.factoryNames[id]);
+        IngameUI.instance.SetCrosshairText(0, AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
             placingBlock.Destroy();
@@ -24,7 +24,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StopPlacement()
     {
-        IngameUI.instance.SetCrosshairText();
+        IngameUI.instance.SetCrosshairText(0);
         if (placingBlock != null)
         {
             placingBlock.Destroy();

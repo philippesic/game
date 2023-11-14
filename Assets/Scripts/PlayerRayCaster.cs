@@ -41,12 +41,12 @@ public class PlayerRayCaster : MonoBehaviour
                 // Node
                 if (hitInfo.collider.gameObject.GetComponent<NodeID>() != null)
                 {
-                    IngameUI.instance.SetCrosshairText(AllGameData.itemNames[hitInfo.collider.gameObject.GetComponent<NodeID>().id]);
+                    IngameUI.instance.SetCrosshairText(1, AllGameData.itemNames[hitInfo.collider.gameObject.GetComponent<NodeID>().id]);
                 }
             }
             else
             {
-                IngameUI.instance.SetCrosshairText("");
+                IngameUI.instance.SetCrosshairText(1);
             }
         }
     }
