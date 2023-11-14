@@ -22,15 +22,6 @@ public class Player : MonoBehaviour
     {
         PlayerRayCaster.instance.GetLookedAtNode();
         UI.CheckOpenKeys();
-        if (Input.inputString != "")
-        {
-            bool is_a_number = int.TryParse(Input.inputString, out int number);
-            if (is_a_number && number >= 0 && number < 10)
-            {
-                worldBlockBreaker.StopRemoval();
-                worldBlockPlacer.StartPlacement(number);
-            }
-        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             worldBlockBreaker.StopRemoval();
@@ -50,22 +41,6 @@ public class Player : MonoBehaviour
             {
                 worldBlockBreaker.StartRemoval();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
-            if (block != null)
-            {
-                ConveyorFactory blockType = block.GetBlockFromType<ConveyorFactory>();
-                if (blockType != null)
-                {
-                    blockType.Give(new ItemObjectContainingFactory.ItemGameObjectContainer(Item.CreateItem(2)));
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            ProcessFactory.instance.inv.Add(0, 5);
         }
     }
 

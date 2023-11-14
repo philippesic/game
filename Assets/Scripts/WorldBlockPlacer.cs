@@ -13,7 +13,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StartPlacement(int id)
     {
-        IngameUI.instance.SetCrosshairText(0, AllGameData.factoryNames[id]);
+        IngameUI.instance.SetCrosshairText(0, "Press 'R' to place" + AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
             placingBlock.Destroy();
