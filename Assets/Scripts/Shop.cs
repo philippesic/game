@@ -9,7 +9,6 @@ public class Shop : UI
 {
     public Transform ShopGrid;
 
-
     void Start()
     {
         SetGridFactories(AllGameData.FactoryIDsList, ShopGrid);
@@ -17,15 +16,11 @@ public class Shop : UI
         foreach (Button btn in GetComponentsInChildren<Button>())
         {
             int id = AllGameData.factoryIDs[btn.GetComponentInChildren<TextMeshProUGUI>().text];
-            btn.onClick.AddListener(delegate { PlaceFactory(id); });
+            btn.onClick.AddListener(delegate
+            {
+                CloseAll();
+                Player.instance.worldBlockPlacer.StartPlacement(id);
+            });
         }
     }
-
-    private void PlaceFactory(int id)
-    {
-        Player.instance.worldBlockPlacer.StartPlacement(id);
-    }
-
-    //This script is attatched to the shop. INstance worldblock placer and do the stuff to instance placing a factory.
-    //Each button assign a place function with an id parameter to place correct object
 }

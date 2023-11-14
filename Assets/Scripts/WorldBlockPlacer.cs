@@ -13,10 +13,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StartPlacement(int id)
     {
-        Time.timeScale = 1;
-        shop.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        IngameUI.instance.SetCrosshairText(AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
             placingBlock.Destroy();
@@ -27,6 +24,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StopPlacement()
     {
+        IngameUI.instance.SetCrosshairText();
         if (placingBlock != null)
         {
             placingBlock.Destroy();

@@ -32,6 +32,14 @@ public abstract class UI : MonoBehaviour
         }
     }
 
+    public static void CloseAll()
+    {
+        foreach (UI ui in uis)
+        {
+            ui.SetState();
+        }
+    }
+
     public KeyCode openKey;
     public bool isOpen = false;
     public GameObject itemObject;

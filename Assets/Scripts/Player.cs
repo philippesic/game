@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public ItemContainer inv;
-    public static Player instance;
+    [HideInInspector] public ItemContainer inv;
+    [HideInInspector] public static Player instance;
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
 
@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
         UI.CheckOpenKeys();
         if (Input.inputString != "")
         {
-            int number;
-            bool is_a_number = int.TryParse(Input.inputString, out number);
+            bool is_a_number = int.TryParse(Input.inputString, out int number);
             if (is_a_number && number >= 0 && number < 10)
             {
                 worldBlockBreaker.StopRemoval();
