@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Unity.VisualScripting;
 
 public abstract class UI : MonoBehaviour
@@ -14,7 +13,21 @@ public abstract class UI : MonoBehaviour
         {
             if (Input.GetKeyDown(ui.openKey))
             {
+                CloseAll(ui);
                 ui.Toggle();
+            }
+        }
+    }
+
+    public static void CloseAll(UI exeption) { CloseAll(new List<UI>() { exeption }); }
+
+    public static void CloseAll(List<UI> exeptions)
+    {
+        foreach (UI ui in uis)
+        {
+            if (!exeptions.Contains(ui))
+            {
+                ui.SetState();
             }
         }
     }
