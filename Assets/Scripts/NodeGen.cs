@@ -7,8 +7,9 @@ public class NodeGen : MonoBehaviour
 {
     public List<GameObject> nodes = new();
     public float scatterRadius;
+    public float rarity = 1.2f;
 
-    
+
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class NodeGen : MonoBehaviour
 
             GameObject prefab = nodes[i];
 
-            float rarityMultiplier = i + 100;
+            float rarityMultiplier = (float)Math.Floor((i + 1) * rarity);
 
             int numberOfInstances = Mathf.RoundToInt(rarityMultiplier * 10);
 
@@ -31,7 +32,8 @@ public class NodeGen : MonoBehaviour
 
                 Vector3 randomPosition = new Vector3(randomX, 0f, randomZ);
 
-                if (terrain.SampleHeight(randomPosition) > 15) {
+                if (terrain.SampleHeight(randomPosition) > 15)
+                {
                     randomPosition.y = terrain.SampleHeight(randomPosition); //yes i know this is shit fix but unity hates destroying assets
                     GameObject newPrefabInstance = Instantiate(prefab, randomPosition, Quaternion.identity);
                     newPrefabInstance.transform.SetParent(transform);

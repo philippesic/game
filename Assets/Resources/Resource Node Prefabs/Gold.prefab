@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2416835620851004875}
   - component: {fileID: -1171819128776476329}
   m_Layer: 0
-  m_Name: Iron
+  m_Name: Gold
   m_TagString: Iron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15fd4e4fa0d30418bbea09e1ed3a7b9e, type: 2}
+  - {fileID: 2100000, guid: f524ce30dfa444f9ea6e402273d792e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d051c4d94ac1434b9b9232b6fc0182d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 7
   multiplierType: 1
 --- !u!65 &-1171819128776476329
 BoxCollider:
