@@ -23,10 +23,10 @@ public class WorldBlockPlacer : MonoBehaviour
     }
 
     public void StopPlacement()
-    {
-        IngameUI.instance.SetCrosshairText(0);
+    {  
         if (placingBlock != null)
         {
+            IngameUI.instance.SetCrosshairText(0);
             placingBlock.Destroy();
             placingBlock = null;
         }

@@ -25,10 +25,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             worldBlockBreaker.StopRemoval();
-            if (worldBlockPlacer.placingBlock)
-            {
-                worldBlockPlacer.StopPlacement();
-            }
+            worldBlockPlacer.StopPlacement();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
