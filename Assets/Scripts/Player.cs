@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        PlayerRayCaster.instance.GetLookedAtNode();
         UI.CheckOpenKeys();
         if (Input.inputString != "")
         {
