@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 7298558091520107177}
   - component: {fileID: 8042766086072072328}
   m_Layer: 3
-  m_Name: Drill
+  m_Name: M1 drill
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
