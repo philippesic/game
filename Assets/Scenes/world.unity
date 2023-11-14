@@ -864,8 +864,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 560904991}
+  - component: {fileID: 560904992}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: IngameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -892,6 +893,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -1820, y: -978}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &560904992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560904990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34ea510fbeab4f6a86d3ba40a8f0878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &696402023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1271,7 @@ MonoBehaviour:
   inv: {fileID: 0}
   worldBlockPlacer: {fileID: 0}
   worldBlockBreaker: {fileID: 0}
-  crosshairText: {fileID: 0}
+  crosshairText: {fileID: 2111509381}
 --- !u!114 &1023695179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,7 +2067,7 @@ GameObject:
   - component: {fileID: 2111509382}
   - component: {fileID: 2111509381}
   m_Layer: 5
-  m_Name: Name
+  m_Name: CrosshairText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2076,8 +2089,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -32.8}
-  m_SizeDelta: {x: 600, y: 50}
+  m_AnchoredPosition: {x: 0, y: -45.8}
+  m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2111509381
 MonoBehaviour:
@@ -2126,8 +2139,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

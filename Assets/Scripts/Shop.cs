@@ -18,17 +18,9 @@ public class Shop : UI
             int id = AllGameData.factoryIDs[btn.GetComponentInChildren<TextMeshProUGUI>().text];
             btn.onClick.AddListener(delegate
             {
-                UI.CloseAll();
-                PlaceFactory(id);
+                CloseAll();
+                Player.instance.worldBlockPlacer.StartPlacement(id);
             });
         }
     }
-
-    private void PlaceFactory(int id)
-    {
-        Player.instance.worldBlockPlacer.StartPlacement(id);
-    }
-
-    //This script is attatched to the shop. INstance worldblock placer and do the stuff to instance placing a factory.
-    //Each button assign a place function with an id parameter to place correct object
 }
