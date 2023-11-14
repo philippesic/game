@@ -50,6 +50,7 @@ MonoBehaviour:
   id: 12
   count: 1
   containingFactory: {fileID: 0}
+  isMoving: 0
 --- !u!65 &22306481910779429
 BoxCollider:
   m_ObjectHideFlags: 0
