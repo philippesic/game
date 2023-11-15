@@ -11,7 +11,7 @@ public class Shop : UI
 
     void Start()
     {
-        SetGridFactories(AllGameData.FactoryIDsList, ShopGrid);
+        SetGridFactories(AllGameData.factoryIDsList, ShopGrid);
 
         foreach (Button btn in GetComponentsInChildren<Button>())
         {

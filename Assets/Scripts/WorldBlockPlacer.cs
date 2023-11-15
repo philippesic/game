@@ -14,6 +14,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StartPlacement(int id, bool keepPlace = false)
     {
+        Player.instance.worldBlockBreaker.StopRemoval();
         this.keepPlace = keepPlace;
         IngameUI.instance.SetCrosshairText(0, "Press 'R' to place" + AllGameData.factoryNames[id]);
         if (placingBlock != null)
@@ -25,7 +26,7 @@ public class WorldBlockPlacer : MonoBehaviour
     }
 
     public void StopPlacement()
-    {  
+    {
         if (placingBlock != null)
         {
             IngameUI.instance.SetCrosshairText(0);
@@ -62,7 +63,14 @@ public class WorldBlockPlacer : MonoBehaviour
                 return true;
             }
         }
-        StopPlacement();
+        if (keepPlace)
+        {
+            StartPlacement(placingBlockID, true);
+        }
+        else
+        {
+            StopPlacement();
+        }
         return false;
     }
 

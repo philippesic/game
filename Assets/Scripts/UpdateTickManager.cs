@@ -5,7 +5,7 @@ public class UpdateTickManager : MonoBehaviour
 {
     public float TickPerSecond;
     public System.Diagnostics.Stopwatch timer;
-    public float lastUpdateTime = 0;
+    public float overFlowTime = 0;
     public static UpdateTickManager instance;
 
     void Start()
@@ -13,15 +13,16 @@ public class UpdateTickManager : MonoBehaviour
         instance = this;
         timer = new System.Diagnostics.Stopwatch();
         timer.Start();
-        lastUpdateTime = 0;
+        overFlowTime = 0;
     }
 
     void Update()
     {
         WorldBlockContainer.instance.DoGeneralUpdate();
-        while (lastUpdateTime + 1000 / TickPerSecond < timer.ElapsedMilliseconds)
+        while (1000 / TickPerSecond <= timer.ElapsedMilliseconds + overFlowTime)
         {
-            lastUpdateTime += 1000 / TickPerSecond;
+            overFlowTime += timer.ElapsedMilliseconds - 1000 / TickPerSecond;
+            timer.Restart();
             WorldBlockContainer.instance.DoTickUpdate();
         }
     }

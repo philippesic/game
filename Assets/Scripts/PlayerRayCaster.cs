@@ -30,7 +30,7 @@ public class PlayerRayCaster : MonoBehaviour
         return null;
     }
 
-    public void GetLookedAtNode()
+    public NodeID GetLookedAtNode()
     {
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -39,15 +39,13 @@ public class PlayerRayCaster : MonoBehaviour
             if (hitInfo.distance < 3 && hitInfo.collider != null)
             {
                 // Node
-                if (hitInfo.collider.gameObject.GetComponent<NodeID>() != null)
+                if (hitInfo.collider.gameObject.TryGetComponent(out NodeID node))
                 {
-                    IngameUI.instance.SetCrosshairText(1, AllGameData.itemNames[hitInfo.collider.gameObject.GetComponent<NodeID>().id]);
+                    return hitInfo.collider.gameObject.GetComponent<NodeID>();
+                    
                 }
             }
-            else
-            {
-                IngameUI.instance.SetCrosshairText(1);
-            }
         }
+        return null;
     }
 }

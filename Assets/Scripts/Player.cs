@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -20,7 +21,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        PlayerRayCaster.instance.GetLookedAtNode();
+        NodeID node = PlayerRayCaster.instance.GetLookedAtNode();
+        IngameUI.instance.SetCrosshairText(1, node == null ? "" : AllGameData.itemNames[node.id]);
         UI.CheckOpenKeys();
         if (Input.GetKeyDown(KeyCode.Q))
         {
