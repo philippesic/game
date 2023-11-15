@@ -49,10 +49,10 @@ public abstract class UI : MonoBehaviour
     {
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
-        if (AllGameData.FactoryIDsList.Contains(factoryId))
+        if (AllGameData.factoryIDsList.Contains(factoryId))
         {
             itemScript.SetText(AllGameData.factoryNames[factoryId]);
-            itemScript.setIcon(AllGameData.factoryIcons[factoryId]);
+            itemScript.SetIcon(AllGameData.factoryIcons[factoryId]);
         }
     }
 

@@ -14,7 +14,7 @@ public class UIToggle : UI
         UIAwake();
         foreach (UIToggle ui in uis)
         {
-            ui.gameObject.SetActive(true);
+            ui.gameObject.SetActive(false);
         }
         UpdateVisualState();
     }

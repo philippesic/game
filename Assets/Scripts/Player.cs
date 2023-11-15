@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        PlayerRayCaster.instance.GetLookedAtNode();
+        NodeID node = PlayerRayCaster.instance.GetLookedAtNode();
+        IngameUI.instance.SetCrosshairText(1, node == null ? "" : AllGameData.itemNames[node.id]);
         UIToggle.CheckOpenKeys();
         if (Input.GetKeyDown(KeyCode.Q))
         {
