@@ -7,72 +7,19 @@ public abstract class UI : MonoBehaviour
 {
     public static List<UI> uis = new();
 
-    public static void CheckOpenKeys()
-    {
-        foreach (UI ui in uis)
-        {
-            if (Input.GetKeyDown(ui.openKey))
-            {
-                CloseAll(ui);
-                ui.Toggle();
-            }
-        }
-    }
-
-    public static void CloseAll(UI exeption) { CloseAll(new List<UI>() { exeption }); }
-
-    public static void CloseAll(List<UI> exeptions)
-    {
-        foreach (UI ui in uis)
-        {
-            if (!exeptions.Contains(ui))
-            {
-                ui.SetState();
-            }
-        }
-    }
-
-    public static void CloseAll()
-    {
-        foreach (UI ui in uis)
-        {
-            ui.SetState();
-        }
-    }
-
-    public KeyCode openKey;
-    public bool isOpen = false;
     public GameObject itemObject;
 
     public void Awake()
     {
         uis.Add(this);
         UIAwake();
-        UpdateVisualState();
+        foreach (UI ui in uis)
+        {
+            ui.gameObject.SetActive(true);
+        }
     }
 
     public virtual void UIAwake() { }
-
-    public void Toggle()
-    {
-        isOpen = !isOpen;
-        UpdateVisualState();
-    }
-
-    public void SetState(bool state = false)
-    {
-        isOpen = state;
-        UpdateVisualState();
-    }
-
-    public void UpdateVisualState()
-    {
-        Time.timeScale = isOpen ? 0 : 1;
-        gameObject.SetActive(isOpen);
-        Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isOpen;
-        GetComponent<Image>().enabled = isOpen;
-    }
 
     public void AddItemToGrid(ItemContainer.ItemData item, Transform grid)
     {
@@ -102,8 +49,11 @@ public abstract class UI : MonoBehaviour
     {
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
-        itemScript.setText(AllGameData.factoryNames[factoryId]);
-        itemScript.setIcon(AllGameData.factoryIcons[factoryId]);
+        if (AllGameData.FactoryIDsList.Contains(factoryId))
+        {
+            itemScript.setText(AllGameData.factoryNames[factoryId]);
+            itemScript.setIcon(AllGameData.factoryIcons[factoryId]);
+        }
     }
 
     public void SetGridFactories(List<int> factoryIds, Transform grid)

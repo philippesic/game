@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public static Player instance;
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
+    public Hotbar hotbar;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerRayCaster.instance.GetLookedAtNode();
-        UI.CheckOpenKeys();
+        UIToggle.CheckOpenKeys();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             worldBlockBreaker.StopRemoval();

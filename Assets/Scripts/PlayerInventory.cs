@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInventory : UI
+public class PlayerInventory : UIToggle
 {
     public Transform ItemGrid;
     ItemContainer lastInv;
