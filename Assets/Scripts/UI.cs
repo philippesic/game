@@ -38,10 +38,12 @@ public abstract class UI : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-
-        foreach (var item in items)
+        if (items != null)
         {
-            AddItemToGrid(item, grid);
+            foreach (var item in items)
+            {
+                AddItemToGrid(item, grid);
+            }
         }
     }
 
@@ -62,10 +64,12 @@ public abstract class UI : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-
-        foreach (var item in factoryIds)
+        if (factoryIds != null)
         {
-            AddFactoryToGrid(item, grid);
+            foreach (var item in factoryIds)
+            {
+                AddFactoryToGrid(item, grid);
+            }
         }
     }
 }

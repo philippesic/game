@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Drill : InventoryContainingFactory
@@ -7,7 +9,8 @@ public class Drill : InventoryContainingFactory
     public int inventorySize;
     [HideInInspector] public float nodeMultiplier;
     [HideInInspector] public ItemContainer outputItems;
-    private float itemsGenerated = 0;
+    Stopwatch stopwatch = new();
+    float itemsGenerated = 0;
 
     public override void SetupFactory()
     {
@@ -24,6 +27,7 @@ public class Drill : InventoryContainingFactory
         }
         itemID = 0;
         nodeMultiplier = 0;
+        stopwatch.Start();
     }
 
     public override ItemData Get(int count)
@@ -41,6 +45,7 @@ public class Drill : InventoryContainingFactory
         if (itemsGeneratedThisTick > 0)
         {
             if (outputItems.Count() < inventorySize){
+                stopwatch.Restart();
                 outputItems.Add(itemID, itemsGeneratedThisTick);
             }
             else
@@ -52,5 +57,10 @@ public class Drill : InventoryContainingFactory
         {
             itemsGenerated = 0;
         }
+    }
+
+    public override float GetProssesing0To1()
+    {
+        return Math.Clamp(stopwatch.ElapsedMilliseconds / 1000 * UpdateTickManager.instance.TickPerSecond / (1 / baseItemsPerTick * nodeMultiplier), 0, 1);
     }
 }

@@ -22,6 +22,8 @@ public class InventoryContainingFactory : Factory
         Give(new ItemData(id, count));
     }
 
+    public virtual float GetProssesing0To1() {return 0;}
+
     public virtual void Give(ItemData item) { }
 
     public virtual ItemData Get(int count)

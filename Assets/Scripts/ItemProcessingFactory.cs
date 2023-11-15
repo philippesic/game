@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemProssesingFactory : InventoryContainingFactory
 {
-    [HideInInspector] ItemContainer input;
-    [HideInInspector] ItemContainer output;
+    [HideInInspector] public ItemContainer input;
+    [HideInInspector] public ItemContainer output;
     [HideInInspector] ItemContainer inputBuffer;
     [HideInInspector] int prossesingTicks = 0;
     [HideInInspector] AllGameData.Recipe currentRecipe;
@@ -57,7 +57,7 @@ public class ItemProssesingFactory : InventoryContainingFactory
         if (currentRecipe != null && input.Has(currentRecipe.itemsCost))
         {
             prossesingTicks += 1;
-            if (prossesingTicks == currentRecipe.timeTicks)
+            if (prossesingTicks >= currentRecipe.timeTicks)
             {
                 input.Remove(currentRecipe.itemsCost);
                 output.Add(currentRecipe.itemsMade);
@@ -88,5 +88,10 @@ public class ItemProssesingFactory : InventoryContainingFactory
             }
         }
         return null;
+    }
+
+    public override float GetProssesing0To1()
+    {
+        return currentRecipe  == null ? -1 : prossesingTicks / currentRecipe.timeTicks;
     }
 }
