@@ -19,7 +19,7 @@ public class Shop : UI
             btn.onClick.AddListener(delegate
             {
                 CloseAll();
-                Player.instance.worldBlockPlacer.StartPlacement(id);
+                Player.instance.worldBlockPlacer.StartPlacement(id, true);
             });
         }
     }

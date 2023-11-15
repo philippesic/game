@@ -7,12 +7,14 @@ public class WorldBlockPlacer : MonoBehaviour
     [HideInInspector] public WorldBlock placingBlock;
     [HideInInspector] public int placingBlockID;
     [HideInInspector] public bool isPlacingOnValid = false;
+    [HideInInspector] public bool keepPlace = false;
     private int blockRotation = 1;
 
     public GameObject shop;
 
-    public void StartPlacement(int id)
+    public void StartPlacement(int id, bool keepPlace = false)
     {
+        this.keepPlace = keepPlace;
         IngameUI.instance.SetCrosshairText(0, "Press 'R' to place" + AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
@@ -40,7 +42,7 @@ public class WorldBlockPlacer : MonoBehaviour
         );
     }
 
-    public bool Place(bool keepPlace = true)
+    public bool Place()
     {
         if (placingBlock != null)
         {
@@ -49,9 +51,14 @@ public class WorldBlockPlacer : MonoBehaviour
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
                 WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, blockRotation);
-                placingBlock.Destroy();
-                placingBlock = null;
-                StopPlacement();
+                if (keepPlace)
+                {
+                    StartPlacement(placingBlockID, true);
+                }
+                else
+                {
+                    StopPlacement();
+                }
                 return true;
             }
         }
@@ -101,7 +108,7 @@ public class WorldBlockPlacer : MonoBehaviour
             {
                 Place();
             }
-            if (placingBlock != null) //gud code
+            if (placingBlock != null)
             {
                 DoPlacementDisplay();
             }
