@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 
 public class Hotbar : UI
 {
-    public Transform HotbarGrid;
-    public List<int> HotbarIDs = new();
+    public Transform hotbarGrid;
+    public List<int> hotbarIDs = new();
     public UnityEngine.UI.Button currentlyHovered;
     public static Hotbar instance;
     void Start()
@@ -17,9 +17,9 @@ public class Hotbar : UI
         instance = this;
         for (int i = 0; i < 10; i++)
         {
-            HotbarIDs.Add(-1);
+            hotbarIDs.Add(-1);
         }
-        SetGridFactories(HotbarIDs, HotbarGrid);
+        SetGridFactories(hotbarIDs, hotbarGrid);
     }
 
     void Update()
@@ -29,8 +29,22 @@ public class Hotbar : UI
             bool is_a_number = int.TryParse(Input.inputString, out int number);
             if (is_a_number && number >= 0 && number < 10 && currentlyHovered != null)
             {
-                HotbarIDs[number == 0 ? 9 : number - 1] = AllGameData.factoryIDs[currentlyHovered.GetComponentInChildren<TextMeshProUGUI>().text];
-                SetGridFactories(HotbarIDs, HotbarGrid);
+                if (UIToggle.uiIsOpen)
+                {
+                    hotbarIDs[number == 0 ? 9 : number - 1] = AllGameData.factoryIDs[currentlyHovered.GetComponentInChildren<TextMeshProUGUI>().text];
+                    SetGridFactories(hotbarIDs, hotbarGrid);
+                }
+                else
+                {
+                    if (hotbarIDs[number == 0 ? 9 : number - 1] == -1)
+                    {
+                        Player.instance.worldBlockPlacer.StopPlacement();
+                    }
+                    else
+                    {
+                        Player.instance.worldBlockPlacer.StartPlacement(hotbarIDs[number == 0 ? 9 : number - 1], true);
+                    }
+                }
             }
         }
     }

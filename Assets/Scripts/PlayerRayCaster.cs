@@ -6,7 +6,7 @@ public class PlayerRayCaster : MonoBehaviour
 {
     public static PlayerRayCaster instance;
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
     }

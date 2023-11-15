@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 public class UIToggle : UI
 {
     public static new List<UIToggle> uis = new();
+    public static bool uiIsOpen = false;
 
     new void Awake()
     {
@@ -34,11 +35,16 @@ public class UIToggle : UI
 
     public static void CloseAll(List<UIToggle> exeptions)
     {
+        uiIsOpen = false;
         foreach (UIToggle ui in uis)
         {
             if (!exeptions.Contains(ui))
             {
                 ui.SetState();
+            }
+            else if (ui.isOpen)
+            {
+                uiIsOpen = true;
             }
         }
     }
@@ -57,19 +63,20 @@ public class UIToggle : UI
     public void Toggle()
     {
         isOpen = !isOpen;
-        Player.instance.uiOpen = isOpen;
+        uiIsOpen = isOpen;
         UpdateVisualState();
     }
 
     public void SetState(bool state = false)
     {
         isOpen = state;
-        Player.instance.uiOpen = isOpen;
+        uiIsOpen = isOpen;
         UpdateVisualState();
     }
 
     public void UpdateVisualState()
     {
+        uiIsOpen = isOpen;
         Time.timeScale = isOpen ? 0 : 1;
         gameObject.SetActive(isOpen);
         Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
