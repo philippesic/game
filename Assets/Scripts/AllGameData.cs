@@ -106,7 +106,7 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, List<Recipe>> recipes = new();
 
     // factories
-    public static List<int> FactoryIDsList = new();
+    public static List<int> factoryIDsList = new();
     public static Dictionary<int, string> factoryNames = new();
     public static Dictionary<string, int> factoryIDs = new();
     public static Dictionary<int, string> factoryDescriptions = new();
@@ -135,7 +135,7 @@ public class AllGameData : ScriptableObject
 
     static void AddFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
     {
-        FactoryIDsList.Add(id);
+        factoryIDsList.Add(id);
         factoryNames.Add(id, name);
         factoryIDs.Add(name, id);
         factoryDescriptions.Add(id, description);
@@ -165,7 +165,7 @@ public class AllGameData : ScriptableObject
 
     public class ItemList
     {
-        private List<ItemIDAndCount> itemIDAndCounts = new();
+        private readonly List<ItemIDAndCount> itemIDAndCounts = new();
 
         public ItemList(int id, int count)
         {

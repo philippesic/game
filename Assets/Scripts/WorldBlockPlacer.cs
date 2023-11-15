@@ -7,12 +7,15 @@ public class WorldBlockPlacer : MonoBehaviour
     [HideInInspector] public WorldBlock placingBlock;
     [HideInInspector] public int placingBlockID;
     [HideInInspector] public bool isPlacingOnValid = false;
+    [HideInInspector] public bool keepPlace = false;
     private int blockRotation = 1;
 
     public GameObject shop;
 
-    public void StartPlacement(int id)
+    public void StartPlacement(int id, bool keepPlace = false)
     {
+        Player.instance.worldBlockBreaker.StopRemoval();
+        this.keepPlace = keepPlace;
         IngameUI.instance.SetCrosshairText(0, "Press 'R' to place" + AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
@@ -24,9 +27,9 @@ public class WorldBlockPlacer : MonoBehaviour
 
     public void StopPlacement()
     {
-        IngameUI.instance.SetCrosshairText(0);
         if (placingBlock != null)
         {
+            IngameUI.instance.SetCrosshairText(0);
             placingBlock.Destroy();
             placingBlock = null;
         }
@@ -40,22 +43,34 @@ public class WorldBlockPlacer : MonoBehaviour
         );
     }
 
-    public bool Place(bool keepPlace = true)
+    public bool Place()
     {
         if (placingBlock != null)
         {
-            Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.getPos());
+            Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.GetPos());
             if (CheckPlacement(pos, blockRotation) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
                 WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, blockRotation);
-                placingBlock.Destroy();
-                placingBlock = null;
-                StopPlacement();
+                if (keepPlace)
+                {
+                    StartPlacement(placingBlockID, true);
+                }
+                else
+                {
+                    StopPlacement();
+                }
                 return true;
             }
         }
-        StopPlacement();
+        if (keepPlace)
+        {
+            StartPlacement(placingBlockID, true);
+        }
+        else
+        {
+            StopPlacement();
+        }
         return false;
     }
 
@@ -64,7 +79,7 @@ public class WorldBlockPlacer : MonoBehaviour
         if (AllGameData.factoryPrefabs.ContainsKey(id))
         {
             WorldBlock shadowObject = Instantiate(AllGameData.factoryPrefabs[id]).GetComponent<WorldBlock>(); ;
-            shadowObject.makeShadow();
+            shadowObject.MakeShadow();
             return shadowObject;
         }
         return null;
@@ -84,12 +99,12 @@ public class WorldBlockPlacer : MonoBehaviour
                     point += hitInfo.normal * 0.999f;
                 }
                 isPlacingOnValid = true;
-                placingBlock.setPos(point, blockRotation, true);
+                placingBlock.SetPos(point, blockRotation, true);
                 return;
             }
         }
         isPlacingOnValid = false;
-        placingBlock.setPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), blockRotation);
+        placingBlock.SetPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), blockRotation);
     }
 
     public void Update()
@@ -101,7 +116,7 @@ public class WorldBlockPlacer : MonoBehaviour
             {
                 Place();
             }
-            if (placingBlock != null) //gud code
+            if (placingBlock != null)
             {
                 DoPlacementDisplay();
             }

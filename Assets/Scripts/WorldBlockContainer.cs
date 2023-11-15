@@ -10,7 +10,7 @@ public class WorldBlockContainer : MonoBehaviour
     public static WorldBlockContainer instance;
     public static Dictionary<int, Vector3> intToRotation = new Dictionary<int, Vector3>();
 
-    void Awake()
+    void Start()
     {
         instance = this;
         intToRotation.Add(1, new Vector3(1, 0, 0));
@@ -25,7 +25,7 @@ public class WorldBlockContainer : MonoBehaviour
     {
         GameObject block = Instantiate(AllGameData.factoryPrefabs[id], pos, RotationIntToRotation3d(rotation), transform);
         WorldBlock blockScript = block.GetComponent<WorldBlock>();
-        blockScript.setPos(pos, rotation, true);
+        blockScript.SetPos(pos, rotation, true);
         blockContainer.Add(blockScript);
         if (block.GetComponent<Factory>())
         {

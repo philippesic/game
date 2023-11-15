@@ -17,7 +17,7 @@ public class Shop : UIToggle
     void Start()
     {
         hb = FindObjectOfType<Hotbar>();
-        SetGridFactories(AllGameData.FactoryIDsList, ShopGrid);
+        SetGridFactories(AllGameData.factoryIDsList, ShopGrid);
 
         EventSystem eventSystem = FindObjectOfType<EventSystem>();
 
@@ -27,7 +27,7 @@ public class Shop : UIToggle
             btn.onClick.AddListener(delegate
             {
                 CloseAll();
-                Player.instance.worldBlockPlacer.StartPlacement(id);
+                Player.instance.worldBlockPlacer.StartPlacement(id, true);
             });
 
             EventTrigger trigger = btn.gameObject.AddComponent<EventTrigger>();

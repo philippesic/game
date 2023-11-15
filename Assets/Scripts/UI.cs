@@ -25,11 +25,11 @@ public abstract class UI : MonoBehaviour
     {
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
-        itemScript.setText(
+        itemScript.SetText(
             AllGameData.itemNames[item.id] +
             (item.count == 1 ? "" : " x" + item.count.ToString())
         );
-        itemScript.setIcon(AllGameData.itemIcons[item.id]);
+        itemScript.SetIcon(AllGameData.itemIcons[item.id]);
     }
 
     public void SetGridItems(List<ItemContainer.ItemData> items, Transform grid)
@@ -51,7 +51,7 @@ public abstract class UI : MonoBehaviour
         MenuItem itemScript = obj.GetComponent<MenuItem>();
         if (AllGameData.FactoryIDsList.Contains(factoryId))
         {
-            itemScript.setText(AllGameData.factoryNames[factoryId]);
+            itemScript.SetText(AllGameData.factoryNames[factoryId]);
             itemScript.setIcon(AllGameData.factoryIcons[factoryId]);
         }
     }

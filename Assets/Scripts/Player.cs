@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,10 +27,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             worldBlockBreaker.StopRemoval();
-            if (worldBlockPlacer.placingBlock)
-            {
-                worldBlockPlacer.StopPlacement();
-            }
+            worldBlockPlacer.StopPlacement();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303c8990657174b158494046d7459563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockID: 20
+  blockID: 21
   isShadow: 0
   isDestroyed: 0
   inventorySize: 100
