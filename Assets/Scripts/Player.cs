@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
     public Hotbar hotbar;
+    public bool uiOpen = false;
 
     void Awake()
     {
@@ -40,6 +41,14 @@ public class Player : MonoBehaviour
             else
             {
                 worldBlockBreaker.StartRemoval();
+            }
+        }
+        if (Input.inputString != "")
+        {
+            bool is_a_number = int.TryParse(Input.inputString, out int number);
+            if (is_a_number && number >= 0 && number < 10 && !uiOpen)
+            {
+                worldBlockPlacer.StartPlacement(Hotbar.instance.HotbarIDs[number == 0 ? 9 : number - 1], true);
             }
         }
     }

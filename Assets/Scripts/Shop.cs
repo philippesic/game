@@ -12,11 +12,9 @@ using UnityEngine.UIElements;
 public class Shop : UIToggle
 {
     public Transform ShopGrid;
-    public Hotbar hb;
 
     void Start()
     {
-        hb = FindObjectOfType<Hotbar>();
         SetGridFactories(AllGameData.factoryIDsList, ShopGrid);
 
         EventSystem eventSystem = FindObjectOfType<EventSystem>();
@@ -35,7 +33,7 @@ public class Shop : UIToggle
             entry.eventID = EventTriggerType.PointerEnter;
             entry.callback.AddListener((data) =>
             {
-                hb.currentlyHovered = btn;
+                Hotbar.instance.currentlyHovered = btn;
             });
             trigger.triggers.Add(entry);
 
@@ -43,7 +41,7 @@ public class Shop : UIToggle
             exitEntry.eventID = EventTriggerType.PointerExit;
             exitEntry.callback.AddListener((data) =>
             {
-                hb.currentlyHovered = null;
+                Hotbar.instance.currentlyHovered = null;
             });
             trigger.triggers.Add(exitEntry);
         }

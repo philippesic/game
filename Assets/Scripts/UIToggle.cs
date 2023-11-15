@@ -57,12 +57,14 @@ public class UIToggle : UI
     public void Toggle()
     {
         isOpen = !isOpen;
+        Player.instance.uiOpen = isOpen;
         UpdateVisualState();
     }
 
     public void SetState(bool state = false)
     {
         isOpen = state;
+        Player.instance.uiOpen = isOpen;
         UpdateVisualState();
     }
 
