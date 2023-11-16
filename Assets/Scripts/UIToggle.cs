@@ -32,6 +32,14 @@ public class UIToggle : UI
         }
     }
 
+    public static void DoAllUISleepUpdates()
+    {
+        foreach (UIToggle ui in uis)
+        {
+            ui.UISleepUpdate();
+        }
+    }
+
     public static void CloseAll(UIToggle exeption) { CloseAll(new List<UIToggle>() { exeption }); }
 
     public static void CloseAll(List<UIToggle> exeptions)
@@ -106,4 +114,6 @@ public class UIToggle : UI
     protected virtual void Open() { }
 
     protected virtual void Close() { }
+
+    public virtual void UISleepUpdate() {}
 }

@@ -18,6 +18,7 @@ public class UpdateTickManager : MonoBehaviour
 
     void Update()
     {
+        UIToggle.DoAllUISleepUpdates();
         WorldBlockContainer.instance.DoGeneralUpdate();
         while (1000 / TickPerSecond <= timer.ElapsedMilliseconds + overFlowTime)
         {
