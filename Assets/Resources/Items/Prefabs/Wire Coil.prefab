@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3707044219562876237}
   - component: {fileID: 3220551033706496347}
-  - component: {fileID: 7111712226966276474}
-  - component: {fileID: 6369190494414283202}
-  - component: {fileID: 8296548116555047114}
+  - component: {fileID: 5032257819039534529}
+  - component: {fileID: 8333513873809962709}
+  - component: {fileID: 2779399461086731625}
   m_Layer: 0
-  m_Name: Lithium
+  m_Name: Wire Coil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e787751b724456881830d78ec92077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 9
+  id: 4
   count: 1
   containingFactory: {fileID: 0}
   isMoving: 0
---- !u!33 &7111712226966276474
+--- !u!33 &5032257819039534529
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,7 +59,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194497300036839304}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6369190494414283202
+--- !u!23 &8333513873809962709
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,7 +79,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e24d4913728b4b3a8fb0bc3a656a270, type: 2}
+  - {fileID: 2100000, guid: 97aec5efcc9d242a7917629b40b7b482, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8296548116555047114
+--- !u!65 &2779399461086731625
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

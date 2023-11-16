@@ -51,11 +51,16 @@ public abstract class UI : MonoBehaviour
     {
         GameObject obj = Instantiate(itemObject, grid);
         MenuItem itemScript = obj.GetComponent<MenuItem>();
-        if (AllGameData.factoryIDsList.Contains(factoryId))
+        if (factoryId != -1)
         {
             itemScript.SetText(AllGameData.factoryNames[factoryId]);
             itemScript.SetIcon(AllGameData.factoryIcons[factoryId]);
         }
+        else
+        {
+            itemScript.SetText("");
+        }
+
     }
 
     public void SetGridFactories(List<int> factoryIds, Transform grid)
@@ -69,6 +74,32 @@ public abstract class UI : MonoBehaviour
             foreach (var item in factoryIds)
             {
                 AddFactoryToGrid(item, grid);
+            }
+        }
+    }
+
+    public void AddRecipeToGrid(AllGameData.Recipe recipe, Transform grid)
+    {
+        GameObject obj = Instantiate(itemObject, grid);
+        MenuItem itemScript = obj.GetComponent<MenuItem>();
+        if (AllGameData.itemIcons.ContainsKey(recipe.itemsMade[0].id))
+        {
+            itemScript.SetIcon(AllGameData.itemIcons[recipe.itemsMade[0].id]);
+        }
+        itemScript.SetText(recipe.name);
+    }
+
+    public void SetGridRecipes(List<AllGameData.Recipe> recipes, Transform grid)
+    {
+        foreach (Transform item in grid)
+        {
+            Destroy(item.gameObject);
+        }
+        if (recipes != null)
+        {
+            foreach (var recipe in recipes)
+            {
+                AddRecipeToGrid(recipe, grid);
             }
         }
     }
