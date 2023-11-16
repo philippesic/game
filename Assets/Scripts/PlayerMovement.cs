@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetKey(sprintKey))
         {
             sprintSpeed = 50f;
@@ -76,17 +75,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (!Player.instance.isStoped)
         {
-            readyToJump = false;
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-            Jump();
+            // when to jump
+            if (Input.GetKey(jumpKey) && readyToJump && grounded)
+            {
+                readyToJump = false;
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Jump();
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+        }
+        else
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
         }
     }
 
@@ -106,11 +113,11 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * sprintSpeed, ForceMode.Force);
+            rb.AddForce(10f * moveSpeed * sprintSpeed * moveDirection.normalized, ForceMode.Force);
 
         // in air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier * sprintSpeed, ForceMode.Force);
+            rb.AddForce(10f * airMultiplier * moveSpeed * sprintSpeed * moveDirection.normalized, ForceMode.Force);
     }
 
     private void SpeedControl()

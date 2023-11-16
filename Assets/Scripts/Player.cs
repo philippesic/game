@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,9 +9,10 @@ public class Player : MonoBehaviour
     [HideInInspector] public static Player instance;
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
-    public double mineSpeed = 250.0; //divide by 50 tps to get seconds
+    public double mineSpeedMS = 5000.0;
     public List<int> mineIDs = new();
-    private double mineTime = 0.0;
+    readonly Stopwatch mineTime = new();
+    [HideInInspector] public bool isStoped = false;
 
     void Awake()
     {
@@ -22,6 +20,16 @@ public class Player : MonoBehaviour
         inv = ItemContainer.New();
         worldBlockPlacer = gameObject.GetComponentInChildren<WorldBlockPlacer>();
         worldBlockBreaker = gameObject.GetComponentInChildren<WorldBlockBreaker>();
+    }
+
+    public void Stop()
+    {
+        isStoped = true;
+    }
+
+    public void Start()
+    {
+        isStoped = false;
     }
 
     void Update()
@@ -51,15 +59,7 @@ public class Player : MonoBehaviour
     {
         NodeID node = PlayerRayCaster.instance.GetLookedAtNode();
         IngameUI.instance.SetCrosshairText(1, node == null ? "" : AllGameData.itemNames[node.id]);
-        if (node != null)
-        {
-            Mine(node);
-        }
-        else
-        {
-            mineTime = 0;
-            IngameUI.instance.SetCrosshairText(10, "");
-        }
+        Mine(node);
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -72,29 +72,37 @@ public class Player : MonoBehaviour
 
     public void Mine(NodeID node)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (node != null)
         {
             if (mineIDs.Contains(node.id))
             {
-                IngameUI.instance.SetCrosshairText(10, Math.Floor(mineTime / (mineSpeed / 100)).ToString() + "%");
-                mineTime++;
-                if (mineTime == mineSpeed)
+                if (Input.GetKey(KeyCode.E))
                 {
-                    inv.Add(node.id, 1);
-                    mineTime = 0;
+                    if (!mineTime.IsRunning) { mineTime.Restart(); }
+                    IngameUI.instance.SetCrosshairText(10, (int) (mineTime.ElapsedMilliseconds / mineSpeedMS * 100) + "%");
+                    ;
+                    if (mineTime.ElapsedMilliseconds > mineSpeedMS)
+                    {
+                        inv.Add(node.id, (int) (node.getNodeMultiplier() * 4));
+                        mineTime.Restart();
+                    }
+                    return;
                 }
-
+                else
+                {
+                    IngameUI.instance.SetCrosshairText(10, "Press 'E' To Mine " + AllGameData.itemNames[node.id]);
+                }
             }
             else
             {
-                mineTime = 0;
                 IngameUI.instance.SetCrosshairText(10, "Cannot Mine This");
+                ;
             }
         }
         else
         {
-            mineTime = 0;
             IngameUI.instance.SetCrosshairText(10, "");
         }
+        mineTime.Stop();
     }
 }

@@ -19,6 +19,7 @@ public class UIToggle : UI
         }
         UpdateVisualState();
     }
+    
     public static void CheckOpenKeys()
     {
         foreach (UIToggle ui in uis)
@@ -82,5 +83,24 @@ public class UIToggle : UI
         Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isOpen;
         GetComponent<Image>().enabled = isOpen;
+        OpenCloseCall(isOpen);
     }
+
+    private void OpenCloseCall(bool isOpen)
+    {
+        if (isOpen)
+        {
+            Player.instance.Stop();
+            Open();
+        }
+        else
+        {
+            Player.instance.Start();
+            Close();
+        }
+    }
+
+    protected virtual void Open() { }
+
+    protected virtual void Close() { }
 }

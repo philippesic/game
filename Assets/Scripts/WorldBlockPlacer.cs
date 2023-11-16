@@ -16,7 +16,7 @@ public class WorldBlockPlacer : MonoBehaviour
     {
         Player.instance.worldBlockBreaker.StopRemoval();
         this.keepPlace = keepPlace;
-        IngameUI.instance.SetCrosshairText(0, "Press 'R' to place" + AllGameData.factoryNames[id]);
+        IngameUI.instance.SetCrosshairText(0, "Press 'R' To Place " + AllGameData.factoryNames[id]);
         if (placingBlock != null)
         {
             placingBlock.Destroy();
