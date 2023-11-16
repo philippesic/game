@@ -21,6 +21,7 @@ public class Shop : UIToggle
 
         foreach (UnityEngine.UI.Button btn in GetComponentsInChildren<UnityEngine.UI.Button>())
         {
+            // on click action
             int id = AllGameData.factoryIDs[btn.GetComponentInChildren<TextMeshProUGUI>().text];
             btn.onClick.AddListener(delegate
             {
@@ -28,21 +29,17 @@ public class Shop : UIToggle
                 Player.instance.worldBlockPlacer.StartPlacement(id, true);
             });
 
+            // add EventTrigger component to button
             EventTrigger trigger = btn.gameObject.AddComponent<EventTrigger>();
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerEnter;
-            entry.callback.AddListener((data) =>
-            {
-                Hotbar.instance.currentlyHovered = btn;
-            });
+
+            // PointerEnter
+            EventTrigger.Entry entry = new() { eventID = EventTriggerType.PointerEnter };
+            entry.callback.AddListener((data) => { Hotbar.instance.currentlyHovered = btn; });
             trigger.triggers.Add(entry);
 
-            EventTrigger.Entry exitEntry = new EventTrigger.Entry();
-            exitEntry.eventID = EventTriggerType.PointerExit;
-            exitEntry.callback.AddListener((data) =>
-            {
-                Hotbar.instance.currentlyHovered = null;
-            });
+            // PointerExit
+            EventTrigger.Entry exitEntry = new() { eventID = EventTriggerType.PointerExit };
+            exitEntry.callback.AddListener((data) => { Hotbar.instance.currentlyHovered = null; });
             trigger.triggers.Add(exitEntry);
         }
     }

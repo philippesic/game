@@ -200,13 +200,33 @@ public class AllGameData : ScriptableObject
     {
         public List<ItemIDAndCount> itemsCost;
         public List<ItemIDAndCount> itemsMade;
-        public float timeTicks;
+        public string name;
+        public float ticks;
         public int factoryID;
+
+        public Recipe(string recipeName, int factoryID, float timeTicks, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
+        {
+            this.factoryID = factoryID;
+            name = recipeName;
+            ticks = timeTicks;
+            this.itemsCost = itemsCost;
+            this.itemsMade = itemsMade;
+        }
+
+        public Recipe(string recipeName, string factoryName, float timeTicks, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
+        {
+            factoryID = factoryIDs[factoryName];
+            name = recipeName;
+            ticks = timeTicks;
+            this.itemsCost = itemsCost;
+            this.itemsMade = itemsMade;
+        }
 
         public Recipe(int factoryID, float timeTicks, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
         {
             this.factoryID = factoryID;
-            this.timeTicks = timeTicks;
+            name = itemNames[itemsMade[0].id];
+            ticks = timeTicks;
             this.itemsCost = itemsCost;
             this.itemsMade = itemsMade;
         }
@@ -214,7 +234,8 @@ public class AllGameData : ScriptableObject
         public Recipe(string factoryName, float timeTicks, List<ItemIDAndCount> itemsCost, List<ItemIDAndCount> itemsMade)
         {
             factoryID = factoryIDs[factoryName];
-            this.timeTicks = timeTicks;
+            name = itemNames[itemsMade[0].id];
+            ticks = timeTicks;
             this.itemsCost = itemsCost;
             this.itemsMade = itemsMade;
         }

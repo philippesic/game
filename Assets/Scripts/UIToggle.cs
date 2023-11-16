@@ -78,7 +78,7 @@ public class UIToggle : UI
     public void UpdateVisualState()
     {
         uiIsOpen = isOpen;
-        Time.timeScale = isOpen ? 0 : 1;
+        // Time.timeScale = isOpen ? 0 : 1;
         gameObject.SetActive(isOpen);
         Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isOpen;

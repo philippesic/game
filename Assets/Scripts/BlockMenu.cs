@@ -38,7 +38,7 @@ public class BlockMenu : UIToggle
             {
                 SetGridItems(prossesingFactory.input.inventoryItems, inputGrid);
                 SetGridItems(prossesingFactory.output.inventoryItems, outputGrid);
-
+                SetGridRecipes(AllGameData.recipes[prossesingFactory.blockID], recipeGrid);
             }
             else
             {
@@ -47,6 +47,7 @@ public class BlockMenu : UIToggle
                 {
                     SetGridItems(null, inputGrid);
                     SetGridItems(drill.outputItems.inventoryItems, outputGrid);
+                    SetGridRecipes(null, recipeGrid);
                 }
             }
             SetProgressBar(viewedFactory.GetProssesing0To1());
