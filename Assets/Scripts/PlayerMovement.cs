@@ -46,27 +46,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-
-        if (Input.GetKey(sprintKey))
+        if (!Player.instance.isStoped)
         {
-            sprintSpeed = 50f;
+            if (Input.GetKey(sprintKey))
+            {
+                sprintSpeed = 50f;
+            }
+            else
+            {
+                sprintSpeed = 5f;
+            }
+
+            // ground check
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, groundLayer);
+
+            MyInput();
+            SpeedControl();
+
+            // handle drag
+            if (grounded)
+                rb.drag = groundDrag;
+            else
+                rb.drag = 0;
         }
-        else
-        {
-            sprintSpeed = 5f;
-        }
-
-        // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, groundLayer);
-
-        MyInput();
-        SpeedControl();
-
-        // handle drag
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
     }
 
     private void FixedUpdate()
@@ -106,11 +108,11 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * sprintSpeed, ForceMode.Force);
+            rb.AddForce(10f * moveSpeed * sprintSpeed * moveDirection.normalized, ForceMode.Force);
 
         // in air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier * sprintSpeed, ForceMode.Force);
+            rb.AddForce(10f * airMultiplier * moveSpeed * sprintSpeed * moveDirection.normalized, ForceMode.Force);
     }
 
     private void SpeedControl()

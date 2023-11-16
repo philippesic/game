@@ -6,38 +6,51 @@ public class BlockMenu : UIToggle
     public Transform inputGrid;
     public Transform outputGrid;
     public Transform recipeGrid;
+    private InventoryContainingFactory viewedFactory;
+
+
+    protected override void Open()
+    {
+        WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
+        if (block != null)
+        {
+            InventoryContainingFactory inventoryFactory = block.GetBlockFromType<InventoryContainingFactory>();
+            if (inventoryFactory != null)
+            {
+                viewedFactory = inventoryFactory;
+                return;
+            }
+        }
+        SetState();
+    }
+
+    protected override void Close()
+    {
+        viewedFactory = null;
+    }
 
     void Update()
     {
-        if (isOpen)
+        if (isOpen && viewedFactory != null)
         {
-            WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
-            if (block != null)
+            ItemProssesingFactory prossesingFactory = viewedFactory.GetBlockFromType<ItemProssesingFactory>();
+            if (prossesingFactory != null)
             {
-                InventoryContainingFactory inventoryFactory = block.GetBlockFromType<InventoryContainingFactory>();
-                if (inventoryFactory != null)
-                {
-                    ItemProssesingFactory prossesingFactory = block.GetBlockFromType<ItemProssesingFactory>();
-                    if (prossesingFactory != null)
-                    {
-                        SetGridItems(prossesingFactory.input.inventoryItems, inputGrid);
-                        SetGridItems(prossesingFactory.output.inventoryItems, outputGrid);
+                SetGridItems(prossesingFactory.input.inventoryItems, inputGrid);
+                SetGridItems(prossesingFactory.output.inventoryItems, outputGrid);
 
-                    }
-                    else
-                    {
-                        Drill drill = block.GetBlockFromType<Drill>();
-                        if (drill != null)
-                        {
-                            SetGridItems(null, inputGrid);
-                            SetGridItems(drill.outputItems.inventoryItems, outputGrid);
-                        }
-                    }
-                    SetProgressBar(inventoryFactory.GetProssesing0To1());
-                    return;
+            }
+            else
+            {
+                Drill drill = viewedFactory.GetBlockFromType<Drill>();
+                if (drill != null)
+                {
+                    SetGridItems(null, inputGrid);
+                    SetGridItems(drill.outputItems.inventoryItems, outputGrid);
                 }
             }
-            SetState();
+            SetProgressBar(viewedFactory.GetProssesing0To1());
+
         }
     }
 

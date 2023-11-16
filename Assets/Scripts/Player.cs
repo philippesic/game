@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public double mineSpeed = 250.0; //divide by 50 tps to get seconds
     public List<int> mineIDs = new();
     private double mineTime = 0.0;
+    public bool isStoped = false;
 
     void Awake()
     {
@@ -22,6 +23,16 @@ public class Player : MonoBehaviour
         inv = ItemContainer.New();
         worldBlockPlacer = gameObject.GetComponentInChildren<WorldBlockPlacer>();
         worldBlockBreaker = gameObject.GetComponentInChildren<WorldBlockBreaker>();
+    }
+
+    public void Stop()
+    {
+        isStoped = true;
+    }
+
+    public void Start()
+    {
+        isStoped = false;
     }
 
     void Update()
@@ -51,7 +62,10 @@ public class Player : MonoBehaviour
     {
         NodeID node = PlayerRayCaster.instance.GetLookedAtNode();
         IngameUI.instance.SetCrosshairText(1, node == null ? "" : AllGameData.itemNames[node.id]);
-        Mine(node);
+        if (node != null)
+        {
+            Mine(node);
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
