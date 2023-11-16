@@ -33,6 +33,7 @@ public class BlockMenu : UIToggle
     {
         if (isOpen && viewedFactory != null)
         {
+            IngameUI.instance.SetCrosshairText(9);
             ItemProssesingFactory prossesingFactory = viewedFactory.GetBlockFromType<ItemProssesingFactory>();
             if (prossesingFactory != null)
             {
@@ -51,7 +52,26 @@ public class BlockMenu : UIToggle
                 }
             }
             SetProgressBar(viewedFactory.GetProssesing0To1());
-
+        }
+        else
+        {
+            WorldBlock block = PlayerRayCaster.instance.GetLookedAtWorldBlock();
+            if (block != null)
+            {
+                ItemProssesingFactory itemProssesingFactory = block.GetBlockFromType<ItemProssesingFactory>();
+                if (itemProssesingFactory != null)
+                {
+                    IngameUI.instance.SetCrosshairText(9, "Press 'E' To Open Block Menu");
+                }
+                else
+                {
+                    IngameUI.instance.SetCrosshairText(9);
+                }
+            }
+            else
+            {
+                IngameUI.instance.SetCrosshairText(9);
+            }
         }
     }
 

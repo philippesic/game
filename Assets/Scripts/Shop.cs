@@ -1,13 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEditor;
 using TMPro;
-using Unity.VisualScripting;
-
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class Shop : UIToggle
 {
@@ -16,8 +9,6 @@ public class Shop : UIToggle
     void Start()
     {
         SetGridFactories(AllGameData.factoryIDsList, ShopGrid);
-
-        EventSystem eventSystem = FindObjectOfType<EventSystem>();
 
         foreach (UnityEngine.UI.Button btn in GetComponentsInChildren<UnityEngine.UI.Button>())
         {
