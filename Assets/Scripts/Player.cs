@@ -91,5 +91,10 @@ public class Player : MonoBehaviour
                 IngameUI.instance.SetCrosshairText(10, "Cannot Mine This");
             }
         }
+        else
+        {
+            mineTime = 0;
+            IngameUI.instance.SetCrosshairText(10, "");
+        }
     }
 }
