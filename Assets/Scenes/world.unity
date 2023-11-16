@@ -1918,7 +1918,7 @@ MonoBehaviour:
   worldBlockBreaker: {fileID: 0}
   mineSpeedMS: 5000
   mineIDs: 010000000200000003000000
-  isStoped: 0
+  isStopped: 0
 --- !u!1 &1062894067
 GameObject:
   m_ObjectHideFlags: 0
