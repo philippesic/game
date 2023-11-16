@@ -51,7 +51,15 @@ public class Player : MonoBehaviour
     {
         NodeID node = PlayerRayCaster.instance.GetLookedAtNode();
         IngameUI.instance.SetCrosshairText(1, node == null ? "" : AllGameData.itemNames[node.id]);
-        Mine(node);
+        if (node != null)
+        {
+            Mine(node);
+        }
+        else
+        {
+            mineTime = 0;
+            IngameUI.instance.SetCrosshairText(10, "");
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -66,7 +74,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-            if (node != null && mineIDs.Contains(node.id))
+            if (mineIDs.Contains(node.id))
             {
                 IngameUI.instance.SetCrosshairText(10, Math.Floor(mineTime / (mineSpeed / 100)).ToString() + "%");
                 mineTime++;
@@ -77,16 +85,11 @@ public class Player : MonoBehaviour
                 }
 
             }
-            else if (!mineIDs.Contains(node.id))
+            else
             {
                 mineTime = 0;
                 IngameUI.instance.SetCrosshairText(10, "Cannot Mine This");
             }
-        }
-        else
-        {
-            mineTime = 0;
-            IngameUI.instance.SetCrosshairText(10, "");
         }
     }
 }
