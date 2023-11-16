@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public double mineSpeedMS = 5000.0;
     public List<int> mineIDs = new();
     readonly Stopwatch mineTime = new();
-    [HideInInspector] public bool isStoped = false;
+    [HideInInspector] public bool isStopped = false;
 
     void Awake()
     {
@@ -22,14 +22,9 @@ public class Player : MonoBehaviour
         worldBlockBreaker = gameObject.GetComponentInChildren<WorldBlockBreaker>();
     }
 
-    public void Stop()
+    public void SetPauseState(bool state)
     {
-        isStoped = true;
-    }
-
-    public void Start()
-    {
-        isStoped = false;
+        isStopped = state;
     }
 
     void Update()
@@ -79,11 +74,11 @@ public class Player : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     if (!mineTime.IsRunning) { mineTime.Restart(); }
-                    IngameUI.instance.SetCrosshairText(10, (int) (mineTime.ElapsedMilliseconds / mineSpeedMS * 100) + "%");
+                    IngameUI.instance.SetCrosshairText(10, (int)(mineTime.ElapsedMilliseconds / mineSpeedMS * 100) + "%");
                     ;
                     if (mineTime.ElapsedMilliseconds > mineSpeedMS)
                     {
-                        inv.Add(node.id, (int) (node.getNodeMultiplier() * 4));
+                        inv.Add(node.id, (int)(node.getNodeMultiplier() * 4));
                         mineTime.Restart();
                     }
                     return;

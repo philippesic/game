@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        if (!Player.instance.isStoped)
+        if (!Player.instance.isStopped)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");

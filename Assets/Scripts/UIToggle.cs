@@ -19,7 +19,7 @@ public class UIToggle : UI
         }
         UpdateVisualState();
     }
-    
+
     public static void CheckOpenKeys()
     {
         foreach (UIToggle ui in uis)
@@ -88,15 +88,18 @@ public class UIToggle : UI
 
     private void OpenCloseCall(bool isOpen)
     {
-        if (isOpen)
+        if (Player.instance != null)
         {
-            Player.instance.Stop();
-            Open();
-        }
-        else
-        {
-            Player.instance.Start();
-            Close();
+            if (isOpen)
+            {
+                Player.instance.SetPauseState(true);
+                Open();
+            }
+            else
+            {
+                Player.instance.SetPauseState(false);
+                Close();
+            }
         }
     }
 
