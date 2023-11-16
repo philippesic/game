@@ -17,7 +17,7 @@ public class WorldBlockBreaker : MonoBehaviour
     public void StartRemoval()
     {
         Player.instance.worldBlockPlacer.StopPlacement();
-        IngameUI.instance.SetCrosshairText(0, "Press 'R' To remove block");
+        IngameUI.instance.SetCrosshairText(0, "Press 'R' To Remove Block");
         isRemoving = true;
     }
 

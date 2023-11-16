@@ -46,29 +46,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!Player.instance.isStoped)
+        if (Input.GetKey(sprintKey))
         {
-            if (Input.GetKey(sprintKey))
-            {
-                sprintSpeed = 50f;
-            }
-            else
-            {
-                sprintSpeed = 5f;
-            }
-
-            // ground check
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, groundLayer);
-
-            MyInput();
-            SpeedControl();
-
-            // handle drag
-            if (grounded)
-                rb.drag = groundDrag;
-            else
-                rb.drag = 0;
+            sprintSpeed = 50f;
         }
+        else
+        {
+            sprintSpeed = 5f;
+        }
+
+        // ground check
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, groundLayer);
+
+        MyInput();
+        SpeedControl();
+
+        // handle drag
+        if (grounded)
+            rb.drag = groundDrag;
+        else
+            rb.drag = 0;
     }
 
     private void FixedUpdate()
@@ -78,17 +75,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (!Player.instance.isStoped)
         {
-            readyToJump = false;
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-            Jump();
+            // when to jump
+            if (Input.GetKey(jumpKey) && readyToJump && grounded)
+            {
+                readyToJump = false;
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Jump();
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+        }
+        else
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
         }
     }
 
