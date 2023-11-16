@@ -7,9 +7,9 @@ public class ItemProssesingFactory : InventoryContainingFactory
 {
     [HideInInspector] public ItemContainer input;
     [HideInInspector] public ItemContainer output;
-    [HideInInspector] ItemContainer inputBuffer;
-    [HideInInspector] int prossesingTicks = 0;
-    [HideInInspector] AllGameData.Recipe currentRecipe;
+    AllGameData.Recipe currentRecipe;
+    ItemContainer inputBuffer;
+    int prossesingTicks = 0;
     public int inventorySize;
 
     public override void SetupFactory()
@@ -62,36 +62,18 @@ public class ItemProssesingFactory : InventoryContainingFactory
                 input.Remove(currentRecipe.itemsCost);
                 output.Add(currentRecipe.itemsMade);
                 prossesingTicks = 0;
-                currentRecipe = null;
-            }
-        }
-        else
-        {
-            currentRecipe = FindValidRecipes();
-            if (currentRecipe != null)
-            {
-                TryToMakeItems();
             }
         }
     }
 
-    public AllGameData.Recipe FindValidRecipes()
+    public void ChangeCurrentRecipe(AllGameData.Recipe recipe)
     {
-        if (AllGameData.recipes.ContainsKey(blockID))
-        {
-            foreach (var recipe in AllGameData.recipes[blockID])
-            {
-                if (input.Has(recipe.itemsCost))
-                {
-                    return recipe;
-                }
-            }
-        }
-        return null;
+        currentRecipe = recipe;
+        prossesingTicks = 0;
     }
 
     public override float GetProssesing0To1()
     {
-        return currentRecipe  == null ? -1 : prossesingTicks / currentRecipe.ticks;
+        return currentRecipe == null ? -1 : prossesingTicks / currentRecipe.ticks;
     }
 }
