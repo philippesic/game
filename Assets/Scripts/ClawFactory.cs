@@ -50,7 +50,7 @@ public class ClawFactory : ItemObjectContainingFactory
         heldItem?.item.UpdateMovement();
         if (heldItem != null && (heldItem.item.transform.position - transform.position).magnitude > 3)
         {
-            heldItem.item.transform.position = GetOutputPos();
+            heldItem.item.Pop();
         }
     }
 
