@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConveyorFactory : ItemObjectContainingFactory
@@ -19,7 +20,12 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override void UpdateItemMovement()
     {
+        if (heldItem != null && heldItem.item.IsDestroyed()) { heldItem = null; }
         heldItem?.item.UpdateMovement();
+        if (heldItem != null && (heldItem.item.transform.position - transform.position).magnitude > 3)
+        {
+            heldItem.item.Pop();
+        }
     }
 
     public override ItemContainer GetExtraBlockCost() // destroys held items
@@ -35,7 +41,8 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override void Tick()
     {
-        if (heldItem == null) {
+        if (heldItem == null)
+        {
             shouldMoveItems = false;
         }
         else if (neighborFactories.ContainsKey("(0, 0, 1)"))

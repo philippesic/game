@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 8333513873809962709}
   - component: {fileID: 2779399461086731625}
   m_Layer: 0
-  m_Name: Steel Fame
+  m_Name: Steel Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -46,7 +46,12 @@ public class ClawFactory : ItemObjectContainingFactory
 
     public override void UpdateItemMovement()
     {
+        if (heldItem != null && heldItem.item.IsDestroyed()) { heldItem = null; }
         heldItem?.item.UpdateMovement();
+        if (heldItem != null && (heldItem.item.transform.position - transform.position).magnitude > 3)
+        {
+            heldItem.item.transform.position = GetOutputPos();
+        }
     }
 
     public override Vector3 GetInputPos()

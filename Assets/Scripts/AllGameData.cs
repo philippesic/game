@@ -94,7 +94,7 @@ public class AllGameData : ScriptableObject
         AddRecipe(new Recipe("Assembler", 50, new ItemList("Copper Wire", 20).Add("Iron Rod", 5).End(), new ItemList("Wire Coil", 5).End()));
         AddRecipe(new Recipe("Assembler", 20, new ItemList("Steel Frame", 8).Add("Steel Plate", 24).End(), new ItemList("Steel Casing", 4).End()));
         AddRecipe(new Recipe("Assembler", 100, new ItemList("Wire Coil", 20).Add("Steel Casing", 4).End(), new ItemList("Motor", 1).End()));
-        AddRecipe(new Recipe("Assembler", 50, new ItemList("Iron Plate", 50).Add("Iron Rod", 10).End(), new ItemList("Propeller", 10).End()));
+        AddRecipe(new Recipe("Assembler", 50, new ItemList("Iron Plate", 30).Add("Iron Rod", 10).End(), new ItemList("Propeller", 10).End()));
         AddRecipe(new Recipe("Assembler", 50, new ItemList("Motor", 20).Add("Propeller", 10).End(), new ItemList("Fan", 5).End()));
         AddRecipe(new Recipe("Assembler", 40, new ItemList("Diamond Glass", 30).Add("Gold Flake", 50).End(), new ItemList("Fiber Optics", 5).End()));
         AddRecipe(new Recipe("Assembler", 150, new ItemList("Steel Casing", 5).Add("Copper Wire", 50).End(), new ItemList("Microcontroller", 1).End()));
