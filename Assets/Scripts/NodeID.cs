@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NodeID : MonoBehaviour
 {
-    public int id;
+    [HideInInspector] public int id;
     public SpeedTypes multiplierType;
 
     public float getNodeMultiplier()

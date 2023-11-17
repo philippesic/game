@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1471,17 +1471,14 @@ MonoBehaviour:
   nodes:
   - {fileID: 125380, guid: 8411940e6aca648c680fc17a47cd0a9e, type: 3}
   - {fileID: 125380, guid: 77845ab9c196547ed8187ded8d30427a, type: 3}
-  - {fileID: 125380, guid: 42540e321f8964d348b23d2b5a753c03, type: 3}
-  - {fileID: 125380, guid: 73e0e96b0eaa04e37912501595949b24, type: 3}
   - {fileID: 125380, guid: 744d275c618324cfeaa4f34cf7159915, type: 3}
-  - {fileID: 125380, guid: 6468862554d088943a074cfb50c89575, type: 3}
   - {fileID: 125380, guid: 1b5c2287d21bd4a30a7157372de58543, type: 3}
   - {fileID: 125380, guid: 3473799fda0414423ab746a429e38ed3, type: 3}
   - {fileID: 125380, guid: e27cc06b363cd4cbab938608c152b578, type: 3}
   - {fileID: 125380, guid: 895991e3b79004083a6d57aab9582bfa, type: 3}
   - {fileID: 125380, guid: 04c3a4460c5a54942aee1ef8c3906b6e, type: 3}
   scatterRadius: 2048
-  rarity: 1.2
+  rarity: 5
 --- !u!1 &820239299
 GameObject:
   m_ObjectHideFlags: 0

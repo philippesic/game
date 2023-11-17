@@ -19,7 +19,9 @@ public class NodeGen : MonoBehaviour
         for (int i = 0; i < nodes.Count; i++)
         {
 
-            GameObject prefab = nodes[i];
+            GameObject node = nodes[i];
+            NodeID nodeScript = node.GetComponent<NodeID>();
+            nodeScript.id = AllGameData.itemIDs[node.name];
 
             float rarityMultiplier = (float)Math.Floor((i + 1) * rarity);
 
@@ -27,18 +29,22 @@ public class NodeGen : MonoBehaviour
 
             for (int j = 0; j < numberOfInstances; j++)
             {
-                float randomX = UnityEngine.Random.Range(0f, terrainData.size.x);
-                float randomZ = UnityEngine.Random.Range(0f, terrainData.size.z);
-
-                Vector3 randomPosition = new Vector3(randomX, 0f, randomZ);
+                Vector3 randomPosition = new(
+                    UnityEngine.Random.Range(0f, terrainData.size.x),
+                    0f,
+                    UnityEngine.Random.Range(0f, terrainData.size.z)
+                    );
 
                 if (terrain.SampleHeight(randomPosition) > 15)
                 {
                     randomPosition.y = terrain.SampleHeight(randomPosition); //yes i know this is shit fix but unity hates destroying assets
-                    GameObject newPrefabInstance = Instantiate(prefab, randomPosition, Quaternion.identity);
-                    newPrefabInstance.transform.SetParent(transform);
+                    GameObject newNodeInstance = Instantiate(node, randomPosition, Quaternion.identity);
+                    newNodeInstance.transform.SetParent(transform);
                 }
-
+                else
+                {
+                    j--;
+                }
             }
         }
     }
