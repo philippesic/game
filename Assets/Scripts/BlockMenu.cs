@@ -27,6 +27,10 @@ public class BlockMenu : UIToggle
                     int i = 0;
                     foreach (UnityEngine.UI.Button button in recipeGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
                     {
+                        if (AllGameData.recipes[prossesingFactory.blockID].Count <= i)
+                        {
+                            break;
+                        }
                         AllGameData.Recipe recipe = AllGameData.recipes[prossesingFactory.blockID][i];
                         button.onClick.AddListener(delegate
                         {

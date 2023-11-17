@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    
-    public int id;
     public int count;
+    [HideInInspector] public int id = 0;
     [HideInInspector] public ItemObjectContainingFactory containingFactory;
     [HideInInspector] public bool isMoving = false;
     private Vector3 moreToPos;
@@ -72,6 +71,7 @@ public class Item : MonoBehaviour
     {
         GameObject obj = Instantiate(AllGameData.itemPrefabs[id], ItemObjectContainer.instance.transform);
         obj.GetComponent<Item>().count = count;
+        obj.GetComponent<Item>().id = id;
         return obj;
     }
 }

@@ -15,40 +15,39 @@ public class AllGameData : ScriptableObject
         AddItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
         AddItem(4, "Uranium", "Radioactive element with unique properties.");
         AddItem(5, "Banana", "A delicious and nutritious fruit.");
-        AddItem(6, "Raw Silver", "Silver in its unrefined state, awaiting refinement.");
-        AddItem(7, "Raw Gold", "Unprocessed gold, waiting to be refined and utilized.");
-        AddItem(8, "Lead", "Dense and malleable lead metal.");
-        AddItem(9, "Lithium", "Essential lithium element for various applications.");
-        AddItem(10, "Sulfur", "A vital element with diverse industrial applications.");
-        AddItem(11, "Diamond", "A precious and exceptionally hard gemstone.");
+        AddItem(6, "Raw Gold", "Unprocessed gold, waiting to be refined and utilized.");
+        AddItem(7, "Sulfur", "A vital element with diverse industrial applications.");
+        AddItem(8, "Diamond", "A precious and exceptionally hard gemstone.");
         // Basic
-        AddItem(12, "Iron", "Iron, ready for various applications.");
-        AddItem(13, "Copper", "Copper, suitable for various uses.");
-        AddItem(14, "Silver", "Silver, ready for crafting and manufacturing.");
-        AddItem(15, "Gold", "Gold, prepared for various high-value applications.");
-        AddItem(31, "Diamond Dust", "Core component for machinery and automation systems.");
-        AddItem(16, "Diamond Glass", "Transparent material used for various constructions.");
-        AddItem(17, "Steel", "Strong and versatile steel material for industrial applications.");
-        AddItem(32, "Iron Rod", "Core component for machinery and automation systems.");
-        AddItem(18, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
-        AddItem(19, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
-        AddItem(20, "Copper Wire", "Copeer wire, ideal for various crafting Endeavors.");
+        AddItem(10, "Iron", "Iron, ready for various applications.");
+        AddItem(11, "Copper", "Copper, suitable for various uses.");
+        AddItem(12, "Gold", "Gold, prepared for various high-value applications.");
+        AddItem(13, "Steel", "Strong and versatile steel material for industrial applications.");
+        AddItem(14, "Iron Rod", "Core component for machinery and automation systems.");
+        AddItem(15, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
+        AddItem(16, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
+        AddItem(17, "Steel Frame", "Steel Frame, ideal for various crafting Endeavors.");
+        AddItem(28, "Copper Wire", "Copeer wire, ideal for various crafting Endeavors.");
+        AddItem(29, "Wire Coil", "Wire Coil, ideal for various crafting Endeavors.");
+        AddItem(20, "Steel Casing", "Steel Casing, ideal for various crafting Endeavors.");
+        AddItem(21, "Propeller", "Propeller, ideal for various crafting Endeavors.");
         // Advanced
-        AddItem(21, "Motor", "Core component for machinery and automation systems.");
-        AddItem(22, "Silicon", "Crucial element for electronic devices and technology.");
-        AddItem(23, "Laser", "High-intensity beam emitter for precision applications.");
-        AddItem(24, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.");
-        AddItem(25, "Solar Panel", "Device that harnesses sunlight for sustainable energy.");
-        AddItem(26, "Fan", "Mechanical device for generating airflow and cooling.");
+        AddItem(30, "Gold Flake", "Gold Flake, ideal for various crafting Endeavors.");
+        AddItem(31, "Diamond Dust", "Core component for machinery and automation systems.");
+        AddItem(32, "Diamond Glass", "Transparent material used for various constructions.");
+        AddItem(33, "Motor", "Core component for machinery and automation systems.");
+        AddItem(34, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.");
+        AddItem(35, "Fan", "Mechanical device for generating airflow and cooling.");
+        AddItem(36, "Fiber Optics", "Super fast wire");
+        AddItem(37, "Magnet", "Magnetic element with various industrial and scientific uses.");
         // Uber Advanced
-        AddItem(27, "Magnet", "Magnetic element with various industrial and scientific uses.");
-        AddItem(28, "Computer", "Advanced computing system for processing complex tasks.");
-        AddItem(29, "High Precision Motor", "Specialized motor for precision-critical applications.");
-        AddItem(30, "Fuel", "Essential energy source for various machinery and vehicles.");
+        AddItem(40, "Computer", "Advanced computing system for processing complex tasks.");
+        AddItem(41, "High Precision Motor", "Specialized motor for precision-critical applications.");
+        AddItem(42, "Laser", "High-intensity beam emitter for precision applications.");
 
         // ---- factories ----
         // Non Factory Blocks
-        AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemList().End());
+        AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemList("Iron Plate", 6).End());
         // Conveyors
         AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for moving your stupi items", new ItemList().End());
         AddFactory(4, "Claw Factory", "it grab you", new ItemList().End());
@@ -64,6 +63,7 @@ public class AllGameData : ScriptableObject
         AddFactory(23, "Foundry", "Combines Stuff", new ItemList().End());
         AddFactory(24, "Assembler", "Builds stuff", new ItemList().End());
         AddFactory(25, "Crusher", "Crushing you mom", new ItemList().End());
+        AddFactory(26, "Manufacture", "Builds the most complex stuff", new ItemList().End());
         // Drills
         AddFactory(35, "Drill T1", "it dirl", new ItemList().End());
         AddFactory(36, "Drill T2", "it dirl", new ItemList().End());
@@ -73,25 +73,36 @@ public class AllGameData : ScriptableObject
         // Smelter
         AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Iron", 5).Add("Coal", 1).End(), new ItemList("Iron", 5).End()));
         AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Copper", 5).Add("Coal", 1).End(), new ItemList("Copper", 5).End()));
-        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Silver", 5).Add("Coal", 1).End(), new ItemList("Silver", 5).End()));
         AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Gold", 5).Add("Coal", 1).End(), new ItemList("Gold", 5).End()));
         // Electric Smelter
         AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Iron", 5).End(), new ItemList("Iron", 5).End()));
         AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Copper", 5).End(), new ItemList("Copper", 5).End()));
-        AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Silver", 5).End(), new ItemList("Silver", 5).End()));
         AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Gold", 5).End(), new ItemList("Gold", 5).End()));
         // Caster
         AddRecipe(new Recipe("Caster", 20, new ItemList("Iron", 10).End(), new ItemList("Iron Rod", 40).End()));
         AddRecipe(new Recipe("Caster", 20, new ItemList("Iron", 10).End(), new ItemList("Iron Plate", 20).End()));
         AddRecipe(new Recipe("Caster", 20, new ItemList("Steel", 10).End(), new ItemList("Steel Plate", 20).End()));
+        AddRecipe(new Recipe("Caster", 20, new ItemList("Steel", 20).End(), new ItemList("Steel Frame", 5).End()));
         AddRecipe(new Recipe("Caster", 20, new ItemList("Copper", 20).End(), new ItemList("Copper Wire", 30).End()));
-        AddRecipe(new Recipe("Caster", 40, new ItemList("Diamond Dust", 30).End(), new ItemList("Diamond Glass", 4).End()));
         // Foundry
-        AddRecipe(new Recipe("Foundry", 20, new ItemList("Iron", 20).Add("Coal", 10).End(), new ItemList("Steel", 30).End()));
+        AddRecipe(new Recipe("Foundry", 30, new ItemList("Iron", 10).Add("Coal", 5).End(), new ItemList("Steel", 15).End()));
+        AddRecipe(new Recipe("Foundry", 40, new ItemList("Diamond Dust", 30).Add("Gold", 8).End(), new ItemList("Diamond Glass", 4).End()));
         // Crusher
         AddRecipe(new Recipe("Crusher", 40, new ItemList("Diamond", 5).End(), new ItemList("Diamond Dust", 10).End()));
+        AddRecipe(new Recipe("Crusher", 20, new ItemList("Gold", 5).End(), new ItemList("Gold Flake", 20).End()));
         // Assembler
-        AddRecipe(new Recipe("Assembler", 100, new ItemList("Motor", 1).End(), new ItemList("Copper Wire", 20).Add("Iron Rod", 5).End()));
+        AddRecipe(new Recipe("Assembler", 50, new ItemList("Copper Wire", 20).Add("Iron Rod", 5).End(), new ItemList("Wire Coil", 5).End()));
+        AddRecipe(new Recipe("Assembler", 20, new ItemList("Steel Frame", 8).Add("Steel Plate", 24).End(), new ItemList("Steel Casing", 4).End()));
+        AddRecipe(new Recipe("Assembler", 100, new ItemList("Wire Coil", 20).Add("Steel Casing", 4).End(), new ItemList("Motor", 1).End()));
+        AddRecipe(new Recipe("Assembler", 50, new ItemList("Iron Plate", 50).Add("Iron Rod", 10).End(), new ItemList("Propeller", 10).End()));
+        AddRecipe(new Recipe("Assembler", 50, new ItemList("Motor", 20).Add("Propeller", 10).End(), new ItemList("Fan", 5).End()));
+        AddRecipe(new Recipe("Assembler", 40, new ItemList("Diamond Glass", 30).Add("Gold Flake", 50).End(), new ItemList("Fiber Optics", 5).End()));
+        AddRecipe(new Recipe("Assembler", 150, new ItemList("Steel Casing", 5).Add("Copper Wire", 50).End(), new ItemList("Microcontroller", 1).End()));
+        AddRecipe(new Recipe("Assembler", 200, new ItemList("Wire Coil", 20).Add("Steel Frame", 10).End(), new ItemList("Magnet", 5).End()));
+        // Manufacture
+        AddRecipe(new Recipe("Manufacture", 200, new ItemList("Microcontroller", 20).Add("Fiber Optics", 40).Add("Steel Casing", 10).Add("Fan", 8).End(), new ItemList("Computer", 1).End()));
+        AddRecipe(new Recipe("Manufacture", 100, new ItemList("Microcontroller", 10).Add("Magnet", 10).Add("Steel Casing", 4).Add("Motor", 20).End(), new ItemList("High Precision Motor", 1).End()));
+        AddRecipe(new Recipe("Manufacture", 200, new ItemList("Magnet", 30).Add("Fiber Optics", 40).Add("Steel Casing", 12).Add("Diamond Glass", 80).End(), new ItemList("Laser", 4).End()));
     }
 
 
