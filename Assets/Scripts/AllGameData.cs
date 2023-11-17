@@ -48,6 +48,7 @@ public class AllGameData : ScriptableObject
         // ---- factories ----
         // Non Factory Blocks
         AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemList("Iron Plate", 6).End());
+        AddFactory(0, "Container", "Basic container for storing items", new ItemList().End());
         // Conveyors
         AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for moving your stupi items", new ItemList().End());
         AddFactory(4, "Claw Factory", "it grab you", new ItemList().End());
