@@ -24,19 +24,14 @@ public class BlockMenu : UIToggle
                     SetGridItems(prossesingFactory.input.inventoryItems, inputGrid);
                     SetGridItems(prossesingFactory.output.inventoryItems, outputGrid);
                     SetGridRecipes(AllGameData.recipes[prossesingFactory.blockID], recipeGrid);
-                    int i = 0;
                     foreach (UnityEngine.UI.Button button in recipeGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
                     {
-                        if (AllGameData.recipes[prossesingFactory.blockID].Count <= i)
-                        {
-                            break;
-                        }
-                        AllGameData.Recipe recipe = AllGameData.recipes[prossesingFactory.blockID][i];
+
+                        AllGameData.Recipe recipe = AllGameData.recipeNames[button.GetComponentInChildren<TextMeshProUGUI>().text];
                         button.onClick.AddListener(delegate
                         {
                             prossesingFactory.ChangeCurrentRecipe(recipe);
                         });
-                        i++;
                     }
                 }
                 else

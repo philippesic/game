@@ -71,9 +71,9 @@ public class AllGameData : ScriptableObject
 
         // ---- Recipes ----
         // Smelter
-        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Iron", 5).Add("Coal", 1).End(), new ItemList("Iron", 5).End()));
-        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Copper", 5).Add("Coal", 1).End(), new ItemList("Copper", 5).End()));
-        AddRecipe(new Recipe("Smelter", 10, new ItemList("Raw Gold", 5).Add("Coal", 1).End(), new ItemList("Gold", 5).End()));
+        AddRecipe(new Recipe("Coal Smelted Iron", "Smelter", 10, new ItemList("Raw Iron", 5).Add("Coal", 1).End(), new ItemList("Iron", 5).End()));
+        AddRecipe(new Recipe("Coal Smelted Copper", "Smelter", 10, new ItemList("Raw Copper", 5).Add("Coal", 1).End(), new ItemList("Copper", 5).End()));
+        AddRecipe(new Recipe("Coal Smelted Gold", "Smelter", 10, new ItemList("Raw Gold", 5).Add("Coal", 1).End(), new ItemList("Gold", 5).End()));
         // Electric Smelter
         AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Iron", 5).End(), new ItemList("Iron", 5).End()));
         AddRecipe(new Recipe("Electric Smelter", 10, new ItemList("Raw Copper", 5).End(), new ItemList("Copper", 5).End()));
@@ -115,6 +115,8 @@ public class AllGameData : ScriptableObject
 
     // recipes
     public static Dictionary<int, List<Recipe>> recipes = new();
+    public static Dictionary<string, Recipe> recipeNames = new();
+
 
     // factories
     public static List<int> factoryIDsList = new();
@@ -142,6 +144,7 @@ public class AllGameData : ScriptableObject
             recipes.Add(recipe.factoryID, new List<Recipe>());
         }
         recipes[recipe.factoryID].Add(recipe);
+        recipeNames.Add(recipe.name, recipe);
     }
 
     static void AddFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
