@@ -63,7 +63,7 @@ public class AllGameData : ScriptableObject
         AddFactory(23, "Foundry", "Combines Stuff", new ItemList().End());
         AddFactory(24, "Assembler", "Builds stuff", new ItemList().End());
         AddFactory(25, "Crusher", "Crushing you mom", new ItemList().End());
-        AddFactory(26, "Manufacture", "Builds the most complex stuff", new ItemList().End());
+        AddFactory(26, "Manufacturer", "Builds the most complex stuff", new ItemList().End());
         // Drills
         AddFactory(35, "Drill T1", "it dirl", new ItemList().End());
         AddFactory(36, "Drill T2", "it dirl", new ItemList().End());
@@ -102,10 +102,10 @@ public class AllGameData : ScriptableObject
         AddRecipe(new Recipe("Assembler", 40, new ItemList("Diamond Glass", 30).Add("Gold Flake", 50).End(), new ItemList("Fiber Optics", 5).End()));
         AddRecipe(new Recipe("Assembler", 150, new ItemList("Steel Casing", 5).Add("Copper Wire", 50).End(), new ItemList("Microcontroller", 1).End()));
         AddRecipe(new Recipe("Assembler", 200, new ItemList("Wire Coil", 20).Add("Steel Frame", 10).End(), new ItemList("Magnet", 5).End()));
-        // Manufacture
-        AddRecipe(new Recipe("Manufacture", 200, new ItemList("Microcontroller", 20).Add("Fiber Optics", 40).Add("Steel Casing", 10).Add("Fan", 8).End(), new ItemList("Computer", 1).End()));
-        AddRecipe(new Recipe("Manufacture", 100, new ItemList("Microcontroller", 10).Add("Magnet", 10).Add("Steel Casing", 4).Add("Motor", 20).End(), new ItemList("High Precision Motor", 1).End()));
-        AddRecipe(new Recipe("Manufacture", 200, new ItemList("Magnet", 30).Add("Fiber Optics", 40).Add("Steel Casing", 12).Add("Diamond Glass", 80).End(), new ItemList("Laser", 4).End()));
+        // Manufacturer
+        AddRecipe(new Recipe("Manufacturer", 200, new ItemList("Microcontroller", 20).Add("Fiber Optics", 40).Add("Steel Casing", 10).Add("Fan", 8).End(), new ItemList("Computer", 1).End()));
+        AddRecipe(new Recipe("Manufacturer", 100, new ItemList("Microcontroller", 10).Add("Magnet", 10).Add("Steel Casing", 4).Add("Motor", 20).End(), new ItemList("High Precision Motor", 1).End()));
+        AddRecipe(new Recipe("Manufacturer", 200, new ItemList("Magnet", 30).Add("Fiber Optics", 40).Add("Steel Casing", 12).Add("Diamond Glass", 80).End(), new ItemList("Laser", 4).End()));
     }
 
 
