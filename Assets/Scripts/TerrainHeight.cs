@@ -2,59 +2,41 @@ using UnityEngine;
 
 public class TerrainHeight : MonoBehaviour
 {
-    public int width;
-    public int height;
+    public int resolution;
     public float scale = 1f;
     public float noiseIntensity = 0.1f;
 
-    float offsetX;
-    float offsetY;
-
-
-    void Awake()
-    {
-        offsetX = Random.Range(0f, 99999f);
-        offsetY = Random.Range(0f, 99999f);
-    }
 
     void Start()
     {
-
-        Terrain terrain = GetComponent<Terrain>();
-
-
-        TerrainData terrainData = new TerrainData();
-
-
-        terrainData.heightmapResolution = width;
-        terrainData.size = new Vector3(width, 600, height);
-
-
+        TerrainData terrainData = new()
+        {
+            heightmapResolution = resolution,
+            size = new Vector3(transform.localScale[0], 600, transform.localScale[0])
+        };
+        // resolution = (int) transform.localScale[0] / terrainData.heightmapResolution;
         float[,] heights = GenerateHeights();
         terrainData.SetHeights(0, 0, heights);
 
-
-        terrain.terrainData = terrainData;
+        GetComponent<Terrain>().terrainData = terrainData;
+        GetComponent<TerrainCollider>().terrainData = terrainData;
     }
 
-    private float[,] GenerateHeights()
+    float[,] GenerateHeights()
     {
-        float[,] heights = new float[width, height];
-
-        for (int x = 0; x < width; x++)
+        float offsetX = Random.Range(0f, 99999f);
+        float offsetY = Random.Range(0f, 99999f);
+        float[,] heights = new float[resolution, resolution];
+        for (int x = 0; x < resolution; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < resolution; y++)
             {
-
-                float xCoord = (float)x / width * scale + offsetX;
-                float yCoord = (float)y / height * scale + offsetY;
-                float noiseValue = Mathf.PerlinNoise(xCoord, yCoord);
-
-
-                heights[x, y] = noiseValue * noiseIntensity;
+                heights[x, y] = Mathf.PerlinNoise(
+                    (float)x / resolution * scale + offsetX,
+                    (float)y / resolution * scale + offsetY
+                    ) * noiseIntensity;
             }
         }
-
         return heights;
     }
 }

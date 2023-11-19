@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 459553547957615040}
   - component: {fileID: 2459908231553719136}
   - component: {fileID: 2044822575747621644}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wind Turbine T2
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2044822575747621644
 MonoBehaviour:
@@ -130,9 +130,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3729854170099401652, guid: 3e46575d09e544e55959d4caeb3f44dc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 570308950741440857, guid: 3e46575d09e544e55959d4caeb3f44dc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e46575d09e544e55959d4caeb3f44dc, type: 3}
       propertyPath: m_Name
       value: WindTurbineModel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e46575d09e544e55959d4caeb3f44dc, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

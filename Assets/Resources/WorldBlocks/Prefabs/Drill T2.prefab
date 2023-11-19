@@ -143,9 +143,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ddc6fbe7a786e4e5db6fc5c1643c5b2c, type: 2}
+    - target: {fileID: -3729854170099401652, guid: 152aceb5f8ca94e72922f79bb27502a0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 152aceb5f8ca94e72922f79bb27502a0, type: 3}
       propertyPath: m_Name
       value: DrillModel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 152aceb5f8ca94e72922f79bb27502a0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906977678944015276, guid: 152aceb5f8ca94e72922f79bb27502a0, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

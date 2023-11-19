@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 459553547957615040}
   - component: {fileID: 1539028926736020127}
   - component: {fileID: -4100982797732706927}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wind Turbine T1
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 577b21b7b8b9542e4ae8a970c1ea8778, type: 3}
       propertyPath: m_Name
       value: WindTurbineModel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 577b21b7b8b9542e4ae8a970c1ea8778, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845601978818647475, guid: 577b21b7b8b9542e4ae8a970c1ea8778, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
