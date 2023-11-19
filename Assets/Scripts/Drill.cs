@@ -9,7 +9,7 @@ public class Drill : InventoryContainingFactory
     public int inventorySize;
     [HideInInspector] public float nodeMultiplier;
     [HideInInspector] public ItemContainer outputItems;
-    Stopwatch stopwatch = new();
+    readonly Stopwatch stopwatch = new();
     float itemsGenerated = 0;
 
     public override void SetupFactory()
@@ -28,6 +28,11 @@ public class Drill : InventoryContainingFactory
         itemID = 0;
         nodeMultiplier = 0;
         stopwatch.Start();
+    }
+
+    public override ItemContainer GetExtraBlockCost()
+    {
+        return outputItems;
     }
 
     public override ItemData Get(int count)

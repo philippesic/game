@@ -10,45 +10,44 @@ public class AllGameData : ScriptableObject
     {
         // ---- Items ----
         // Main
-        AddItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.");
-        AddItem(2, "Raw Copper", "Unprocessed copper, in its natural state.");
-        AddItem(3, "Coal", "A fundamental source of energy, essential for various processes.");
-        AddItem(4, "Uranium", "Radioactive element with unique properties.");
-        AddItem(5, "Banana", "A delicious and nutritious fruit.");
-        AddItem(6, "Raw Gold", "Unprocessed gold, waiting to be refined and utilized.");
-        AddItem(7, "Sulfur", "A vital element with diverse industrial applications.");
-        AddItem(8, "Diamond", "A precious and exceptionally hard gemstone.");
+        AddItem(1, "Raw Iron", "Unrefined iron, awaiting transformation.", 200);
+        AddItem(2, "Raw Copper", "Unprocessed copper, in its natural state.", 200);
+        AddItem(3, "Coal", "A fundamental source of energy, essential for various processes.", 200);
+        AddItem(4, "Uranium", "Radioactive element with unique properties.", 200);
+        AddItem(5, "Banana", "A delicious and nutritious fruit.", 50);
+        AddItem(6, "Raw Gold", "Unprocessed gold, waiting to be refined and utilized.", 200);
+        AddItem(7, "Sulfur", "A vital element with diverse industrial applications.", 200);
+        AddItem(8, "Diamond", "A precious and exceptionally hard gemstone.", 200);
         // Basic
-        AddItem(10, "Iron", "Iron, ready for various applications.");
-        AddItem(11, "Copper", "Copper, suitable for various uses.");
-        AddItem(12, "Gold", "Gold, prepared for various high-value applications.");
-        AddItem(13, "Steel", "Strong and versatile steel material for industrial applications.");
-        AddItem(14, "Iron Rod", "Core component for machinery and automation systems.");
-        AddItem(15, "Iron Plate", "Flat iron sheet, commonly used in fabrication.");
-        AddItem(16, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.");
-        AddItem(17, "Steel Frame", "Steel Frame, ideal for various crafting Endeavors.");
-        AddItem(28, "Copper Wire", "Copeer wire, ideal for various crafting Endeavors.");
-        AddItem(29, "Wire Coil", "Wire Coil, ideal for various crafting Endeavors.");
-        AddItem(20, "Steel Casing", "Steel Casing, ideal for various crafting Endeavors.");
-        AddItem(21, "Propeller", "Propeller, ideal for various crafting Endeavors.");
+        AddItem(10, "Iron", "Iron, ready for various applications.", 200);
+        AddItem(11, "Copper", "Copper, suitable for various uses.", 200);
+        AddItem(12, "Gold", "Gold, prepared for various high-value applications.", 200);
+        AddItem(13, "Steel", "Strong and versatile steel material for industrial applications.", 200);
+        AddItem(14, "Iron Rod", "Core component for machinery and automation systems.", 400);
+        AddItem(15, "Iron Plate", "Flat iron sheet, commonly used in fabrication.", 400);
+        AddItem(16, "Steel Plate", "Sturdy steel sheet, essential for heavy-duty projects.", 400);
+        AddItem(17, "Steel Frame", "Steel Frame, ideal for various crafting Endeavors.", 50);
+        AddItem(28, "Copper Wire", "Copeer wire, ideal for various crafting Endeavors.", 500);
+        AddItem(29, "Wire Coil", "Wire Coil, ideal for various crafting Endeavors.", 100);
+        AddItem(20, "Steel Casing", "Steel Casing, ideal for various crafting Endeavors.", 100);
+        AddItem(21, "Propeller", "Propeller, ideal for various crafting Endeavors.", 50);
         // Advanced
-        AddItem(30, "Gold Flake", "Gold Flake, ideal for various crafting Endeavors.");
-        AddItem(31, "Diamond Dust", "Core component for machinery and automation systems.");
-        AddItem(32, "Diamond Glass", "Transparent material used for various constructions.");
-        AddItem(33, "Motor", "Core component for machinery and automation systems.");
-        AddItem(34, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.");
-        AddItem(35, "Fan", "Mechanical device for generating airflow and cooling.");
-        AddItem(36, "Fiber Optics", "Super fast wire");
-        AddItem(37, "Magnet", "Magnetic element with various industrial and scientific uses.");
+        AddItem(30, "Gold Flake", "Gold Flake, ideal for various crafting Endeavors.", 500);
+        AddItem(31, "Diamond Dust", "Core component for machinery and automation systems.", 500);
+        AddItem(32, "Diamond Glass", "Transparent material used for various constructions.", 200);
+        AddItem(33, "Motor", "Core component for machinery and automation systems.", 100);
+        AddItem(34, "Microcontroller", "Miniaturized computing unit for controlling intricate systems.", 50);
+        AddItem(35, "Fan", "Mechanical device for generating airflow and cooling.", 100);
+        AddItem(36, "Fiber Optics", "Super fast wire", 400);
+        AddItem(37, "Magnet", "Magnetic element with various industrial and scientific uses.", 200);
         // Uber Advanced
-        AddItem(40, "Computer", "Advanced computing system for processing complex tasks.");
-        AddItem(41, "High Precision Motor", "Specialized motor for precision-critical applications.");
-        AddItem(42, "Laser", "High-intensity beam emitter for precision applications.");
+        AddItem(40, "Computer", "Advanced computing system for processing complex tasks.", 100);
+        AddItem(41, "High Precision Motor", "Specialized motor for precision-critical applications.", 100);
+        AddItem(42, "Laser", "High-intensity beam emitter for precision applications.", 100);
 
         // ---- factories ----
         // Non Factory Blocks
         AddFactory(0, "1x1x1 block", "Basic 1x1x1 block for building", new ItemList("Iron Plate", 6).End());
-        AddFactory(0, "Container", "Basic container for storing items", new ItemList().End());
         // Conveyors
         AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for moving your stupi items", new ItemList().End());
         AddFactory(4, "Claw Factory", "it grab you", new ItemList().End());
@@ -69,6 +68,9 @@ public class AllGameData : ScriptableObject
         AddFactory(35, "Drill T1", "it dirl", new ItemList().End());
         AddFactory(36, "Drill T2", "it dirl", new ItemList().End());
         AddFactory(37, "Drill T3", "it dirl", new ItemList().End());
+        // Containers
+        AddFactory(40, "Container", "Basic container for storing items", new ItemList().End());
+
 
         // ---- Recipes ----
         // Smelter
@@ -111,6 +113,7 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, string> itemNames = new();
     public static Dictionary<string, int> itemIDs = new();
     public static Dictionary<int, string> itemDescriptions = new();
+    public static Dictionary<int, int> itemStackSizes = new();
     public static Dictionary<int, Sprite> itemIcons = new();
     public static Dictionary<int, GameObject> itemPrefabs = new();
 
@@ -129,11 +132,12 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, List<ItemIDAndCount>> factoryPlacementCosts = new();
 
     // internal stuff
-    static void AddItem(int id, string name, string description)
+    static void AddItem(int id, string name, string description, int stackSize = 100)
     {
         itemNames.Add(id, name);
         itemIDs.Add(name, id);
         itemDescriptions.Add(id, description);
+        itemStackSizes.Add(id, stackSize);
         itemIcons.Add(id, Resources.Load<Sprite>("Items/Icons/" + itemNames[id]));
         itemPrefabs.Add(id, Resources.Load<GameObject>("Items/Prefabs/" + itemNames[id]));
     }

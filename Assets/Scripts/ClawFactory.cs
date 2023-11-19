@@ -84,7 +84,7 @@ public class ClawFactory : ItemObjectContainingFactory
                 else
                 {
                     InventoryContainingFactory inventoryFactory = neighborFactorie.GetBlockFromType<InventoryContainingFactory>();
-                    if (inventoryFactory != null && inventoryFactory.HasRoomToPush())
+                    if (inventoryFactory != null && inventoryFactory.HasRoomToPush(heldItem.item))
                     {
                         inventoryFactory.Give(RemoveItem(heldItem).item.Pop());
                         shouldMoveItems = false;

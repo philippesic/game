@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.AI;
 
 public class ItemContainer : ScriptableObject
 {
-    public static ItemContainer New()
+    public static ItemContainer New(int slotCount = -1)
     {
-        return CreateInstance<ItemContainer>();
+        ItemContainer itemContainer =  CreateInstance<ItemContainer>();
+        itemContainer.slotCount = slotCount;
+        return itemContainer;
     }
 
     public class ItemData
@@ -20,13 +23,16 @@ public class ItemContainer : ScriptableObject
             this.id = id;
             this.count = count;
         }
+
+        public ItemData() { }
     }
 
-    public List<ItemData> inventoryItems;
+    public List<ItemData> inventoryItems = new();
+    public int slotCount = -1;
 
-    public void Awake()
+    public ItemContainer Copy()
     {
-        inventoryItems = new List<ItemData>();
+        return New(slotCount).Add(this);
     }
 
     public int Count()
@@ -80,57 +86,48 @@ public class ItemContainer : ScriptableObject
         return counts;
     }
 
+    // methonds to add items
     public ItemContainer Add(Item item)
     {
-        Add(item.id, item.count);
-        return this;
+        return Add(item, out _);
+    }
+    
+    public ItemContainer Add(Item item, out ItemContainer leftovers)
+    {
+        return Add(item.id, item.count, out leftovers);
     }
 
     public ItemContainer Add(int id, int count)
     {
-        foreach (ItemData invItem in inventoryItems)
-        {
-            if (invItem.id == id)
-            {
-                invItem.count += count;
-                ContentChange();
-                return this;
-            }
-        }
-
-        inventoryItems.Add(new ItemData(id, count));
-        ContentChange();
-        return this;
+        return Add(id, count, out _);
     }
 
-    public ItemContainer Add(List<int> ids, List<int> counts)
+    public ItemContainer Add(int id, int count, out ItemContainer leftovers)
     {
-        foreach (ItemData invItem in inventoryItems)
-        {
-            if (ids.Contains(invItem.id))
-            {
-                int index = ids.FindIndex(id => id == invItem.id);
-                invItem.count += counts[index];
-                ids.RemoveAt(index);
-                counts.RemoveAt(index);
-            }
-        }
-        for (int i = 0; i < ids.Count; i++)
-        {
-            inventoryItems.Add(new ItemData(ids[i], counts[i]));
-        }
-        ContentChange();
-        return this;
+        return Add(new List<int> { id }, new List<int> { count }, out leftovers);
     }
 
     public ItemContainer Add(ItemContainer container)
     {
-        if (container == null) { return this; }
-        Add(container.GetIDs(), container.GetCounts());
-        return this;
+        return Add(container, out _);
+    }
+
+    public ItemContainer Add(ItemContainer container, out ItemContainer leftovers)
+    {
+        if (container == null)
+        {
+            leftovers = New();
+            return this;
+        }
+        return Add(container.GetIDs(), container.GetCounts(), out leftovers);
     }
 
     public ItemContainer Add(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
+    {
+        return Add(itemIDAndCounts, out _); 
+    }
+
+    public ItemContainer Add(List<AllGameData.ItemIDAndCount> itemIDAndCounts, out ItemContainer leftovers)
     {
         List<int> ids = new();
         List<int> counts = new();
@@ -139,86 +136,126 @@ public class ItemContainer : ScriptableObject
             ids.Add(item.id);
             counts.Add(item.count);
         }
-        Add(ids, counts);
-        return this;
+        return Add(ids, counts, out leftovers);
     }
 
-    public void Remove(int id, int count)
+    public ItemContainer Add(List<int> ids, List<int> counts)
     {
-        foreach (ItemData invItem in inventoryItems)
+        return Add(ids, counts, out _);
+    }
+
+    public ItemContainer Add(List<int> ids, List<int> counts, out ItemContainer leftovers)
+    {
+        leftovers = GetLeftOvers(ids, counts);
+        if (leftovers.Count() > 0)
         {
-            if (invItem.id == id)
-            {
-                invItem.count -= count;
-                ContentChange();
-                return;
-            }
+            ItemContainer itemsToAdd = leftovers.GetMissing(ids, counts);
+            ids = itemsToAdd.GetIDs();
+            counts = itemsToAdd.GetCounts();
         }
-    }
-
-    public void Remove(List<int> ids, List<int> counts)
-    {
-        foreach (ItemData invItem in inventoryItems)
+        for (int i = 0; i < ids.Count; i++)
         {
-            if (ids.Contains(invItem.id))
+            int id = ids[i];
+            int count = counts[i];
+            if (HasItemType(id, out ItemData itemData, true))
             {
-                invItem.count -= counts[ids.FindIndex(id => id == invItem.id)];
+                if (AllGameData.itemStackSizes[id] - itemData.count > count)
+                {
+                    itemData.count += count;
+                }
+                else
+                {
+                    ids.Insert(i + 1, id);
+                    counts.Insert(i + 1, count - (AllGameData.itemStackSizes[id] - itemData.count));
+                    itemData.count = AllGameData.itemStackSizes[id];
+                }
+            }
+            else
+            {
+                while (count > AllGameData.itemStackSizes[id])
+                {
+                    inventoryItems.Add(new ItemData(id, AllGameData.itemStackSizes[id]));
+                    count -= AllGameData.itemStackSizes[id];
+                }
+                inventoryItems.Add(new ItemData(id, count));
             }
         }
         ContentChange();
+        return this;
     }
 
-    public void Remove(ItemContainer container)
+    // methonds to remove items
+    public ItemContainer Remove(Item item)
     {
-        Remove(container.GetIDs(), container.GetCounts());
+        return Remove(item.id, item.count);
     }
 
-    public void Remove(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
+    public ItemContainer Remove(int id, int count)
     {
-        List<int> ids = new List<int>();
-        List<int> counts = new List<int>();
+        return Remove(new List<int> { id }, new List<int> { count });
+    }
+
+    public ItemContainer Remove(ItemContainer container)
+    {
+        return Remove(container.GetIDs(), container.GetCounts());
+    }
+
+    public ItemContainer Remove(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
+    {
+        List<int> ids = new();
+        List<int> counts = new();
         foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);
         }
-        Remove(ids, counts);
+        return Remove(ids, counts);
     }
 
-    public int GetMissing(int id, int count)
-    {
-        foreach (ItemData invItem in inventoryItems)
-        {
-            if (invItem.id == id)
-            {
-                return Math.Max(0, count - invItem.count);
-            }
-        }
-        return count;
-    }
-
-    public List<int> GetMissing(List<int> ids, List<int> counts)
+    public ItemContainer Remove(List<int> ids, List<int> counts)
     {
         foreach (ItemData invItem in inventoryItems)
         {
             if (ids.Contains(invItem.id))
             {
-                int i = ids.FindIndex(id => id == invItem.id);
-                counts[i] = Math.Max(0, counts[i] - invItem.count);
+                int index = ids.FindIndex(id => id == invItem.id);
+                if (counts[index] > invItem.count)
+                {
+                    counts[index] -= invItem.count;
+                    invItem.count = 0;
+                }
+                else
+                {
+                    invItem.count -= counts[index];
+                    ids.RemoveAt(index);
+                    counts.RemoveAt(index);
+                }
             }
         }
-        return counts;
+        ContentChange();
+        return this;
     }
 
-    public List<int> GetMissing(ItemContainer container)
+    // methonds to find if inventory is missing items
+    public ItemContainer GetMissing(Item item)
+    {
+        return GetMissing(item.id, item.count);
+    }
+
+    public ItemContainer GetMissing(int id, int count)
+    {
+        return GetMissing(new List<int> { id }, new List<int> { count });
+    }
+
+    public ItemContainer GetMissing(ItemContainer container)
     {
         return GetMissing(container.GetIDs(), container.GetCounts());
     }
 
-    public List<int> GetMissing(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
+    public ItemContainer GetMissing(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
-        List<int> ids = new List<int>();
-        List<int> counts = new List<int>();
+        List<int> ids = new();
+        List<int> counts = new();
         foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
@@ -227,19 +264,21 @@ public class ItemContainer : ScriptableObject
         return GetMissing(ids, counts);
     }
 
+    public ItemContainer GetMissing(List<int> ids, List<int> counts)
+    {
+        return New().Add(ids, counts).Remove(this);
+    }
+
+    // methonds to find if inventory has items
+
     public bool Has(int id, int count)
     {
-        return GetMissing(id, count) == 0;
+        return Has(new List<int> { id }, new List<int> { count });
     }
 
     public bool Has(AllGameData.ItemIDAndCount itemIDAndCount)
     {
-        return GetMissing(itemIDAndCount.id, itemIDAndCount.count) == 0;
-    }
-
-    public bool Has(List<int> ids, List<int> counts)
-    {
-        return GetMissing(ids, counts).All(x => x == 0);
+        return Has(itemIDAndCount.id, itemIDAndCount.count);
     }
 
     public bool Has(ItemContainer container)
@@ -249,14 +288,107 @@ public class ItemContainer : ScriptableObject
 
     public bool Has(List<AllGameData.ItemIDAndCount> itemIDAndCounts)
     {
-        List<int> ids = new List<int>();
-        List<int> counts = new List<int>();
+        List<int> ids = new();
+        List<int> counts = new();
         foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
         {
             ids.Add(item.id);
             counts.Add(item.count);
         }
         return Has(ids, counts);
+    }
+
+    public bool Has(List<int> ids, List<int> counts)
+    {
+        return GetMissing(ids, counts).Count() == 0;
+    }
+
+    public ItemContainer GetLeftOvers(int id, int count, int emptySlots = -1)
+    {
+        return GetLeftOvers(new List<int> { id }, new List<int> { count }, emptySlots);
+    }
+
+    public ItemContainer GetLeftOvers(AllGameData.ItemIDAndCount itemIDAndCount, int emptySlots = -1)
+    {
+        return GetLeftOvers(itemIDAndCount.id, itemIDAndCount.count, emptySlots);
+    }
+
+    public ItemContainer GetLeftOvers(ItemContainer container, int emptySlots = -1)
+    {
+        return GetLeftOvers(container.GetIDs(), container.GetCounts(), emptySlots);
+    }
+
+    public ItemContainer GetLeftOvers(List<AllGameData.ItemIDAndCount> itemIDAndCounts, int emptySlots = -1)
+    {
+        List<int> ids = new();
+        List<int> counts = new();
+        foreach (AllGameData.ItemIDAndCount item in itemIDAndCounts)
+        {
+            ids.Add(item.id);
+            counts.Add(item.count);
+        }
+        return GetLeftOvers(ids, counts, emptySlots);
+    }
+
+    public ItemContainer GetLeftOvers(List<int> ids, List<int> counts, int emptySlots = -1)
+    {
+        if (slotCount == -1) { return New(); }
+        ItemContainer leftOversContainer = New();
+        if (emptySlots == -1)
+        {
+            emptySlots = slotCount - inventoryItems.Count();
+        }
+        for (int i = 0; i < ids.Count(); i++)
+        {
+            int id = ids[i];
+            int count = counts[i];
+            if (HasItemType(id, out ItemData itemData, true))
+            {
+                int leftOvers = count - (AllGameData.itemStackSizes[id] - itemData.count);
+                if (leftOvers > 0)
+                {
+                    leftOversContainer.Add(GetLeftOvers(id, leftOvers, out emptySlots, emptySlots));
+                }
+            }
+            else
+            {
+                if (emptySlots > 0)
+                {
+                    emptySlots -= 1;
+                    if (count > AllGameData.itemStackSizes[id])
+                    {
+                        count -= AllGameData.itemStackSizes[id];
+                        leftOversContainer.Add(GetLeftOvers(id, count, out emptySlots, emptySlots));
+                    }
+                }
+                else
+                {
+                    leftOversContainer.Add(id, count);
+                }
+            }
+        }
+        return leftOversContainer;
+    }
+
+    public ItemContainer GetLeftOvers(int id, int count, out int newEmptySlots, int emptySlots)
+    {
+        ItemContainer items = GetLeftOvers(new List<int>() { id }, new List<int>() { count }, emptySlots);
+        newEmptySlots = emptySlots - (count - items.Count()) / AllGameData.itemStackSizes[id];
+        return items;
+    }
+
+    public bool HasItemType(int id, out ItemData itemData, bool skipFullStacks = false)
+    {
+        foreach (ItemData item in inventoryItems)
+        {
+            if (item.id == id && (item.count < AllGameData.itemStackSizes[id] || !skipFullStacks))
+            {
+                itemData = item;
+                return true;
+            }
+        }
+        itemData = null;
+        return false;
     }
 
     public void Empty()
@@ -267,7 +399,7 @@ public class ItemContainer : ScriptableObject
 
     public void ContentChange()
     {
-        List<ItemData> itemsToRemove = new List<ItemData>();
+        List<ItemData> itemsToRemove = new();
         foreach (ItemData invItem in inventoryItems)
         {
             if (invItem.count == 0)

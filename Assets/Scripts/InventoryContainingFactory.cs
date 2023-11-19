@@ -7,24 +7,41 @@ public class InventoryContainingFactory : Factory
         public ItemData(int id, int count) : base(id, count) { }
     }
 
-    public virtual bool HasRoomToPush(int count = 1)
+    public virtual bool HasRoomToPush(Item item)
     {
-        return count == 0;
+        return HasRoomToPush(item.id, item.count);
+    }
+     public virtual bool HasRoomToPush(int id, int count)
+    {
+        return HasRoomToPush(ItemContainer.New().Add(id, count));
+    }
+     public virtual bool HasRoomToPush(ItemData item)
+    {
+        return HasRoomToPush(ItemContainer.New().Add(item.id, item.count));
+    }
+     public virtual bool HasRoomToPush(ItemContainer items)
+    {
+        return items.Count() == 0;
     }
 
-    public void Give(Item item)
+    public ItemContainer Give(Item item)
     {
-        Give(item.id, item.count);
+        return Give(item.id, item.count);
     }
 
-    public void Give(int id, int count)
+    public ItemContainer Give(int id, int count)
     {
-        Give(new ItemData(id, count));
+        return Give(ItemContainer.New().Add(id, count));
     }
+
+    public ItemContainer Give(ItemData item)
+    {
+        return Give(ItemContainer.New().Add(item.id, item.count));
+    }
+
+    public virtual ItemContainer Give(ItemContainer items) { return ItemContainer.New(); }
 
     public virtual float GetProssesing0To1() {return 0;}
-
-    public virtual void Give(ItemData item) { }
 
     public virtual ItemData Get(int count)
     {
