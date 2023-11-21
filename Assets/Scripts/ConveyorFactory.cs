@@ -20,12 +20,13 @@ public class ConveyorFactory : ItemObjectContainingFactory
 
     public override void UpdateItemMovement()
     {
-        if (heldItem != null && heldItem.item.IsDestroyed()) { heldItem = null; }
-        heldItem?.item.UpdateMovement();
-        if (heldItem != null && (heldItem.item.transform.position - transform.position).magnitude > 3)
+        if (heldItem == null) { return; }
+        if (heldItem.item.IsDestroyed())
         {
-            heldItem.item.Pop();
+            heldItem = null;
+            return;
         }
+        heldItem.item.UpdateMovement();
     }
 
     public override ItemContainer GetExtraBlockCost() // destroys held items
@@ -39,21 +40,22 @@ public class ConveyorFactory : ItemObjectContainingFactory
         return heldItem == null;
     }
 
-    public override void Tick()
+    public override bool TryToMoveItem()
     {
-        if (heldItem == null)
+        if (shouldMoveItems && heldItem != null)
         {
-            shouldMoveItems = false;
-        }
-        else if (neighborFactories.ContainsKey("(0, 0, 1)"))
-        {
-            ItemObjectContainingFactory containingFactory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ItemObjectContainingFactory>();
-            if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
+            if (neighborFactories.ContainsKey("(0, 0, 1)"))
             {
-                shouldMoveItems = false;
-                containingFactory.Give(heldItem);
-                RemoveItem(heldItem);
+                ItemObjectContainingFactory containingFactory = neighborFactories["(0, 0, 1)"].GetBlockFromType<ItemObjectContainingFactory>();
+                if (shouldMoveItems && containingFactory != null && containingFactory.HasRoomToPush())
+                {
+                    shouldMoveItems = false;
+                    containingFactory.Give(heldItem);
+                    RemoveItem(heldItem);
+                    return true;
+                }
             }
         }
+        return false;
     }
 }

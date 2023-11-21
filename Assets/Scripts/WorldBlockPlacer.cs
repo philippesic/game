@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -8,9 +9,8 @@ public class WorldBlockPlacer : MonoBehaviour
     [HideInInspector] public int placingBlockID;
     [HideInInspector] public bool isPlacingOnValid = false;
     [HideInInspector] public bool keepPlace = false;
-    private int blockRotation = 1;
-
-    public GameObject shop;
+    int blockRotation = 1;
+    List<int> rotations = new() { 1, 2, 3, 4, 5, 6 };
 
     public void StartPlacement(int id, bool keepPlace = false)
     {
@@ -21,6 +21,8 @@ public class WorldBlockPlacer : MonoBehaviour
         {
             placingBlock.Destroy();
         }
+        rotations = AllGameData.factoryRotations.ContainsKey(id) ? AllGameData.factoryRotations[id] : new() { 1, 2, 3, 4, 5, 6 };
+        if (blockRotation >= rotations.Count) { blockRotation = 0; }
         placingBlock = CreateShadowObject(id);
         placingBlockID = id;
     }
@@ -37,10 +39,7 @@ public class WorldBlockPlacer : MonoBehaviour
 
     private bool CheckPlacement(Vector3 pos, int rotation)
     {
-        return (
-            placingBlock.CanBePlaced() &&
-            Player.instance.inv.Has(AllGameData.factoryPlacementCosts[placingBlockID])
-        );
+        return placingBlock.CanBePlaced() && Player.instance.inv.Has(AllGameData.factoryPlacementCosts[placingBlockID]);
     }
 
     public bool Place()
@@ -48,10 +47,10 @@ public class WorldBlockPlacer : MonoBehaviour
         if (placingBlock != null)
         {
             Vector3 pos = WorldBlockContainer.VecToGrid(placingBlock.GetPos());
-            if (CheckPlacement(pos, blockRotation) && isPlacingOnValid)
+            if (CheckPlacement(pos, rotations[blockRotation]) && isPlacingOnValid)
             {
                 Player.instance.inv.Remove(AllGameData.factoryPlacementCosts[placingBlockID]);
-                WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, blockRotation);
+                WorldBlockContainer.instance.CreateBlock(placingBlockID, pos, rotations[blockRotation]);
                 if (keepPlace)
                 {
                     StartPlacement(placingBlockID, true);
@@ -99,12 +98,12 @@ public class WorldBlockPlacer : MonoBehaviour
                     point += hitInfo.normal * 0.999f;
                 }
                 isPlacingOnValid = true;
-                placingBlock.SetPos(point, blockRotation, true);
+                placingBlock.SetPos(point, rotations[blockRotation], true);
                 return;
             }
         }
         isPlacingOnValid = false;
-        placingBlock.SetPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), blockRotation);
+        placingBlock.SetPos(gameObject.transform.position + gameObject.transform.rotation * new Vector3(0, 0, 10), rotations[blockRotation]);
     }
 
     public void Update()
@@ -128,12 +127,12 @@ public class WorldBlockPlacer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             blockRotation -= 1;
-            if (blockRotation < 1) { blockRotation = 6; }
+            if (blockRotation < 0) { blockRotation = rotations.Count-1; }
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
             blockRotation += 1;
-            if (blockRotation > 6) { blockRotation = 1; }
+            if (blockRotation >= rotations.Count) { blockRotation = 0; }
         }
     }
 }

@@ -58,7 +58,7 @@ public class ItemProssesingFactory : InventoryContainingFactory
         if (currentRecipe != null && input.Has(currentRecipe.itemsCost))
         {
             prossesingTicks += 1;
-            if (prossesingTicks >= currentRecipe.ticks)
+            if (prossesingTicks >= currentRecipe.ticks * UpdateTickManager.instance.tickSpeedIncreaseScale)
             {
                 input.Remove(currentRecipe.itemsCost);
                 output.Add(currentRecipe.itemsMade);
@@ -75,6 +75,6 @@ public class ItemProssesingFactory : InventoryContainingFactory
 
     public override float GetProssesing0To1()
     {
-        return currentRecipe == null ? -1 : prossesingTicks / currentRecipe.ticks;
+        return currentRecipe == null ? -1 : prossesingTicks / UpdateTickManager.instance.tickSpeedIncreaseScale / currentRecipe.ticks;
     }
 }

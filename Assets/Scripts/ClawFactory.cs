@@ -27,16 +27,17 @@ public class ClawFactory : ItemObjectContainingFactory
         return ItemContainer.New().Add(heldItem.item.Pop());
     }
 
-    public override void Tick()
+    public override bool TryToMoveItem()
     {
         if (heldItem == null)
         {
-            TryGrab();
+            return TryGrab();
         }
         else
         {
-            TryPush();
+            return TryPush();
         }
+
     }
 
     protected override void MannageGivenItem(ItemGameObjectContainer item)
@@ -46,12 +47,13 @@ public class ClawFactory : ItemObjectContainingFactory
 
     public override void UpdateItemMovement()
     {
-        if (heldItem != null && heldItem.item.IsDestroyed()) { heldItem = null; }
-        heldItem?.item.UpdateMovement();
-        if (heldItem != null && (heldItem.item.transform.position - transform.position).magnitude > 3)
+        if (heldItem == null) { return; }
+        if (heldItem.item.IsDestroyed())
         {
-            heldItem.item.Pop();
+            heldItem = null;
+            return;
         }
+        heldItem.item.UpdateMovement();
     }
 
     public override Vector3 GetInputPos()
@@ -61,66 +63,41 @@ public class ClawFactory : ItemObjectContainingFactory
 
     public override Vector3 GetOutputPos()
     {
-        return transform.position + transform.rotation * new Vector3(0, 0, 1);
+        return transform.position /*+ transform.rotation * new Vector3(0, 0, 1)*/;
     }
 
-    public void TryPush()
+    public bool TryPush()
     {
-        if (heldItem.item.isMoving)
-        {
-            shouldMoveItems = false;
-        }
         if (shouldMoveItems)
         {
             if (neighborFactories.ContainsKey("(0, 0, 1)"))
             {
                 Factory neighborFactorie = neighborFactories["(0, 0, 1)"];
-                ConveyorFactory conveyorFactory = neighborFactorie.GetBlockFromType<ConveyorFactory>();
-                if (conveyorFactory != null && conveyorFactory.HasRoomToPush())
+                if (neighborFactorie.GetBlockFromType(out ConveyorFactory conveyorFactory) && conveyorFactory.HasRoomToPush())
                 {
                     conveyorFactory.Give(RemoveItem(heldItem));
                     shouldMoveItems = false;
+                    return true;
                 }
                 else
                 {
-                    InventoryContainingFactory inventoryFactory = neighborFactorie.GetBlockFromType<InventoryContainingFactory>();
-                    if (inventoryFactory != null && inventoryFactory.HasRoomToPush(heldItem.item))
+                    if (neighborFactorie.GetBlockFromType(out InventoryContainingFactory inventoryFactory) && inventoryFactory.HasRoomToPush(heldItem.item))
                     {
                         inventoryFactory.Give(RemoveItem(heldItem).item.Pop());
                         shouldMoveItems = false;
-                    }
-                    else
-                    {
-                        Factory block = neighborFactorie.GetBlockFromType<Factory>();
-                        if (block != null)
-                        {
-                            shouldMoveItems = false;
-                        }
+                        return true;
                     }
                 }
             }
-            // makes claws place items on the ground
-            // else
-            // {
-            //     Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(0.45f, 0.45f, 0.45f));
-            //     foreach (Collider collider in colliders)
-            //     {
-            //         if (collider.TryGetComponent(out Item _))
-            //         {
-            //             shouldMoveItems = false;
-            //             break;
-            //         }
-            //     }
-            //     if (shouldMoveItems)
-            //     {
-            //         RemoveItem(heldItem).displayObject.transform.position = transform.position + transform.forward;
-            //         shouldMoveItems = false;
-            //     }
-            // }
+            else
+            {
+                shouldMoveItems = false;
+            }
         }
+        return false;
     }
 
-    public void TryGrab()
+    public bool TryGrab()
     {
         if (shouldMoveItems)
         {
@@ -128,10 +105,11 @@ public class ClawFactory : ItemObjectContainingFactory
             {
                 Factory neighborFactorie = neighborFactories["(0, 0, -1)"];
                 ConveyorFactory conveyorFactory = neighborFactorie.GetBlockFromType<ConveyorFactory>();
-                if (conveyorFactory != null && conveyorFactory.heldItem != null && !conveyorFactory.heldItem.item.isMoving)
+                if (conveyorFactory != null && conveyorFactory.heldItem != null)
                 {
                     Give(conveyorFactory.RemoveItem(conveyorFactory.heldItem));
                     shouldMoveItems = false;
+                    return true;
                 }
                 else
                 {
@@ -140,6 +118,7 @@ public class ClawFactory : ItemObjectContainingFactory
                     {
                         Give(GetItemGameObjectContainer(inventoryFactory.Get(1)));
                         shouldMoveItems = false;
+                        return true;
                     }
                     else
                     {
@@ -153,21 +132,25 @@ public class ClawFactory : ItemObjectContainingFactory
             }
             else
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position - transform.forward, new Vector3(0.45f, 0.45f, 0.45f));
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.TryGetComponent(out Item item))
-                    {
-                        if (item.containingFactory == null)
-                        {
-                            Give(GetItemGameObjectContainer(collider.gameObject));
-                            shouldMoveItems = false;
-                            break;
-                        }
-                    }
-                }
-
+                shouldMoveItems = false;
             }
+            // else
+            // {
+            //     Collider[] colliders = Physics.OverlapBox(transform.position - transform.forward, new Vector3(0.45f, 0.45f, 0.45f));
+            //     foreach (Collider collider in colliders)
+            //     {
+            //         if (collider.TryGetComponent(out Item item))
+            //         {
+            //             if (item.containingFactory == null)
+            //             {
+            //                 Give(GetItemGameObjectContainer(collider.gameObject));
+            //                 shouldMoveItems = false;
+            //                 break;
+            //             }
+            //         }
+            //     }
+            // }
         }
+        return false;
     }
 }

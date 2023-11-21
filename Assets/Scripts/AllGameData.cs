@@ -52,24 +52,24 @@ public class AllGameData : ScriptableObject
         AddFactory(1, "1x1x1 Conveyor", "Basic 1x1x1 Conveyor for moving your stupi items", new ItemList().End());
         AddFactory(4, "Claw Factory", "it grab you", new ItemList().End());
         // Power
-        AddFactory(10, "Solar Array T1", "Sun power!", new ItemList().End());
-        AddFactory(11, "Solar Array T2", "Sun power!^2", new ItemList().End());
-        AddFactory(12, "Wind Turbine T1", "Wind power!", new ItemList().End());
-        AddFactory(13, "Wind Turbine T2", "Wind power!^2", new ItemList().End());
+        AddFactory(10, "Solar Array T1", "Sun power!", new ItemList().End(), "flat");
+        AddFactory(11, "Solar Array T2", "Sun power!^2", new ItemList().End(), "flat");
+        AddFactory(12, "Wind Turbine T1", "Wind power!", new ItemList().End(), "flat");
+        AddFactory(13, "Wind Turbine T2", "Wind power!^2", new ItemList().End(), "flat");
         // Machines
-        AddFactory(20, "Smelter", "Basic Smelter for starting your factory", new ItemList().End());
-        AddFactory(21, "Electric Smelter", "block", new ItemList().End());
-        AddFactory(22, "Caster", "block", new ItemList().End());
-        AddFactory(23, "Foundry", "Combines Stuff", new ItemList().End());
-        AddFactory(24, "Assembler", "Builds stuff", new ItemList().End());
-        AddFactory(25, "Crusher", "Crushing you mom", new ItemList().End());
-        AddFactory(26, "Manufacturer", "Builds the most complex stuff", new ItemList().End());
+        AddFactory(20, "Smelter", "Basic Smelter for starting your factory", new ItemList().End(), "flat");
+        AddFactory(21, "Electric Smelter", "block", new ItemList().End(), "flat");
+        AddFactory(22, "Caster", "block", new ItemList().End(), "flat");
+        AddFactory(23, "Foundry", "Combines Stuff", new ItemList().End(), "flat");
+        AddFactory(24, "Assembler", "Builds stuff", new ItemList().End(), "flat");
+        AddFactory(25, "Crusher", "Crushing you mom", new ItemList().End(), "flat");
+        AddFactory(26, "Manufacturer", "Builds the most complex stuff", new ItemList().End(), "flat");
         // Drills
-        AddFactory(35, "Drill T1", "it dirl", new ItemList().End());
-        AddFactory(36, "Drill T2", "it dirl", new ItemList().End());
-        AddFactory(37, "Drill T3", "it dirl", new ItemList().End());
+        AddFactory(35, "Drill T1", "it dirl", new ItemList().End(), "flat");
+        AddFactory(36, "Drill T2", "it dirl", new ItemList().End(), "flat");
+        AddFactory(37, "Drill T3", "it dirl", new ItemList().End(), "flat");
         // Containers
-        AddFactory(40, "Container", "Basic container for storing items", new ItemList().End());
+        AddFactory(40, "Container", "Basic container for storing items", new ItemList().End(), "flat");
 
 
         // ---- Recipes ----
@@ -130,6 +130,16 @@ public class AllGameData : ScriptableObject
     public static Dictionary<int, Sprite> factoryIcons = new();
     public static Dictionary<int, GameObject> factoryPrefabs = new();
     public static Dictionary<int, List<ItemIDAndCount>> factoryPlacementCosts = new();
+    public static Dictionary<int, List<int>> factoryRotations = new();
+
+    // other data
+    public static Dictionary<string, List<int>> rotationsTypes = new()
+    {
+        {"all",  new(){1, 2, 3, 4, 5, 6}},
+        {"none",  new(){1}},
+        {"flat",  new(){1, 2, 3, 4}},
+        {"up down",  new(){5, 6}},
+    };
 
     // internal stuff
     static void AddItem(int id, string name, string description, int stackSize = 100)
@@ -152,7 +162,7 @@ public class AllGameData : ScriptableObject
         recipeNames.Add(recipe.name, recipe);
     }
 
-    static void AddFactory(int id, string name, string description, List<ItemIDAndCount> placementCost)
+    static void AddFactory(int id, string name, string description, List<ItemIDAndCount> placementCost, string rotationType = "all", List<int> rotations = null)
     {
         factoryIDsList.Add(id);
         factoryNames.Add(id, name);
@@ -160,7 +170,15 @@ public class AllGameData : ScriptableObject
         factoryDescriptions.Add(id, description);
         factoryIcons.Add(id, Resources.Load<Sprite>("WorldBlocks/Icons/" + factoryNames[id]));
         factoryPrefabs.Add(id, Resources.Load<GameObject>("WorldBlocks/Prefabs/" + factoryNames[id]));
+        if (rotationType != null)
+        {
+            rotations = rotationsTypes[rotationType];
+        }
         factoryPlacementCosts.Add(id, placementCost);
+        if (rotations != null)
+        {
+            factoryRotations.Add(id, rotations);
+        }
     }
 
     // data types

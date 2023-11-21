@@ -56,7 +56,7 @@ public class WorldBlock : MonoBehaviour
     public List<Collider> GetCurrentBlockCollisions()
     {
         Collider[] collisions = Physics.OverlapBox(transform.position, new Vector3(0.49f, 0.49f, 0.49f));
-        List<Collider> blockCollisions = new List<Collider>();
+        List<Collider> blockCollisions = new();
         foreach (Collider collision in collisions)
         {
             if (collision.GetComponentInParent<WorldBlock>() != null || collision.GetComponentInParent<Player>() != null)
@@ -75,5 +75,11 @@ public class WorldBlock : MonoBehaviour
     public T GetBlockFromType<T>() where T : WorldBlock
     {
         return GetComponentInParent<T>();
+    }
+
+    public bool GetBlockFromType<T>(out T block) where T : WorldBlock
+    {
+        block = GetBlockFromType<T>();
+        return block != null;
     }
 }

@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.tvOS;
+using UnityEngine.UIElements;
 
 public class WorldBlockContainer : MonoBehaviour
 {
-    public List<WorldBlock> blockContainer = new List<WorldBlock>();
-    public List<Factory> factoryContainer = new List<Factory>();
+    public List<WorldBlock> blockContainer = new();
+    public List<Factory> factoryContainer = new();
+    public List<ItemObjectContainingFactory> objectContainingFactoryContainer = new();
     public static int unitsPerGrid = 1;
     public static WorldBlockContainer instance;
-    public static Dictionary<int, Vector3> intToRotation = new Dictionary<int, Vector3>();
+    public static Dictionary<int, Vector3> intToRotation = new();
 
     void Start()
     {
@@ -27,9 +30,13 @@ public class WorldBlockContainer : MonoBehaviour
         WorldBlock blockScript = block.GetComponent<WorldBlock>();
         blockScript.SetPos(pos, rotation, true);
         blockContainer.Add(blockScript);
-        if (block.GetComponent<Factory>())
+        if (blockScript.GetBlockFromType(out Factory factory))
         {
-            factoryContainer.Add(block.GetComponent<Factory>());
+            factoryContainer.Add(factory);
+            if (blockScript.GetBlockFromType(out ItemObjectContainingFactory objectContainingFactory))
+            {
+                objectContainingFactoryContainer.Add(objectContainingFactory);
+            }
         }
     }
 
@@ -39,12 +46,18 @@ public class WorldBlockContainer : MonoBehaviour
         {
             blockContainer.Remove(block);
         }
-        Factory factory = block.GetBlockFromType<Factory>();
-        if (factory != null)
+        if (block.GetBlockFromType(out Factory factory))
         {
             if (factoryContainer.Contains(factory))
             {
                 factoryContainer.Remove(factory);
+            }
+            if (block.GetBlockFromType(out ItemObjectContainingFactory objectContainingFactory))
+            {
+                if (objectContainingFactoryContainer.Contains(objectContainingFactory))
+                {
+                    objectContainingFactoryContainer.Remove(objectContainingFactory);
+                }
             }
         }
     }
@@ -55,10 +68,50 @@ public class WorldBlockContainer : MonoBehaviour
         {
             factory.PreTick();
         }
+        DoObjectContainingFactoryUpdate();
         foreach (Factory factory in factoryContainer)
         {
             factory.Tick();
         }
+        DoObjectContainingFactoryUpdate();
+    }
+
+    List<T> CopyList<T>(List<T> list)
+    {
+        List<T> newList = new();
+        foreach (T item in list)
+        {
+            newList.Add(item);
+        }
+        return newList;
+    }
+
+    int tick = 0;
+    public void DoObjectContainingFactoryUpdate()
+    {
+        tick++;
+        List<ItemObjectContainingFactory> factories = new();
+        foreach (ItemObjectContainingFactory factory in objectContainingFactoryContainer)
+        {
+            if (tick % (factory.ticksPerMove * UpdateTickManager.instance.tickSpeedIncreaseScale) == 0)
+            {
+                factories.Add(factory);
+            }
+        }
+        if (objectContainingFactoryContainer.Count == factories.Count) { tick = 0; }
+        bool didMove;
+        do
+        {
+            didMove = false;
+            foreach (ItemObjectContainingFactory factory in CopyList(factories))
+            {
+                didMove = factory.TryToMoveItem() || didMove;
+                if (factory.shouldMoveItems == false)
+                {
+                    factories.Remove(factory);
+                }
+            }
+        } while (didMove);
     }
 
     public void DoGeneralUpdate()
