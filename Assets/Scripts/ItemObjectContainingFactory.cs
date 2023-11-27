@@ -1,11 +1,45 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemObjectContainingFactory : Factory
 {
     public static Dictionary<Item, ItemGameObjectContainer> allItemGameObjectContainersDict = new();
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(ItemContainer.ItemData item)
+    {
+        if (item == null) { return null; }
+        return GetItemGameObjectContainer(item.id, item.count);
+    }
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(int id, int count)
+    {
+        return GetItemGameObjectContainer(Item.CreateItem(id, count));
+    }
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(GameObject itemObject, bool createNew = true)
+    {
+        if (itemObject == null) { return null; }
+        return GetItemGameObjectContainer(itemObject.GetComponent<Item>(), createNew);
+    }
+
+    public ItemGameObjectContainer GetItemGameObjectContainer(Item item, bool createNew = true)
+    {
+        if (item != null && allItemGameObjectContainersDict.ContainsKey(item))
+        {
+            return allItemGameObjectContainersDict[item];
+        }
+        if (createNew)
+        {
+            ItemGameObjectContainer container = new(item);
+            container.item.MoveTo(GetInputPos());
+            return container;
+        }
+        return null;
+    }
+
 
     public class ItemGameObjectContainer
     {
@@ -39,61 +73,37 @@ public class ItemObjectContainingFactory : Factory
         }
     }
 
-    [HideInInspector] public bool shouldMoveItems = true;
+    public bool shouldMoveItems = true;
+    public int ticksPerMove = 3;
 
     public void Give(ItemGameObjectContainer item)
     {
+        // check null and destroyed(
         if (item == null) { return; }
-        shouldMoveItems = false;
-        if (item.displayObject != null)
+        if (item.item == null) { return; }
+        if (item.item.IsDestroyed()) { return; }
+        // check if incomplete
+        if (item.displayObject == null)
         {
-            item.item.UpdateItemObjectContainingFactory(this);
-            item.item.MoveTo(GetOutputPos());
+            item = GetItemGameObjectContainer(item.item);
         }
+        // recive item
+        shouldMoveItems = false;
+        item.item.UpdateItemObjectContainingFactory(this);
+        item.item.MoveTo(GetOutputPos(), ticksPerMove);
         MannageGivenItem(item);
     }
 
     protected virtual void MannageGivenItem(ItemGameObjectContainer item) { }
 
-    public ItemGameObjectContainer GetItemGameObjectContainer(int id, int count)
-    {
-        return GetItemGameObjectContainer(Item.CreateItem(id, count));
-    }
-
-    public ItemGameObjectContainer GetItemGameObjectContainer(ItemContainer.ItemData item)
-    {
-        if (item == null) { return null; }
-        ItemGameObjectContainer container = GetItemGameObjectContainer(Item.CreateItem(item.id, item.count));
-        container.item.transform.position = GetInputPos();
-        return container;
-    }
-
     public virtual Vector3 GetInputPos()
     {
         return transform.position;
     }
-    
+
     public virtual Vector3 GetOutputPos()
     {
         return transform.position;
-    }
-
-    public ItemGameObjectContainer GetItemGameObjectContainer(Item item, bool createNew = true)
-    {
-        if (item != null && allItemGameObjectContainersDict.ContainsKey(item))
-        {
-            return allItemGameObjectContainersDict[item];
-        }
-        if (createNew)
-        {
-            return new ItemGameObjectContainer(item);
-        }
-        return null;
-    }
-
-    public ItemGameObjectContainer GetItemGameObjectContainer(GameObject itemObject, bool createNew = true)
-    {
-        return GetItemGameObjectContainer(itemObject.GetComponent<Item>(), createNew);
     }
 
     public void RemoveItem(Item item)
@@ -108,7 +118,7 @@ public class ItemObjectContainingFactory : Factory
         }
     }
 
-    public ItemGameObjectContainer RemoveItem(ItemGameObjectContainer item, bool destroyObject = false)
+    public ItemGameObjectContainer RemoveItem(ItemGameObjectContainer item)
     {
         Item itemClass = item.item;
         if (itemClass.containingFactory == this)
@@ -132,7 +142,13 @@ public class ItemObjectContainingFactory : Factory
     public override void PreTick()
     {
         shouldMoveItems = true;
-        
+
+    }
+
+    public virtual bool TryToMoveItem()
+    {
+        shouldMoveItems = false;
+        return false;
     }
 
     public override void GeneralUpdate()
@@ -140,5 +156,5 @@ public class ItemObjectContainingFactory : Factory
         UpdateItemMovement();
     }
 
-    public virtual void UpdateItemMovement() {}
+    public virtual void UpdateItemMovement() { }
 }

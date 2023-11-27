@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 459553547957615040}
   - component: {fileID: 1136829858688578720}
   - component: {fileID: -8795996019501591604}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Solar Array T1
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1670e970834404fb88643116dd4c75ce, type: 2}
+    - target: {fileID: -2591191826347267934, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 165876756961298764, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -142,10 +146,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolarArrayModel1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3766636046713162410, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8710f6058c94a4071b59965f2053a3f6, type: 2}
+    - target: {fileID: 6906977678944015276, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421120919038652939, guid: b1f28633ac827439cb790bdf666c57d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

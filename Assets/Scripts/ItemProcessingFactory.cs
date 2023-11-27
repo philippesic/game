@@ -10,12 +10,11 @@ public class ItemProssesingFactory : InventoryContainingFactory
     AllGameData.Recipe currentRecipe;
     ItemContainer inputBuffer;
     int prossesingTicks = 0;
-    public int inventorySize;
 
     public override void SetupFactory()
     {
-        input = ItemContainer.New();
-        output = ItemContainer.New();
+        input = ItemContainer.New(10);
+        output = ItemContainer.New(10);
         inputBuffer = ItemContainer.New();
     }
 
@@ -32,7 +31,7 @@ public class ItemProssesingFactory : InventoryContainingFactory
 
     public override ItemContainer GetExtraBlockCost()
     {
-        return ItemContainer.New().Add(input).Add(output).Add(inputBuffer);
+        return input.Copy().Add(output).Add(inputBuffer);
     }
 
     public override ItemData Get(int count)
@@ -42,14 +41,16 @@ public class ItemProssesingFactory : InventoryContainingFactory
         return new ItemData(itemData.id, itemData.count);
     }
 
-    public override bool HasRoomToPush(int count = 1)
+    public override bool HasRoomToPush(ItemContainer items)
     {
-        return input.Count() + inputBuffer.Count() + count <= inventorySize;
+        return input.GetLeftOvers(inputBuffer.Copy().Add(items)).Count() == 0;
     }
 
-    public override void Give(ItemData item)
+    public override ItemContainer Give(ItemContainer items)
     {
-        inputBuffer.Add(item.id, item.count);
+        input.Copy().Add(inputBuffer).Add(items, out ItemContainer leftovers);
+        inputBuffer.Add(items).Remove(leftovers);
+        return leftovers;
     }
 
     protected void TryToMakeItems()
@@ -57,7 +58,7 @@ public class ItemProssesingFactory : InventoryContainingFactory
         if (currentRecipe != null && input.Has(currentRecipe.itemsCost))
         {
             prossesingTicks += 1;
-            if (prossesingTicks >= currentRecipe.ticks)
+            if (prossesingTicks >= currentRecipe.ticks * UpdateTickManager.instance.tickSpeedIncreaseScale)
             {
                 input.Remove(currentRecipe.itemsCost);
                 output.Add(currentRecipe.itemsMade);
@@ -74,6 +75,6 @@ public class ItemProssesingFactory : InventoryContainingFactory
 
     public override float GetProssesing0To1()
     {
-        return currentRecipe == null ? -1 : prossesingTicks / currentRecipe.ticks;
+        return currentRecipe == null ? -1 : prossesingTicks / UpdateTickManager.instance.tickSpeedIncreaseScale / currentRecipe.ticks;
     }
 }

@@ -9,7 +9,7 @@ public class Drill : InventoryContainingFactory
     public int inventorySize;
     [HideInInspector] public float nodeMultiplier;
     [HideInInspector] public ItemContainer outputItems;
-    Stopwatch stopwatch = new();
+    readonly Stopwatch stopwatch = new();
     float itemsGenerated = 0;
 
     public override void SetupFactory()
@@ -30,6 +30,11 @@ public class Drill : InventoryContainingFactory
         stopwatch.Start();
     }
 
+    public override ItemContainer GetExtraBlockCost()
+    {
+        return outputItems;
+    }
+
     public override ItemData Get(int count)
     {
         ItemContainer.ItemData itemData = outputItems.Get(count);
@@ -40,7 +45,7 @@ public class Drill : InventoryContainingFactory
     public override void Tick()
     {
         int itemsGeneratedBeforeTick = (int)itemsGenerated;
-        itemsGenerated += baseItemsPerTick * nodeMultiplier;
+        itemsGenerated += baseItemsPerTick * nodeMultiplier / UpdateTickManager.instance.tickSpeedIncreaseScale;
         int itemsGeneratedThisTick = ((int)itemsGenerated) - itemsGeneratedBeforeTick;
         if (itemsGeneratedThisTick > 0)
         {
@@ -50,7 +55,7 @@ public class Drill : InventoryContainingFactory
             }
             else
             {
-                itemsGenerated = 1 - (baseItemsPerTick * nodeMultiplier);
+                itemsGenerated = 1 - (baseItemsPerTick * nodeMultiplier / UpdateTickManager.instance.tickSpeedIncreaseScale);
             }
         }
         if (itemsGenerated % 1 == 0)
@@ -61,6 +66,6 @@ public class Drill : InventoryContainingFactory
 
     public override float GetProssesing0To1()
     {
-        return Math.Clamp(stopwatch.ElapsedMilliseconds / 1000 * UpdateTickManager.instance.TickPerSecond / (1 / baseItemsPerTick * nodeMultiplier), 0, 1);
+        return Math.Clamp(stopwatch.ElapsedMilliseconds / 1000 * UpdateTickManager.instance.GetTickPerSecond() / (1 / baseItemsPerTick * nodeMultiplier / UpdateTickManager.instance.tickSpeedIncreaseScale), 0, 1);
     }
 }
