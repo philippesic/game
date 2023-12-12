@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public static Player instance;
     [HideInInspector] public WorldBlockPlacer worldBlockPlacer;
     [HideInInspector] public WorldBlockBreaker worldBlockBreaker;
-    public double mineSpeedMS = 5000.0;
+    public double mineSpeedMS = 1000.0;
     public List<int> mineIDs = new();
     readonly Stopwatch mineTime = new();
     [HideInInspector] public bool isStopped = false;
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour
                 {
                     if (!mineTime.IsRunning) { mineTime.Restart(); }
                     IngameUI.instance.SetCrosshairText(10, (int)(mineTime.ElapsedMilliseconds / mineSpeedMS * 100) + "%");
-                    ;
                     if (mineTime.ElapsedMilliseconds > mineSpeedMS)
                     {
                         inv.Add(node.id, (int)(node.getNodeMultiplier() * 4));

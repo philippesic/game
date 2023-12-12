@@ -397,6 +397,11 @@ public class ItemContainer : ScriptableObject
         ContentChange();
     }
 
+    public bool IsEmpty()
+    {
+        return Count() == 0;
+    }
+
     public void ContentChange()
     {
         List<ItemData> itemsToRemove = new();

@@ -26,7 +26,6 @@ public class BlockMenu : UIToggle
                     SetGridRecipes(AllGameData.recipes[prossesingFactory.blockID], recipeGrid);
                     foreach (UnityEngine.UI.Button button in recipeGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
                     {
-
                         AllGameData.Recipe recipe = AllGameData.recipeNames[button.GetComponentInChildren<TextMeshProUGUI>().text];
                         button.onClick.AddListener(delegate
                         {
