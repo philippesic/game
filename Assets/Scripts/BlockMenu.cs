@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class BlockMenu : UIToggle
@@ -22,7 +23,23 @@ public class BlockMenu : UIToggle
                 if (prossesingFactory != null)
                 {
                     SetGridItems(prossesingFactory.input.inventoryItems, inputGrid);
+                    foreach (UnityEngine.UI.Button button in outputGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
+                    {
+                        button.onClick.AddListener(delegate
+                        {
+                            ItemContainer clickedItems = null;
+                            prossesingFactory.input.Remove(clickedItems);
+                            Player.instance.inv.Add(clickedItems);
+                        });
+                    }
                     SetGridItems(prossesingFactory.output.inventoryItems, outputGrid);
+                    foreach (UnityEngine.UI.Button button in outputGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
+                    {
+                        button.onClick.AddListener(delegate
+                        {
+                            prossesingFactory.ChangeCurrentRecipe(recipe);
+                        });
+                    }
                     SetGridRecipes(AllGameData.recipes[prossesingFactory.blockID], recipeGrid);
                     foreach (UnityEngine.UI.Button button in recipeGrid.GetComponentsInChildren<UnityEngine.UI.Button>())
                     {

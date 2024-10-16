@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSubInventory : UIToggle
+public class PlayerSubInventory2 : UI
 {
     public Transform itemGrid;
     public Transform recipeGrid;
